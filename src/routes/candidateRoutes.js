@@ -1,10 +1,3 @@
-/**
- * @swagger
- * /candidates:
- *   get:
- *     summary: Retrieve a list of candidates
- *     description: Retrieve a list of candidates, pagination is supported with "page" and "limit" query parameters.
- */
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -12,17 +5,15 @@ const Candidate = mongoose.model("Candidate");
 
 const router = express.Router();
 
-/**
- * @swagger
- * /candidates:
- *   get:
- *     summary: Retrieve a list of candidates
- *     description: Retrieve a list of candidates, pagination is supported with "page" and "limit" query parameters.
- */
 router.get("/candidates", async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 10, party } = req.query;
 
-  const candidates = await Candidate.find()
+  let query = {};
+  if (party) {
+    query.org_politica_nombre = party;
+  }
+
+  const candidates = await Candidate.find(query)
     .limit(limit * 1)
     .skip((page - 1) * limit)
     .exec();

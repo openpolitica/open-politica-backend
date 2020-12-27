@@ -1,0 +1,88 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Open Politica API",
+    "version": "0.1.0",
+    "description": "API para obtener información de los candidatos a elecciones de Perú. Fecha de actualización: N/A",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://spdx.org/licenses/Apache-2.0.html"
+    },
+    "contact": {
+      "name": "OpenPolitica",
+      "url": "https://openpolitica.com",
+      "email": "hola@openpolitica.com"
+    }
+  },
+  "servers": [
+    { "url": "https://tip.magiqapps.com", "description": "Production Server" },
+    { "url": "http://localhost:3000", "description": "Development Server" }
+  ],
+  "paths": {
+    "/candidates": {
+      "get": {
+        "summary": "Returns a list of candidates.",
+        "description": "Returns a list of candidates. Accepts 'page' and 'limit' as query parameters",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number in integer - Default is 1",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of entries to return - Default is 10",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "party",
+            "description": "Political Party",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ACCION POPULAR",
+                "ALIANZA PARA EL PROGRESO",
+                "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+                "DEMOCRACIA DIRECTA",
+                "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+                "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
+                "FUERZA POPULAR",
+                "JUNTOS POR EL PERU",
+                "PARTIDO APRISTA PERUANO",
+                "PARTIDO DEMOCRATICO SOMOS PERU",
+                "PARTIDO MORADO",
+                "PARTIDO POLÍTICO CONTIGO",
+                "PARTIDO POPULAR CRISTIANO - PPC",
+                "PERU LIBRE",
+                "PERU NACION",
+                "PERU PATRIA SEGURA",
+                "PODEMOS PERU",
+                "RENACIMIENTO UNIDO NACIONAL",
+                "RENOVACION POPULAR",
+                "UNION POR EL PERU",
+                "VAMOS PERU"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

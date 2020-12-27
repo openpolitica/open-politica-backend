@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const m2s = require("mongoose-to-swagger");
 
 const linksSchema = new mongoose.Schema(
   {
@@ -248,6 +247,4 @@ const candidateSchema = new mongoose.Schema({
   enlaces: linksSchema,
 });
 
-const Candidate = mongoose.model("Candidate", candidateSchema);
-const swaggerSchema = m2s(Candidate);
-console.log(swaggerSchema);
+mongoose.model("Candidate", candidateSchema);

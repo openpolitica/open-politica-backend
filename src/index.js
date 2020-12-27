@@ -4,7 +4,7 @@ const os = require("os");
 const http = require("http");
 const cluster = require("cluster");
 const express = require("express");
-const swaggerJSdoc = require("swagger-jsdoc");
+const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -69,54 +69,21 @@ if (cluster.isMaster) {
   // Express Middleware
   const app = express();
 
+  app.use(cors());
   app.use(bodyParser.json());
   app.use(candidateRoutes);
   app.use(partyRoutes);
-
-  // Swagger Server
-  const options = {
-    definition: {
-      openapi: "3.0.0",
-      info: {
-        title: "Open Politica API",
-        version: "0.1.0",
-        description:
-          "API para obtener información de los candidatos a elecciones de Perú. Fecha de actualización: N/A",
-        license: {
-          name: "Apache 2.0",
-          url: "https://spdx.org/licenses/Apache-2.0.html",
-        },
-        contact: {
-          name: "OpenPolitica",
-          url: "https://openpolitica.com",
-          email: "hola@openpolitica.com",
-        },
-      },
-      servers: [
-        {
-          url: "http://localhost:3000/",
-          description: "Development server",
-        },
-        {
-          url: "https://tip.magiqapps.com/",
-          description: "Production server",
-        },
-      ],
-    },
-    apis: ["./routes/*.js"],
-  };
-
-  const swaggerSpec = swaggerJSdoc(options);
-
-  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
   // Main routes
   app.get("/", (req, res) => {
     res.send("Hi there! " + cluster.worker.id);
   });
 
-  // Server
+  // Swagger
+  const swaggerDocument = require("./swagger.json");
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+  // Server
   http.createServer(app).listen(process.env.PORT || 3000, function() {
     console.log(
       "Express server listening on port 3000 as Worker " +
