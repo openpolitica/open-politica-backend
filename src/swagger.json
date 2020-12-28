@@ -73,6 +73,91 @@
               ]
             },
             "required": false
+          },
+          {
+            "in": "query",
+            "name": "role",
+            "description": "Candidate Role",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CONGRESISTA DE LA REPÚBLICA",
+                "PRESIDENTE DE LA REPÚBLICA"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/{id}": {
+      "get": {
+        "summary": "Returns a single candidate by database ID.",
+        "description": "Returns a single candidate by database ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID assigned by database",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/hoja_vida_id/{hoja_vida_id}": {
+      "get": {
+        "summary": "Returns a single candidate by 'Hoja Vida ID'.",
+        "description": "Returns a single candidate by 'Hoja Vida ID'.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hoja_vida_id",
+            "description": "JNE - hoja_vida_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/id_dni/{id_dni}": {
+      "get": {
+        "summary": "Returns a single candidate by 'DNI'.",
+        "description": "Returns a single candidate by 'DNI'.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_dni",
+            "description": "JNE - id_dni.string",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
           }
         ],
         "consumes": ["application/json"],
