@@ -18,7 +18,6 @@ const mongooseConnect = () => {
     useFindAndModify: false,
   });
 };
-
 mongooseConnect();
 
 mongoose.connection.on("connected", () => {

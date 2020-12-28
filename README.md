@@ -4,17 +4,14 @@ Backend del Proyecto Open Política construido en Node.js
 
 ## Instrucciones para ambientes de desarrollo
 
-1. Crear dev.js localmente con _connection string_ a BD
-
-`src/config/dev.js`
+1. Crear .env en la raíz con _connection string_ a BD
 
 ```
-module.exports = {
-  mongoURI:
-    "mongodb+srv://...",
-};
+MONGO_URI="mongodb+srv://..."
 ```
 
 2. Lanzar script
 
-`npm run dev`
+```
+npm run dev
+```
