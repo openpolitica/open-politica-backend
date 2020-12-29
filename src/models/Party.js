@@ -1,18 +1,18 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const plansSchema = new mongoose.Schema(
+const plansSchema = new Schema(
   {
     topic: String,
-    plan: String,
+    plan: String
   },
   { _id: false }
 );
 
-const partySchema = new mongoose.Schema({
+const partySchema = new Schema({
   name: String,
   image: String,
   color: String,
-  plans: [plansSchema],
+  plans: [plansSchema]
 });
 
-mongoose.model("Party", partySchema);
+module.exports = model("Party", partySchema);
