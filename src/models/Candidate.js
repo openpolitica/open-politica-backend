@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const linksSchema = new mongoose.Schema(
+const linksSchema = new Schema(
   {
     imagen: String,
     resumen: String,
-    hoja_vida: String,
+    hoja_vida: String
   },
   { _id: false }
 );
 
-const annotationsSchema = new mongoose.Schema(
+const annotationsSchema = new Schema(
   {
     anotacion_numero: String,
     expediente_numero: String,
@@ -17,40 +17,40 @@ const annotationsSchema = new mongoose.Schema(
     documento_numero: String,
     documento_identidad: String,
     dice: String,
-    debe_decir: String,
+    debe_decir: String
   },
   { _id: false }
 );
 
-const trajectorySchema = new mongoose.Schema(
+const trajectorySchema = new Schema(
   {
     dni: String,
     eleccion: String,
     lugar: String,
     cargo: String,
     org_politica: String,
-    resultado: String,
+    resultado: String
   },
   { _id: false }
 );
 
-const additionalInfoSchema = new mongoose.Schema(
+const additionalInfoSchema = new Schema(
   {
-    info: String,
+    info: String
   },
   { _id: false }
 );
 
-const assetsSchema = new mongoose.Schema(
+const assetsSchema = new Schema(
   {
     bienes_otros: { type: Array },
     bienes_muebles: { type: Array },
-    bienes_inmuebles: { type: Array },
+    bienes_inmuebles: { type: Array }
   },
   { _id: false }
 );
 
-const incomeSchema = new mongoose.Schema(
+const incomeSchema = new Schema(
   {
     remuneracion_bruta_publico: Number,
     remuneracion_bruta_privado: Number,
@@ -63,154 +63,154 @@ const incomeSchema = new mongoose.Schema(
     total_otro: Number,
     total: Number,
     total_privado: Number,
-    total_publico: Number,
+    total_publico: Number
   },
   { _id: false }
 );
 
-const judgementsCivilSchema = new mongoose.Schema(
+const judgementsCivilSchema = new Schema(
   {
     materia_sentencia: String,
     expediente_obliga: String,
     organo_judicial_obliga: String,
-    fallo_obliga: String,
+    fallo_obliga: String
   },
   { _id: false }
 );
 
-const judgementsCriminalSchema = new mongoose.Schema(
+const judgementsCriminalSchema = new Schema(
   {
     expediente_penal: String,
     organo_judicial_penal: String,
     delito_penal: String,
     fallo_penal: String,
     modalidad: String,
-    cumple_fallo: String,
+    cumple_fallo: String
   },
   { _id: false }
 );
 
-const judgementsSchema = new mongoose.Schema(
+const judgementsSchema = new Schema(
   {
     sentencias_penales: [judgementsCriminalSchema],
-    sentencias_civiles: [judgementsCivilSchema],
+    sentencias_civiles: [judgementsCivilSchema]
   },
   { _id: false }
 );
 
-const experienceWorkSchema = new mongoose.Schema(
+const experienceWorkSchema = new Schema(
   {
     centro_trabajo: String,
     ocupacion_profesion: String,
     anio_desde: Number,
     anio_hasta: Number,
-    hasta_actualidad: Boolean,
+    hasta_actualidad: Boolean
   },
   { _id: false }
 );
 
-const experienceElectionsSchema = new mongoose.Schema(
+const experienceElectionsSchema = new Schema(
   {
     org_politica: String,
     cargo: String,
     anio_desde: Number,
     anio_hasta: Number,
-    hasta_actualidad: Boolean,
+    hasta_actualidad: Boolean
   },
   { _id: false }
 );
 
-const experiencePartySchema = new mongoose.Schema(
+const experiencePartySchema = new Schema(
   {
     org_politica: String,
     cargo: String,
     anio_desde: Number,
     anio_hasta: Number,
-    hasta_actualidad: Boolean,
+    hasta_actualidad: Boolean
   },
   { _id: false }
 );
 
-const experienceQuitSchema = new mongoose.Schema(
+const experienceQuitSchema = new Schema(
   {
     org_politica: String,
-    anio: Number,
+    anio: Number
   },
   { _id: false }
 );
 
-const experienceSchema = new mongoose.Schema(
+const experienceSchema = new Schema(
   {
     laboral: [experienceWorkSchema],
     cargos_elecciones: [experienceElectionsSchema],
     cargos_partidarios: [experiencePartySchema],
-    renuncias: [experienceQuitSchema],
+    renuncias: [experienceQuitSchema]
   },
   { _id: false }
 );
 
-const educationBasicSchema = new mongoose.Schema(
+const educationBasicSchema = new Schema(
   {
     tiene_basica: Boolean,
     tiene_primaria: Boolean,
     primaria_concluida: Boolean,
     tiene_secundaria: Boolean,
-    secundaria_concluida: Boolean,
+    secundaria_concluida: Boolean
   },
   { _id: false }
 );
 
-const educationTechnicalSchema = new mongoose.Schema(
+const educationTechnicalSchema = new Schema(
   {
     centro_estudio: String,
     carrera: String,
-    concluida: Boolean,
+    concluida: Boolean
   },
   { _id: false }
 );
 
-const educationNonUniversitySchema = new mongoose.Schema(
+const educationNonUniversitySchema = new Schema(
   {
     centro_estudio: String,
     carrera: String,
-    concluida: Boolean,
+    concluida: Boolean
   },
   { _id: false }
 );
 
-const educationUniversitySchema = new mongoose.Schema(
+const educationUniversitySchema = new Schema(
   {
     centro_estudio: String,
     carrera: String,
     concluida: Boolean,
     bachiller: Boolean,
-    titulo: Boolean,
+    titulo: Boolean
   },
   { _id: false }
 );
 
-const educationPostGraduateSchema = new mongoose.Schema(
+const educationPostGraduateSchema = new Schema(
   {
     centro_estudio: String,
     especialidad: String,
     concluida: Boolean,
-    egresado: Boolean,
+    egresado: Boolean
   },
   { _id: false }
 );
 
-const educationSchema = new mongoose.Schema(
+const educationSchema = new Schema(
   {
     basica: educationBasicSchema,
     tecnica: [educationTechnicalSchema],
     no_universitaria: [educationNonUniversitySchema],
     universitaria: [educationUniversitySchema],
-    postgrado: [educationPostGraduateSchema],
+    postgrado: [educationPostGraduateSchema]
   },
   { _id: false }
 );
 
-const fileSchema = new mongoose.Schema({
+const fileSchema = new Schema({
   expediente_id: Number,
   tipo_eleccion_id: Number,
   expediente_codigo: String,
@@ -229,10 +229,10 @@ const fileSchema = new mongoose.Schema({
   candidatos_hombres: Number,
   candidatos_mujeres: Number,
   ubicacion_jurado_id: Number,
-  distrito_electoral: String,
+  distrito_electoral: String
 });
 
-const candidateSchema = new mongoose.Schema({
+const candidateSchema = new Schema({
   hoja_vida_id: Number,
   id_dni: Object,
   id_ce: Object,
@@ -280,7 +280,7 @@ const candidateSchema = new mongoose.Schema({
   revocatoria: { type: Array },
   vacancia: { type: Array },
   anotaciones_marginales: { type: Array, items: annotationsSchema },
-  enlaces: linksSchema,
+  enlaces: linksSchema
 });
 
-mongoose.model("Candidate", candidateSchema);
+module.exports = model("Candidate", candidateSchema);
