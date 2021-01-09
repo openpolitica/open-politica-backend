@@ -44,33 +44,37 @@
           },
           {
             "in": "query",
-            "name": "party",
+            "name": "parties",
             "description": "Political Party",
+            "explode": false,
             "schema": {
-              "type": "string",
-              "enum": [
-                "ACCION POPULAR",
-                "ALIANZA PARA EL PROGRESO",
-                "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
-                "DEMOCRACIA DIRECTA",
-                "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
-                "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
-                "FUERZA POPULAR",
-                "JUNTOS POR EL PERU",
-                "PARTIDO APRISTA PERUANO",
-                "PARTIDO DEMOCRATICO SOMOS PERU",
-                "PARTIDO MORADO",
-                "PARTIDO POLÍTICO CONTIGO",
-                "PARTIDO POPULAR CRISTIANO - PPC",
-                "PERU LIBRE",
-                "PERU NACION",
-                "PERU PATRIA SEGURA",
-                "PODEMOS PERU",
-                "RENACIMIENTO UNIDO NACIONAL",
-                "RENOVACION POPULAR",
-                "UNION POR EL PERU",
-                "VAMOS PERU"
-              ]
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ACCION POPULAR",
+                  "ALIANZA PARA EL PROGRESO",
+                  "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+                  "DEMOCRACIA DIRECTA",
+                  "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+                  "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
+                  "FUERZA POPULAR",
+                  "JUNTOS POR EL PERU",
+                  "PARTIDO APRISTA PERUANO",
+                  "PARTIDO DEMOCRATICO SOMOS PERU",
+                  "PARTIDO MORADO",
+                  "PARTIDO POLÍTICO CONTIGO",
+                  "PARTIDO POPULAR CRISTIANO - PPC",
+                  "PERU LIBRE",
+                  "PERU NACION",
+                  "PERU PATRIA SEGURA",
+                  "PODEMOS PERU",
+                  "RENACIMIENTO UNIDO NACIONAL",
+                  "RENOVACION POPULAR",
+                  "UNION POR EL PERU",
+                  "VAMOS PERU"
+                ]
+              }
             },
             "required": false
           },
@@ -85,6 +89,44 @@
                 "PRESIDENTE DE LA REPÚBLICA",
                 "PRIMER VICEPRESIDENTE DE LA REPÚBLICA",
                 "SEGUNDO VICEPRESIDENTE DE LA REPÚBLICA"
+              ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "region",
+            "description": "Candidate Region",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TUMBES",
+                "PIURA",
+                "LAMBAYEQUE",
+                "LA LIBERTAD",
+                "ANCASH",
+                "LIMA",
+                "LIMA PROVINCIAS",
+                "ICA",
+                "AREQUIPA",
+                "MOQUEGUA",
+                "TACNA",
+                "CAJAMARCA",
+                "HUANUCO",
+                "PASCO",
+                "JUNIN",
+                "HUANCAVELICA",
+                "AYACUCHO",
+                "APURIMAC",
+                "CUSCO",
+                "PUNO",
+                "LORETO",
+                "AMAZONAS",
+                "SAN MARTIN",
+                "MADRE DE DIOS",
+                "UCAYALI",
+                "PERUANOS RESIDENTES EN EL EXTRANJERO",
+                "CALLAO"
               ]
             },
             "required": false

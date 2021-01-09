@@ -1,14 +1,17 @@
 const { CandidateModel } = require("../models");
 
 const getCandidates = async (params) => {
-  const { page = 1, limit = 10, party, role } = params;
+  const { page = 1, limit = 10, parties, region, role } = params;
 
   let query = {};
-  if (party) {
-    query.org_politica_nombre = party;
+  if (parties) {
+    query.org_politica_nombre = { $in: parties.split(",") };
   }
   if (role) {
     query.cargo_nombre = role;
+  }
+  if (region) {
+    query.postula_distrito = region;
   }
 
   const candidates = await CandidateModel.find(query)
@@ -21,19 +24,19 @@ const getCandidates = async (params) => {
   return {
     candidates,
     totalPages: Math.ceil(count / limit),
-    currentPage: page
+    currentPage: page,
   };
 };
 
 const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   return await CandidateModel.findOne({
-    hoja_vida_id
+    hoja_vida_id,
   });
 };
 
 const getCandidateByDNI = async (id_dni) => {
   return await CandidateModel.findOne({
-    id_dni: { string: id_dni }
+    id_dni: { string: id_dni },
   });
 };
 
@@ -45,5 +48,5 @@ module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
   getCandidateByDNI,
-  getCandidateById
+  getCandidateById,
 };
