@@ -7,10 +7,4 @@ router.get("/", partiesController.getParties);
 
 router.get("/:id", partiesController.findOneParty);
 
-router.post("/", partiesController.createParty);
-
-router.put("/:id", partiesController.modifyOneParty);
-
-router.delete("/:id", partiesController.deleteOneParty);
-
 module.exports = router;
