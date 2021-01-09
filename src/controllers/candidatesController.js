@@ -1,78 +1,55 @@
-const { CandidateModel } = require("../models");
+const candidateService = require("../services/candidatesService");
+const responseBuilder = require("../utils/responseBuilder");
 
-getCandidates = async (req, res) => {
-  const { page = 1, limit = 10, party, role } = req.query;
-
-  let query = {};
-  if (party) {
-    query.org_politica_nombre = party;
-  }
-  if (role) {
-    query.cargo_nombre = role;
-  }
-
-  const candidates = await CandidateModel.find(query)
-    .limit(limit * 1)
-    .skip((page - 1) * limit)
-    .exec();
-
-  const count = await CandidateModel.countDocuments();
-
-  res.json({
-    candidates,
-    totalPages: Math.ceil(count / limit),
-    currentPage: page
-  });
-};
-
-getCandidateByHojaDeVida = async (req, res) => {
-  const candidate = await CandidateModel.findOne({
-    hoja_vida_id: req.params.hoja_vida_id
-  });
-  res.send(candidate);
-};
-
-getCandidateByDNI = async (req, res) => {
-  const candidate = await CandidateModel.findOne({
-    id_dni: { string: req.params.id_dni }
-  });
-  res.send(candidate);
-};
-
-getCandidateById = async (req, res) => {
-  const candidate = await CandidateModel.findOne({ _id: req.params.id });
-  res.send(candidate);
-};
-
-createCandidate = async (req, res) => {
+const getCandidates = async (req, res) => {
   try {
-    const candidate = new CandidateModel(req.body);
-    await candidate.save();
-
-    res.send(candidate);
-  } catch (err) {
-    res.status(422).send({ error: err.message });
+    let result = await candidateService.getCandidates(req.query);
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
   }
 };
 
-modifyCandidateById = async (req, res) => {
-  const candidate = await CandidateModel.findOne({ _id: req.params.id });
-  Object.assign(candidate, req.body);
-  await candidate.save();
-  res.send("modified");
+const getCandidateByHojaDeVida = async (req, res) => {
+  try {
+    let result = await candidateService.getCandidateByHojaDeVida(
+      req.params.hoja_vida_id
+    );
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
+  }
 };
 
-deleteCandidate = async (req, res) => {
-  await CandidateModel.deleteOne({ _id: req.params.id });
-  res.send("success");
+const getCandidateByDNI = async (req, res) => {
+  try {
+    let result = await candidateService.getCandidateByDNI(req.params.id_dni);
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
+  }
+};
+
+const getCandidateById = async (req, res) => {
+  try {
+    let result = await candidateService.getCandidateById(req.params.id);
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
+  }
 };
 
 module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
   getCandidateByDNI,
-  getCandidateById,
-  createCandidate,
-  modifyCandidateById,
-  deleteCandidate
+  getCandidateById
 };
