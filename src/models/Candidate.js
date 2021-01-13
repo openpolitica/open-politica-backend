@@ -98,6 +98,16 @@ const judgementsSchema = new Schema(
   { _id: false }
 );
 
+const judgementsECSchema = new Schema(
+  {
+    delito: String,
+    procesos: Number,
+    tipo: String,
+    fallo: String
+  },
+  { _id: false }
+);
+
 const experienceWorkSchema = new Schema(
   {
     centro_trabajo: String,
@@ -272,13 +282,16 @@ const candidateSchema = new Schema({
   ingresos: { type: Array, items: incomeSchema },
   bienes: assetsSchema,
   info_adicional: { type: Array, items: additionalInfoSchema },
+  // Campos nuevos?
+  vacancia: { type: Boolean },
+  experiencia_publica: { type: Boolean },
+  sentencias_ec: [judgementsECSchema],
   // Campos obsoletos?
   contraloria: { type: Array },
   redam: { type: Array },
   servir: { type: Array },
   trayectorias: { type: Array, items: trajectorySchema },
   revocatoria: { type: Array },
-  vacancia: { type: Array },
   anotaciones_marginales: { type: Array, items: annotationsSchema },
   enlaces: linksSchema
 });
