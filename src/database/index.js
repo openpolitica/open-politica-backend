@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const candidateService = require("../services/candidatesService");
 
 const { mongoURI } = require("../config");
-console.log(mongoURI);
+
 if (process.env.NODE_ENV !== "production") mongoose.set("debug", true);
 
 const dbConnection = async function() {
