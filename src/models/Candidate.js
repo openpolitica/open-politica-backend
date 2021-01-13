@@ -4,7 +4,7 @@ const linksSchema = new Schema(
   {
     imagen: String,
     resumen: String,
-    hoja_vida: String,
+    hoja_vida: String
   },
   { _id: false }
 );
@@ -17,7 +17,7 @@ const annotationsSchema = new Schema(
     documento_numero: String,
     documento_identidad: String,
     dice: String,
-    debe_decir: String,
+    debe_decir: String
   },
   { _id: false }
 );
@@ -29,14 +29,14 @@ const trajectorySchema = new Schema(
     lugar: String,
     cargo: String,
     org_politica: String,
-    resultado: String,
+    resultado: String
   },
   { _id: false }
 );
 
 const additionalInfoSchema = new Schema(
   {
-    info: String,
+    info: String
   },
   { _id: false }
 );
@@ -45,7 +45,7 @@ const assetsSchema = new Schema(
   {
     bienes_otros: { type: Array },
     bienes_muebles: { type: Array },
-    bienes_inmuebles: { type: Array },
+    bienes_inmuebles: { type: Array }
   },
   { _id: false }
 );
@@ -63,7 +63,7 @@ const incomeSchema = new Schema(
     total_otro: Number,
     total: Number,
     total_privado: Number,
-    total_publico: Number,
+    total_publico: Number
   },
   { _id: false }
 );
@@ -73,7 +73,7 @@ const judgementsCivilSchema = new Schema(
     materia_sentencia: String,
     expediente_obliga: String,
     organo_judicial_obliga: String,
-    fallo_obliga: String,
+    fallo_obliga: String
   },
   { _id: false }
 );
@@ -85,7 +85,7 @@ const judgementsCriminalSchema = new Schema(
     delito_penal: String,
     fallo_penal: String,
     modalidad: String,
-    cumple_fallo: String,
+    cumple_fallo: String
   },
   { _id: false }
 );
@@ -93,7 +93,7 @@ const judgementsCriminalSchema = new Schema(
 const judgementsSchema = new Schema(
   {
     sentencias_penales: [judgementsCriminalSchema],
-    sentencias_civiles: [judgementsCivilSchema],
+    sentencias_civiles: [judgementsCivilSchema]
   },
   { _id: false }
 );
@@ -103,7 +103,7 @@ const judgementsECSchema = new Schema(
     delito: String,
     procesos: Number,
     tipo: String,
-    fallo: String,
+    fallo: String
   },
   { _id: false }
 );
@@ -114,7 +114,7 @@ const experienceWorkSchema = new Schema(
     ocupacion_profesion: String,
     anio_desde: Number,
     anio_hasta: Number,
-    hasta_actualidad: Boolean,
+    hasta_actualidad: Boolean
   },
   { _id: false }
 );
@@ -125,7 +125,7 @@ const experienceElectionsSchema = new Schema(
     cargo: String,
     anio_desde: Number,
     anio_hasta: Number,
-    hasta_actualidad: Boolean,
+    hasta_actualidad: Boolean
   },
   { _id: false }
 );
@@ -136,7 +136,7 @@ const experiencePartySchema = new Schema(
     cargo: String,
     anio_desde: Number,
     anio_hasta: Number,
-    hasta_actualidad: Boolean,
+    hasta_actualidad: Boolean
   },
   { _id: false }
 );
@@ -144,7 +144,7 @@ const experiencePartySchema = new Schema(
 const experienceQuitSchema = new Schema(
   {
     org_politica: String,
-    anio: Number,
+    anio: Number
   },
   { _id: false }
 );
@@ -154,7 +154,7 @@ const experienceSchema = new Schema(
     laboral: [experienceWorkSchema],
     cargos_elecciones: [experienceElectionsSchema],
     cargos_partidarios: [experiencePartySchema],
-    renuncias: [experienceQuitSchema],
+    renuncias: [experienceQuitSchema]
   },
   { _id: false }
 );
@@ -165,7 +165,7 @@ const educationBasicSchema = new Schema(
     tiene_primaria: Boolean,
     primaria_concluida: Boolean,
     tiene_secundaria: Boolean,
-    secundaria_concluida: Boolean,
+    secundaria_concluida: Boolean
   },
   { _id: false }
 );
@@ -174,7 +174,7 @@ const educationTechnicalSchema = new Schema(
   {
     centro_estudio: String,
     carrera: String,
-    concluida: Boolean,
+    concluida: Boolean
   },
   { _id: false }
 );
@@ -183,7 +183,7 @@ const educationNonUniversitySchema = new Schema(
   {
     centro_estudio: String,
     carrera: String,
-    concluida: Boolean,
+    concluida: Boolean
   },
   { _id: false }
 );
@@ -194,7 +194,7 @@ const educationUniversitySchema = new Schema(
     carrera: String,
     concluida: Boolean,
     bachiller: Boolean,
-    titulo: Boolean,
+    titulo: Boolean
   },
   { _id: false }
 );
@@ -204,7 +204,7 @@ const educationPostGraduateSchema = new Schema(
     centro_estudio: String,
     especialidad: String,
     concluida: Boolean,
-    egresado: Boolean,
+    egresado: Boolean
   },
   { _id: false }
 );
@@ -215,7 +215,7 @@ const educationSchema = new Schema(
     tecnica: [educationTechnicalSchema],
     no_universitaria: [educationNonUniversitySchema],
     universitaria: [educationUniversitySchema],
-    postgrado: [educationPostGraduateSchema],
+    postgrado: [educationPostGraduateSchema]
   },
   { _id: false }
 );
@@ -239,7 +239,7 @@ const fileSchema = new Schema({
   candidatos_hombres: Number,
   candidatos_mujeres: Number,
   ubicacion_jurado_id: Number,
-  distrito_electoral: String,
+  distrito_electoral: String
 });
 
 const candidateSchema = new Schema({
@@ -293,7 +293,7 @@ const candidateSchema = new Schema({
   trayectorias: { type: Array, items: trajectorySchema },
   revocatoria: { type: Array },
   anotaciones_marginales: { type: Array, items: annotationsSchema },
-  enlaces: linksSchema,
+  enlaces: linksSchema
 });
 
 module.exports = model("Candidate", candidateSchema);

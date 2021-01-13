@@ -8,7 +8,7 @@ const getCandidates = async (params) => {
     region,
     role,
     vacancia,
-    sentencias,
+    sentencias
   } = params;
 
   let query = {};
@@ -29,7 +29,7 @@ const getCandidates = async (params) => {
   if (sentencias === "true") {
     candidates = await CandidateModel.find({
       ...query,
-      sentencias_ec: { $exists: true, $ne: [] },
+      sentencias_ec: { $exists: true, $ne: [] }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
@@ -37,7 +37,7 @@ const getCandidates = async (params) => {
   } else if (sentencias === "false") {
     candidates = await CandidateModel.find({
       ...query,
-      sentencias_ec: { $exists: true, $eq: [] },
+      sentencias_ec: { $exists: true, $eq: [] }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
@@ -54,19 +54,19 @@ const getCandidates = async (params) => {
   return {
     candidates,
     totalPages: Math.ceil(count / limit),
-    currentPage: page,
+    currentPage: page
   };
 };
 
 const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   return await CandidateModel.findOne({
-    hoja_vida_id,
+    hoja_vida_id
   });
 };
 
 const getCandidateByDNI = async (id_dni) => {
   return await CandidateModel.findOne({
-    id_dni: { string: id_dni },
+    id_dni: { string: id_dni }
   });
 };
 
@@ -78,5 +78,5 @@ module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
   getCandidateByDNI,
-  getCandidateById,
+  getCandidateById
 };
