@@ -1,7 +1,15 @@
 const { CandidateModel } = require("../models");
 
 const getCandidates = async (params) => {
-  const { page = 1, limit = 10, parties, region, role } = params;
+  const {
+    page = 1,
+    limit = 10,
+    parties,
+    region,
+    role,
+    vacancia,
+    sentencias,
+  } = params;
 
   let query = {};
   if (parties) {
@@ -13,11 +21,33 @@ const getCandidates = async (params) => {
   if (region) {
     query.postula_distrito = region;
   }
+  if (vacancia) {
+    query.vacancia = vacancia;
+  }
 
-  const candidates = await CandidateModel.find(query)
-    .limit(limit * 1)
-    .skip((page - 1) * limit)
-    .exec();
+  var candidates = [];
+  if (sentencias === "true") {
+    candidates = await CandidateModel.find({
+      ...query,
+      sentencias_ec: { $exists: true, $ne: [] },
+    })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+  } else if (sentencias === "false") {
+    candidates = await CandidateModel.find({
+      ...query,
+      sentencias_ec: { $exists: true, $eq: [] },
+    })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+  } else {
+    candidates = await CandidateModel.find(query)
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+  }
 
   const count = await CandidateModel.countDocuments();
 

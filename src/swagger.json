@@ -44,6 +44,24 @@
           },
           {
             "in": "query",
+            "name": "sentencias",
+            "description": "tiene sentencias true/false",
+            "schema": {
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "vacancia",
+            "description": "votó vacancia true/false",
+            "schema": {
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
             "name": "parties",
             "description": "Political Party",
             "explode": false,
