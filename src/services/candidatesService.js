@@ -3,7 +3,7 @@ const { CandidateModel } = require("../models");
 const getCandidates = async (params) => {
   const {
     page = 1,
-    limit = 10,
+    limit = 0,
     parties,
     region,
     role,
