@@ -36,7 +36,7 @@
           {
             "in": "query",
             "name": "limit",
-            "description": "Number of entries to return - Default is 10",
+            "description": "Number of entries to return per page - Default is no limit",
             "schema": {
               "type": "integer"
             },
@@ -44,33 +44,180 @@
           },
           {
             "in": "query",
-            "name": "party",
+            "name": "sentencias",
+            "description": "tiene sentencias true/false",
+            "schema": {
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "vacancia",
+            "description": "votó vacancia true/false",
+            "schema": {
+              "type": "boolean"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "parties",
             "description": "Political Party",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "ACCION POPULAR",
+                  "ALIANZA PARA EL PROGRESO",
+                  "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+                  "DEMOCRACIA DIRECTA",
+                  "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+                  "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
+                  "FUERZA POPULAR",
+                  "JUNTOS POR EL PERU",
+                  "PARTIDO APRISTA PERUANO",
+                  "PARTIDO DEMOCRATICO SOMOS PERU",
+                  "PARTIDO MORADO",
+                  "PARTIDO POLÍTICO CONTIGO",
+                  "PARTIDO POPULAR CRISTIANO - PPC",
+                  "PERU LIBRE",
+                  "PERU NACION",
+                  "PERU PATRIA SEGURA",
+                  "PODEMOS PERU",
+                  "RENACIMIENTO UNIDO NACIONAL",
+                  "RENOVACION POPULAR",
+                  "UNION POR EL PERU",
+                  "VAMOS PERU"
+                ]
+              }
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "role",
+            "description": "Candidate Role",
             "schema": {
               "type": "string",
               "enum": [
-                "ACCION POPULAR",
-                "ALIANZA PARA EL PROGRESO",
-                "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
-                "DEMOCRACIA DIRECTA",
-                "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
-                "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
-                "FUERZA POPULAR",
-                "JUNTOS POR EL PERU",
-                "PARTIDO APRISTA PERUANO",
-                "PARTIDO DEMOCRATICO SOMOS PERU",
-                "PARTIDO MORADO",
-                "PARTIDO POLÍTICO CONTIGO",
-                "PARTIDO POPULAR CRISTIANO - PPC",
-                "PERU LIBRE",
-                "PERU NACION",
-                "PERU PATRIA SEGURA",
-                "PODEMOS PERU",
-                "RENACIMIENTO UNIDO NACIONAL",
-                "RENOVACION POPULAR",
-                "UNION POR EL PERU",
-                "VAMOS PERU"
+                "CONGRESISTA DE LA REPÚBLICA",
+                "PRESIDENTE DE LA REPÚBLICA",
+                "PRIMER VICEPRESIDENTE DE LA REPÚBLICA",
+                "SEGUNDO VICEPRESIDENTE DE LA REPÚBLICA"
               ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "region",
+            "description": "Candidate Region",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TUMBES",
+                "PIURA",
+                "LAMBAYEQUE",
+                "LA LIBERTAD",
+                "ANCASH",
+                "LIMA",
+                "LIMA PROVINCIAS",
+                "ICA",
+                "AREQUIPA",
+                "MOQUEGUA",
+                "TACNA",
+                "CAJAMARCA",
+                "HUANUCO",
+                "PASCO",
+                "JUNIN",
+                "HUANCAVELICA",
+                "AYACUCHO",
+                "APURIMAC",
+                "CUSCO",
+                "PUNO",
+                "LORETO",
+                "AMAZONAS",
+                "SAN MARTIN",
+                "MADRE DE DIOS",
+                "UCAYALI",
+                "PERUANOS RESIDENTES EN EL EXTRANJERO",
+                "CALLAO"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/{id}": {
+      "get": {
+        "summary": "Returns a single candidate by database ID.",
+        "description": "Returns a single candidate by database ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID assigned by database",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/hoja_vida_id/{hoja_vida_id}": {
+      "get": {
+        "summary": "Returns a single candidate by 'Hoja Vida ID'.",
+        "description": "Returns a single candidate by 'Hoja Vida ID'.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hoja_vida_id",
+            "description": "JNE - hoja_vida_id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/id_dni/{id_dni}": {
+      "get": {
+        "summary": "Returns a single candidate by 'DNI'.",
+        "description": "Returns a single candidate by 'DNI'.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_dni",
+            "description": "JNE - id_dni.string",
+            "schema": {
+              "type": "integer"
             },
             "required": false
           }
