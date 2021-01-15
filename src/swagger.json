@@ -36,7 +36,7 @@
           {
             "in": "query",
             "name": "limit",
-            "description": "Number of entries to return - Default is 10",
+            "description": "Number of entries to return per page - Default is no limit",
             "schema": {
               "type": "integer"
             },
