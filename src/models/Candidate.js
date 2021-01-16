@@ -289,6 +289,7 @@ const candidateSchema = new Schema({
   vacancia: { type: Boolean },
   experiencia_publica: { type: Boolean },
   sentencias_ec: [judgementsECSchema],
+  org_politica_alias: String,
   // Campos obsoletos?
   contraloria: { type: Array },
   redam: { type: Array },
