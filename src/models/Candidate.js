@@ -222,6 +222,7 @@ const educationSchema = new Schema(
 
 const fileSchema = new Schema({
   expediente_id: Number,
+  expediente_estado: String,
   tipo_eleccion_id: Number,
   expediente_codigo: String,
   expediente_codigo_padre: String,
@@ -270,11 +271,13 @@ const candidateSchema = new Schema({
   cargo_nombre: String,
   candidato_id: Number,
   proceso_electoral_id: Number,
+  posicion: Number,
   org_politica_id: Number,
   org_politica_nombre: String,
   estado_nombre: String,
   estado_id: Number,
   hoja_vida: String,
+  enlace_foto: String,
   expediente: fileSchema,
   educacion: educationSchema,
   experiencia: experienceSchema,
