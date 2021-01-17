@@ -15,7 +15,10 @@
     }
   },
   "servers": [
-    { "url": "https://tip.magiqapps.com", "description": "Production Server" },
+    {
+      "url": "https://api.openpolitica.com",
+      "description": "Production Server"
+    },
     { "url": "http://localhost:3000", "description": "Development Server" }
   ],
   "paths": {
