@@ -183,7 +183,7 @@ const educationNonUniversitySchema = new Schema(
   {
     centro_estudio: String,
     carrera: String,
-    concluida: Boolean
+    concluida: { boolean: Boolean },
   },
   { _id: false }
 );
@@ -203,7 +203,7 @@ const educationPostGraduateSchema = new Schema(
   {
     centro_estudio: String,
     especialidad: String,
-    concluida: Boolean,
+    concluida: { boolean: Boolean },
     egresado: Boolean
   },
   { _id: false }
@@ -290,6 +290,7 @@ const candidateSchema = new Schema({
   experiencia_publica: { type: Boolean },
   sentencias_ec: [judgementsECSchema],
   org_politica_alias: String,
+  educacion_mayor_nivel: String,
   // Campos obsoletos?
   contraloria: { type: Array },
   redam: { type: Array },
