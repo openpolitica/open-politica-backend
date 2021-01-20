@@ -5,7 +5,14 @@ const { CandidateModel } = require("../models");
 
 const resetCandidates = async () => {
   console.log("Resetting candidates");
-  const candidates = await CandidateModel.updateMany({}, { sentencias_ec: [] });
+  const candidates = await CandidateModel.updateMany(
+    {},
+    {
+      sentencias_ec: [],
+      sentencias_ec_penal_cnt: 0,
+      sentencias_ec_civil_cnt: 0,
+    }
+  );
 };
 
 resetCandidates();
@@ -30,7 +37,13 @@ fs.createReadStream("sentencias_input_data.csv")
           {
             hoja_vida_id: element.hoja_vida_id,
           },
-          { $push: { sentencias_ec: sentencia } }
+          {
+            $push: { sentencias_ec: sentencia },
+            $inc: {
+              sentencias_ec_civil_cnt: sentencia.tipo === "Civil" ? 1 : 0,
+              sentencias_ec_penal_cnt: sentencia.tipo === "Penal" ? 1 : 0,
+            },
+          }
         );
       })
     );
