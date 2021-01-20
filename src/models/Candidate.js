@@ -289,6 +289,8 @@ const candidateSchema = new Schema({
   vacancia: { type: Boolean },
   experiencia_publica: { type: Boolean },
   sentencias_ec: [judgementsECSchema],
+  sentencias_ec_penal_cnt: { type: Number, default: 0 },
+  sentencias_ec_civil_cnt: { type: Number, default: 0 },
   org_politica_alias: String,
   educacion_mayor_nivel: String,
   // Campos obsoletos?
