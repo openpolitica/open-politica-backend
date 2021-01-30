@@ -1,5 +1,10 @@
 #!/bin/bash
 
+####### REQUIRES TO SET ENVIRONMENT VALUES #########
+# export MYSQL_HOST=localhost_or_remote_host
+# export MYSQL_PWD=password_for_root_user
+# export MYSQL_TCP_PORT=tcp_port_if_not_3306
+
 # Delete previous downloads
 echo "----------------------------------------------"
 echo "#### Deleting previous downloads"
