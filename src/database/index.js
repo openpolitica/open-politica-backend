@@ -1,31 +1,67 @@
-const mongoose = require("mongoose");
-const candidateService = require("../services/candidatesService");
+const mysql = require("mysql");
+const { host, user, password, database, port } = require("../config");
 
-const { mongoURI } = require("../config");
-
-if (process.env.NODE_ENV !== "production") mongoose.set("debug", true);
-
-const dbConnection = async function() {
-  try {
-    // Mongoose connect
-    let db = await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true
+class Database {
+  constructor() {
+    this.connection = mysql.createConnection({
+      host,
+      user,
+      password,
+      database,
+      port,
+      multipleStatements: true
     });
-
-    console.log("Mongodb is connected to", db.connection.host);
-  } catch (error) {
-    console.log(`MongoDB connection error: ${error}`);
-    setTimeout(connectWithRetry, 5000);
   }
-};
 
-/// Retry connection
-const connectWithRetry = async () => {
-  console.log("MongoDB connection with retry");
-  return await dbConnection();
-};
+  query(sql, args) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(sql, args, (err, rows) => {
+        if (err) return reject(err);
+        resolve(rows);
+      });
+    });
+  }
+  close() {
+    return new Promise((resolve, reject) => {
+      this.connection.end((err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+  beginTransaction() {
+    return new Promise((resolve, reject) => {
+      this.connection.beginTransaction((err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+  rollback() {
+    return new Promise((resolve, reject) => {
+      this.connection.rollback((err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+  commit() {
+    return new Promise((resolve, reject) => {
+      this.connection.commit((err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+}
 
-module.exports = dbConnection;
+const db = new Database();
+db.connection.connect(function (err) {
+  if (err) {
+    console.error("Connection error: " + err.stack);
+    return;
+  }
+
+  console.log(`Connected to ${db.connection.config.host} DB successfully!`);
+});
+module.exports = db;
