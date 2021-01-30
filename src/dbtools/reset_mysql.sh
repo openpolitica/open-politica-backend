@@ -87,7 +87,6 @@ DROP TABLE IF EXISTS `ingreso`;
 DROP TABLE IF EXISTS `sentencia_civil`;
 DROP TABLE IF EXISTS `sentencia_penal`;
 DROP TABLE IF EXISTS `sentencias_ec`;
-DROP TABLE IF EXISTS `temp_sentencias`;
 DROP TABLE IF EXISTS `candidato`;
 DROP TABLE IF EXISTS `bien_inmueble`;
 DROP TABLE IF EXISTS `bien_mueble`;
@@ -249,7 +248,8 @@ CREATE TABLE IF NOT EXISTS `extra_data` (
   `sentencias_ec_penal_cnt` tinyint(1) DEFAULT 0,
   `experiencia_publica` tinyint(1) DEFAULT NULL,
   `bienes_muebles_valor` decimal(12,2) DEFAULT 0,
-  `bienes_inmuebles_valor` decimal(12,2) DEFAULT 0
+  `bienes_inmuebles_valor` decimal(12,2) DEFAULT 0,
+  `org_politica_alias` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ALTER TABLE `extra_data`
   ADD CONSTRAINT `extra_data_fk1` FOREIGN KEY (`hoja_vida_id`) 
@@ -308,6 +308,24 @@ UPDATE extra_data
 SET experiencia_publica=0
 WHERE hoja_vida_id NOT IN (SELECT hoja_vida_id FROM temp_experiencia t WHERE t.experiencia_publica=1);
 DROP TABLE IF EXISTS `temp_experiencia`;
+'''
+## Alias de partido
+mysql --login-path=local --database=op --local-infile=1 -e '''
+DROP TABLE IF EXISTS `temp_partidos`;
+CREATE TABLE `temp_partidos` (
+  `nombre` varchar(56) DEFAULT NULL,
+  `alias` varchar(56) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+LOAD DATA LOCAL INFILE "./partidos_alias.csv"
+INTO TABLE temp_partidos
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+UPDATE extra_data e, candidato c, temp_partidos p
+SET e.org_politica_alias=REPLACE(REPLACE(p.alias, "\r", ""), "\n", "")
+WHERE e.hoja_vida_id = c.hoja_vida_id AND c.org_politica_nombre = p.nombre;
+DROP TABLE IF EXISTS `temp_partidos`;
 '''
 ## Educación mayor nivel
 mysql --login-path=local --database=op -e '''
