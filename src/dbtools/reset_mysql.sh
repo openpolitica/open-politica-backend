@@ -26,7 +26,7 @@ java -jar client-0.0.5.jar convert --output-format=mariadb 2021-candidatos-congr
 # Login to mysql
 echo "----------------------------------------------"
 echo "#### Login to MySQL"
-mysql_config_editor set --login-path=local --user=root
+mysql_config_editor set --login-path=local --skip-warn --user=root
 
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
@@ -133,7 +133,12 @@ DROP TABLE IF EXISTS `candidato`;
 # Presidents file has a shorter varchar for postula_distrito / TODO: only affect this field
 echo "----------------------------------------------"
 echo "#### Making varchars wider"
-sed -i "" -e "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
+if [[ $(uname -s) == Linux ]]
+then
+    sed -i "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
+else
+    sed -i "" -e "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
+fi
 
 # Import Presidenciales
 echo "----------------------------------------------"
@@ -192,8 +197,14 @@ WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 # Replace DROP & CREATE lines in the file Congreso
 echo "----------------------------------------------"
 echo "#### Preparing the 'Congresistas' file to be appended instead of replacing the existing data"
-sed -i "" -e "/DROP TABLE/d" outputCongreso/data.sql
-sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
+if [[ $(uname -s) == Linux ]]
+then
+    sed -i "/DROP TABLE/d" outputCongreso/data.sql
+    sed -i "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
+else
+    sed -i "" -e "/DROP TABLE/d" outputCongreso/data.sql
+    sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
+fi
 
 # Import Congreso again
 echo "----------------------------------------------"
