@@ -12,4 +12,8 @@ router.get(
 
 router.get("/id_dni/:id_dni", candidatesController.getCandidateByDNI);
 
+router.post("/createHash", candidatesController.createEncodedHash);
+
+router.get("/sharedList/:hash", candidatesController.getListFromHash);
+
 module.exports = router;
