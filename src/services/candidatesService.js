@@ -23,7 +23,7 @@ const getCandidates = async (params) => {
   }
   if (vacancia) {
     query += "AND b.vacancia = ? ";
-    arguments.push(+vacancia);
+    arguments.push(vacancia ? 1 : 0);
   }
 
   let candidates = [];
@@ -39,7 +39,7 @@ const getCandidates = async (params) => {
       candidates
     };
   } catch (error) {
-    throw new Error("Error al consultar la Base de Datos");
+    throw new Error("Error al consultar los candidatos");
   }
 };
 
