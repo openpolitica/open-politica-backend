@@ -501,7 +501,8 @@ CREATE TABLE `geo` (
   `id` smallint DEFAULT NULL,
   `location` varchar(32) DEFAULT NULL,
   `lat` varchar(32) DEFAULT NULL,
-  `lng` varchar(32) DEFAULT NULL
+  `lng` varchar(32) DEFAULT NULL,
+  `sitios` tinyint(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 LOAD DATA LOCAL INFILE "./geo.csv"
 INTO TABLE geo
@@ -519,6 +520,15 @@ ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE geo ADD INDEX (location, lat, lng);
 ALTER TABLE data_ec ADD INDEX (designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
+'''
+
+# Update data for special cases
+echo "----------------------------------------------"
+echo "#### Updating candidates special information"
+mysql --login-path=local --database=op -e '''
+UPDATE candidato
+SET id_nombres = "GAHELA TSENEG", id_sexo = "F"
+WHERE hoja_vida_id = 136670
 '''
 
 # Delete downloads
