@@ -162,30 +162,6 @@
         }
       }
     },
-    "/candidates/{id}": {
-      "get": {
-        "summary": "Returns a single candidate by database ID.",
-        "description": "Returns a single candidate by database ID.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "ID assigned by database",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          }
-        ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/candidates/hoja_vida_id/{hoja_vida_id}": {
       "get": {
         "summary": "Returns a single candidate by 'Hoja Vida ID'.",
