@@ -5,9 +5,9 @@ const swaggerUi = require("swagger-ui-express");
 
 // Main route
 router.get("/", async (req, res) => {
-  const result = await db.query("SELECT 1+1 AS RESULT");
+  const result = await db.query("SELECT 1+1 AS TEST");
   console.log(result);
-  res.send("Server and DB running OK");
+  res.send("Server and DB are running OK");
 });
 
 // Swagger

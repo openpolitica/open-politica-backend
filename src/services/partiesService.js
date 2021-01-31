@@ -1,13 +1,9 @@
-const { PartyModel } = require("../models");
-
 const getParties = async () => {
-  return await PartyModel.find().sort({
-    name: "asc"
-  });
+  return;
 };
 
 const findOneParty = async (_id) => {
-  return await PartyModel.findOne({ _id });
+  return;
 };
 
 module.exports = {
