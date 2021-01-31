@@ -14,8 +14,8 @@ const getCandidates = async (params) => {
   }
   if (role) {
     query += "AND a.cargo_nombre LIKE ? ";
-    if (role.lastIndexOf("PRESIDENTE") === 0) arguments.push(role + "%");
-    else arguments.push("%" + role + "%");
+    if (role === "CONGRESISTA") arguments.push("%" + role + "%");
+    else arguments.push(role + "%");
   }
   if (region) {
     query += "AND a.postula_distrito = ? ";
