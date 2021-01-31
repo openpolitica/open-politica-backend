@@ -242,11 +242,17 @@ mysql --login-path=local --database=op -e '''
 DROP TABLE IF EXISTS `extra_data`;
 CREATE TABLE IF NOT EXISTS `extra_data` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
+  `educacion_primaria` tinyint(1) DEFAULT 0,
+  `educacion_secundaria` tinyint(1) DEFAULT 0,
+  `educacion_superior_tecnica` tinyint(1) DEFAULT 0,
+  `educacion_superior_nouniversitaria` tinyint(1) DEFAULT 0,
+  `educacion_superior_universitaria` tinyint(1) DEFAULT 0,
+  `educacion_postgrado` tinyint(1) DEFAULT 0,
   `educacion_mayor_nivel` varchar(32) DEFAULT NULL,
   `vacancia` tinyint(1) DEFAULT NULL,
   `sentencias_ec_civil_cnt` tinyint(1) DEFAULT 0,
   `sentencias_ec_penal_cnt` tinyint(1) DEFAULT 0,
-  `experiencia_publica` tinyint(1) DEFAULT NULL,
+  `experiencia_publica` tinyint(1) DEFAULT 0,
   `bienes_muebles_valor` decimal(12,2) DEFAULT 0,
   `bienes_inmuebles_valor` decimal(12,2) DEFAULT 0,
   `org_politica_alias` varchar(32) DEFAULT NULL
@@ -322,6 +328,10 @@ FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
 LINES TERMINATED BY "\n"
 IGNORE 1 ROWS;
+UPDATE `temp_partidos`
+SET nombre="EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+alias="Frente Amplio"
+WHERE nombre="EL FRENTE AMPLIO POR JUSTICIA VIDA Y LIBERTAD";
 UPDATE extra_data e, candidato c, temp_partidos p
 SET e.org_politica_alias=REPLACE(REPLACE(p.alias, "\r", ""), "\n", "")
 WHERE e.hoja_vida_id = c.hoja_vida_id AND c.org_politica_nombre = p.nombre;
@@ -330,23 +340,27 @@ DROP TABLE IF EXISTS `temp_partidos`;
 ## Educación mayor nivel
 mysql --login-path=local --database=op -e '''
 UPDATE extra_data
-SET educacion_mayor_nivel="Primaria"
+SET educacion_mayor_nivel="Primaria", educacion_primaria=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e 
 WHERE e.tipo = "BASICA_PRIMARIA" AND e.concluyo = 1);
 UPDATE extra_data
-SET educacion_mayor_nivel="Secundaria"
+SET educacion_mayor_nivel="Secundaria", educacion_secundaria=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e 
 WHERE e.tipo = "BASICA_SECUNDARIA" AND e.concluyo = 1);
 UPDATE extra_data
-SET educacion_mayor_nivel="Superior - No Universitaria"
+SET educacion_mayor_nivel="Superior - Técnica", educacion_superior_tecnica=1
+WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e
+WHERE e.tipo = "TECNICA" AND e.concluyo = 1);
+UPDATE extra_data
+SET educacion_mayor_nivel="Superior - No Universitaria", educacion_superior_nouniversitaria=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e 
 WHERE e.tipo = "NO_UNIVERSITARIA" AND e.concluyo = 1);
 UPDATE extra_data
-SET educacion_mayor_nivel="Superior - Universitaria"
+SET educacion_mayor_nivel="Superior - Universitaria", educacion_superior_universitaria=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e 
 WHERE e.tipo = "UNIVERSITARIA" AND e.concluyo = 1);
 UPDATE extra_data
-SET educacion_mayor_nivel="Postgrado"
+SET educacion_mayor_nivel="Postgrado", educacion_postgrado=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e 
 WHERE e.tipo = "POSTGRADO" AND e.concluyo = 1);
 UPDATE extra_data
@@ -501,7 +515,8 @@ CREATE TABLE `geo` (
   `id` smallint DEFAULT NULL,
   `location` varchar(32) DEFAULT NULL,
   `lat` varchar(32) DEFAULT NULL,
-  `lng` varchar(32) DEFAULT NULL
+  `lng` varchar(32) DEFAULT NULL,
+  `sitios` tinyint(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 LOAD DATA LOCAL INFILE "./geo.csv"
 INTO TABLE geo
@@ -519,6 +534,15 @@ ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE geo ADD INDEX (location, lat, lng);
 ALTER TABLE data_ec ADD INDEX (designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
+'''
+
+# Update data for special cases
+echo "----------------------------------------------"
+echo "#### Updating candidates special information"
+mysql --login-path=local --database=op -e '''
+UPDATE candidato
+SET id_nombres = "GAHELA TSENEG", id_sexo = "F"
+WHERE hoja_vida_id = 136670
 '''
 
 # Delete downloads
