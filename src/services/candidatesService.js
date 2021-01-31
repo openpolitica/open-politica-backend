@@ -1,6 +1,5 @@
 const db = require("../database");
 const lz = require("lz-string");
-const sqlstr = require("sqlstring");
 
 const getCandidates = async (params) => {
   const { parties, region, role, vacancia, sentencias } = params;
@@ -113,8 +112,8 @@ const getCandidateByDNI = async (id_dni) => {
   };
 };
 
-const encodeResults = (cadidates) => {
-  const strCandidates = JSON.stringify(cadidates);
+const encodeResults = (candidates) => {
+  const strCandidates = JSON.stringify(candidates);
   const hash = lz.compressToEncodedURIComponent(strCandidates);
   return {
     hash
