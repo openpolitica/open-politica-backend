@@ -12,7 +12,7 @@ const getCandidates = async (params) => {
 
   if (parties) {
     query += "AND a.org_politica_nombre IN (?) ";
-    arguments.push([parties.split(",")]);
+    arguments.push(parties.split(","));
   }
   if (role) {
     query += "AND a.cargo_nombre LIKE ? ";
