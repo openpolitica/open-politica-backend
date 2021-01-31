@@ -106,10 +106,10 @@
             "schema": {
               "type": "string",
               "enum": [
-                "CONGRESISTA DE LA REPÚBLICA",
-                "PRESIDENTE DE LA REPÚBLICA",
-                "PRIMER VICEPRESIDENTE DE LA REPÚBLICA",
-                "SEGUNDO VICEPRESIDENTE DE LA REPÚBLICA"
+                "PRESIDENTE",
+                "PRIMER VICEPRESIDENTE",
+                "SEGUNDO VICEPRESIDENTE",
+                "CONGRESISTA"
               ]
             },
             "required": false

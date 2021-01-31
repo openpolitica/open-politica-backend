@@ -12,6 +12,4 @@ router.get(
 
 router.get("/id_dni/:id_dni", candidatesController.getCandidateByDNI);
 
-router.get("/:id", candidatesController.getCandidateById);
-
 module.exports = router;
