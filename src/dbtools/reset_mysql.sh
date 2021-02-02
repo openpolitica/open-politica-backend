@@ -513,7 +513,7 @@ mysql --login-path=local --database=op --local-infile=1 -e '''
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` smallint DEFAULT NULL,
-  `location` varchar(32) DEFAULT NULL,
+  `location` varchar(48) DEFAULT NULL,
   `lat` varchar(32) DEFAULT NULL,
   `lng` varchar(32) DEFAULT NULL,
   `seats` tinyint(2) DEFAULT NULL
