@@ -16,5 +16,6 @@ router.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 router.use("/parties", require("./partyRoutes"));
 router.use("/candidates", require("./candidateRoutes"));
+router.use("/locations", require("./locationRoutes"));
 
 module.exports = router;
