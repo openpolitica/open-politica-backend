@@ -1,4 +1,5 @@
 const db = require("../database");
+const lz = require("lz-string");
 
 const getCandidates = async (params) => {
   const { parties, region, role, vacancia, sentencias } = params;
@@ -111,8 +112,33 @@ const getCandidateByDNI = async (id_dni) => {
   };
 };
 
+const encodeResults = (candidates) => {
+  const strCandidates = JSON.stringify(candidates);
+  const hash = lz.compressToEncodedURIComponent(strCandidates);
+  return {
+    hash
+  };
+};
+
+const decodeList = async (hash) => {
+  if (!hash) return [];
+  try {
+    const arrArgs = JSON.parse(lz.decompressFromEncodedURIComponent(hash));
+    let query =
+      "SELECT a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, a.org_politica_nombre, b.org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a, extra_data b, data_ec c, ingreso d WHERE a.hoja_vida_id = b.hoja_vida_id AND a.hoja_vida_id = c.hoja_vida_id AND a.hoja_vida_id = d.hoja_vida_id AND a.hoja_vida_id IN (?)";
+    candidates = await db.query(query, [arrArgs]);
+    return {
+      candidates
+    };
+  } catch (error) {
+    throw new Error("Hash inválido");
+  }
+};
+
 module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
-  getCandidateByDNI
+  getCandidateByDNI,
+  encodeResults,
+  decodeList
 };

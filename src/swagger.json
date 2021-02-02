@@ -209,6 +209,60 @@
           }
         }
       }
+    },
+    "/candidates/createHash": {
+      "post": {
+        "summary": "Returns an encoded hash",
+        "description": "Returns an encoded hash according to a given array of hoja_vida_id (numbers)",
+        "requestBody": {
+          "description": "List of candidates on an array",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "example": {
+                "candidates": [134165, 134166, 134169, 134173, 134180]
+              }
+            }
+          }
+        },
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/sharedList/{hash}": {
+      "get": {
+        "summary": "Returns a list of candidates based on the deencrypted array of hoja_vida_id keys.",
+        "description": "Returns a list of candidates from hash decryption",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hash",
+            "description": "Encoded hash from backend",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "NoRgzALCBsCsA04rWoyMCcaoHYzZAA4AGAXSA"
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }

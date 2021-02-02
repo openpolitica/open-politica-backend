@@ -36,8 +36,32 @@ const getCandidateByDNI = async (req, res) => {
   }
 };
 
+const createEncodedHash = async (req, res) => {
+  try {
+    let result = await candidateService.encodeResults(req.body.candidates);
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
+  }
+};
+
+const getListFromHash = async (req, res) => {
+  try {
+    let result = await candidateService.decodeList(req.params.hash);
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
+  }
+};
+
 module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
-  getCandidateByDNI
+  getCandidateByDNI,
+  createEncodedHash,
+  getListFromHash
 };
