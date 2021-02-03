@@ -144,52 +144,25 @@ echo "----------------------------------------------"
 echo "#### Definitely importing first group of candidates: Presidentes & Vicepresidentes"
 mysql --login-path=local --database=op < outputPresidentes/data.sql
 
-# Create indexes relations between tables, alter some field types
-echo "----------------------------------------------"
-echo "#### Creating indexes and relations betweeen tables"
-mysql --login-path=local --database=op -e '''
-ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado);
-ALTER TABLE `ingreso`
-  ADD CONSTRAINT `ingreso_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `ingreso`
-  MODIFY COLUMN total DECIMAL(15,2);
-ALTER TABLE `ingreso`
-  MODIFY COLUMN total_publico DECIMAL(15,2);
-ALTER TABLE `ingreso`
-  MODIFY COLUMN total_privado DECIMAL(15,2);
-ALTER TABLE `experiencia`
-  ADD CONSTRAINT `experiencia_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `educacion`
-  ADD CONSTRAINT `educacion_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `sentencia_civil`
-  ADD CONSTRAINT `sentencia_civil_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `sentencia_penal`
-  ADD CONSTRAINT `sentencia_penal_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `bien_inmueble`
-  ADD CONSTRAINT `bien_inmueble_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;  
-ALTER TABLE `bien_mueble`
-  ADD CONSTRAINT `bien_mueble_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;  
-'''
-
-# For VP+congres entries, delete info that comes from Presidenciales
+# For VP+congres entries, delete duplicate info that comes from Presidenciales
 echo "----------------------------------------------"
 echo "#### Deleting 'Vicepresidentes' candidates that will also come from the 'Congresistas' base"
 mysql --login-path=local --database=op -e '''
 DELETE FROM candidato
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM educacion
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM experiencia
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM bien_mueble
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM bien_inmueble
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM ingreso
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM sentencia_civil
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+DELETE FROM sentencia_penal
 WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 '''
 
@@ -210,15 +183,58 @@ echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
 mysql --login-path=local --database=op < outputCongreso/data.sql
 
-# Expand cargo_nombre field and remove duplicates
+# Expand cargo_nombre field and remove new duplicates
 echo "----------------------------------------------"
-echo "#### Altering some field types for supporting longer text"
+echo "#### Altering some field types for supporting longer text and removing duplicate entries individually"
 mysql --login-path=local --database=op -e '''
 ALTER TABLE `candidato`
   MODIFY COLUMN cargo_nombre varchar(64);
+
 DELETE FROM `candidato`
 WHERE expediente_estado LIKE "%IMPROCEDENTE%"
-OR expediente_estado LIKE "%EXCLUSION%"
+OR expediente_estado LIKE "%EXCLUSION%";
+
+CREATE TABLE temp_educacion SELECT DISTINCT * FROM educacion;
+ALTER TABLE educacion RENAME junk;
+ALTER TABLE temp_educacion RENAME educacion;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_educacion`;
+
+CREATE TABLE temp_ingreso SELECT DISTINCT * FROM ingreso;
+ALTER TABLE ingreso RENAME junk;
+ALTER TABLE temp_ingreso RENAME ingreso;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_ingreso`;
+
+CREATE TABLE temp_bien_mueble SELECT DISTINCT * FROM bien_mueble;
+ALTER TABLE bien_mueble RENAME junk;
+ALTER TABLE temp_bien_mueble RENAME bien_mueble;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_bien_mueble`;
+
+CREATE TABLE temp_bien_inmueble SELECT DISTINCT * FROM bien_inmueble;
+ALTER TABLE bien_inmueble RENAME junk;
+ALTER TABLE temp_bien_inmueble RENAME bien_inmueble;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_bien_inmueble`;
+
+CREATE TABLE temp_experiencia SELECT DISTINCT * FROM experiencia;
+ALTER TABLE experiencia RENAME junk;
+ALTER TABLE temp_experiencia RENAME experiencia;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_experiencia`;
+
+CREATE TABLE temp_sentencia_civil SELECT DISTINCT * FROM sentencia_civil;
+ALTER TABLE sentencia_civil RENAME junk;
+ALTER TABLE temp_sentencia_civil RENAME sentencia_civil;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_sentencia_civil`;
+
+CREATE TABLE temp_sentencia_penal SELECT DISTINCT * FROM sentencia_penal;
+ALTER TABLE sentencia_penal RENAME junk;
+ALTER TABLE temp_sentencia_penal RENAME sentencia_penal;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_sentencia_penal`;
 '''
 
 # Change applicable Vicepresidentes to VP+Congresistas
@@ -253,14 +269,11 @@ CREATE TABLE IF NOT EXISTS `extra_data` (
   `sentencias_ec_civil_cnt` tinyint(1) DEFAULT 0,
   `sentencias_ec_penal_cnt` tinyint(1) DEFAULT 0,
   `experiencia_publica` tinyint(1) DEFAULT 0,
+  `experiencia_privada` tinyint(1) DEFAULT 0,
   `bienes_muebles_valor` decimal(12,2) DEFAULT 0,
   `bienes_inmuebles_valor` decimal(12,2) DEFAULT 0,
   `org_politica_alias` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-ALTER TABLE `extra_data`
-  ADD CONSTRAINT `extra_data_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
 '''
 
 # Populate extra_data table
@@ -294,14 +307,15 @@ OR c.org_politica_nombre LIKE "PODEMOS PERU"
 OR c.org_politica_nombre LIKE "UNION POR EL PERU"
 OR c.org_politica_nombre LIKE "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP");
 '''
-## Experiencia pública
+## Experiencia pública y privada
 mysql --login-path=local --database=op --local-infile=1 -e '''
 DROP TABLE IF EXISTS `temp_experiencia`;
 CREATE TABLE `temp_experiencia` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
-  `experiencia_publica` tinyint(1) DEFAULT NULL
+  `experiencia_publica` tinyint(1) DEFAULT NULL,
+  `experiencia_privada` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-LOAD DATA LOCAL INFILE "./experiencia_candidate_level.csv"
+LOAD DATA LOCAL INFILE "./experiencia.csv"
 INTO TABLE temp_experiencia
 FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
@@ -313,6 +327,12 @@ WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM temp_experiencia t WHERE t.exper
 UPDATE extra_data
 SET experiencia_publica=0
 WHERE hoja_vida_id NOT IN (SELECT hoja_vida_id FROM temp_experiencia t WHERE t.experiencia_publica=1);
+UPDATE extra_data
+SET experiencia_privada=1
+WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM temp_experiencia t WHERE t.experiencia_privada=1);
+UPDATE extra_data
+SET experiencia_privada=0
+WHERE hoja_vida_id NOT IN (SELECT hoja_vida_id FROM temp_experiencia t WHERE t.experiencia_privada=1);
 DROP TABLE IF EXISTS `temp_experiencia`;
 '''
 ## Alias de partido
@@ -399,11 +419,6 @@ WHERE e.hoja_vida_id = t.hoja_vida_id AND tipo="Civil");
 
 DELETE FROM `sentencias_ec`
 WHERE `sentencias_ec`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
-
-ALTER TABLE `sentencias_ec`
-  ADD CONSTRAINT `sentencias_ec_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
 '''
 
 # Update 'bienes' total values in extra_data
@@ -499,11 +514,6 @@ WHERE sancion_servir_registro IS NULL OR sancion_servir_registro = "";
 UPDATE `data_ec`
 SET sancion_servir_institucion = "No registra"
 WHERE sancion_servir_institucion IS NULL OR CHAR_LENGTH(sancion_servir_institucion) = 1;
-
-ALTER TABLE `data_ec`
-  ADD CONSTRAINT `data_ec_fk1` FOREIGN KEY (`hoja_vida_id`) 
-  REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;
 '''
 
 # New locations table and populate
@@ -526,10 +536,83 @@ LINES TERMINATED BY "\n"
 IGNORE 1 ROWS;
 '''
 
-# Create indexes to the rest of tables!
+# Delete useless data
 echo "----------------------------------------------"
-echo "#### Creating indexes for query optimization"
+echo "#### Delete data from tables that does not belong to any candidate"
 mysql --login-path=local --database=op -e '''
+DELETE FROM `ingreso`
+WHERE `ingreso`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `experiencia`
+WHERE `experiencia`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `educacion`
+WHERE `educacion`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `sentencia_civil`
+WHERE `sentencia_civil`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `sentencia_penal`
+WHERE `sentencia_penal`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `bien_mueble`
+WHERE `bien_mueble`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `bien_inmueble`
+WHERE `bien_inmueble`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `data_ec`
+WHERE `data_ec`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `extra_data`
+WHERE `extra_data`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+DELETE FROM `sentencias_ec`
+WHERE `sentencias_ec`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
+'''
+
+# Create definite indexes and relations!
+echo "----------------------------------------------"
+echo "#### Creating indexes and relations betweeen tables"
+mysql --login-path=local --database=op -e '''
+ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado);
+ALTER TABLE `ingreso`
+  ADD CONSTRAINT `ingreso_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ingreso`
+  MODIFY COLUMN total DECIMAL(15,2);
+ALTER TABLE `ingreso`
+  MODIFY COLUMN total_publico DECIMAL(15,2);
+ALTER TABLE `ingreso`
+  MODIFY COLUMN total_privado DECIMAL(15,2);
+ALTER TABLE `experiencia`
+  ADD CONSTRAINT `experiencia_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `educacion`
+  ADD CONSTRAINT `educacion_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sentencia_civil`
+  ADD CONSTRAINT `sentencia_civil_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sentencia_penal`
+  ADD CONSTRAINT `sentencia_penal_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `bien_inmueble`
+  ADD CONSTRAINT `bien_inmueble_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;  
+ALTER TABLE `bien_mueble`
+  ADD CONSTRAINT `bien_mueble_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;  
+ALTER TABLE `data_ec`
+  ADD CONSTRAINT `data_ec_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `extra_data`
+  ADD CONSTRAINT `extra_data_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sentencias_ec`
+  ADD CONSTRAINT `sentencias_ec_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;  
 ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
