@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `data_ec`;
 DROP TABLE IF EXISTS `educacion`;
 DROP TABLE IF EXISTS `experiencia`;
 DROP TABLE IF EXISTS `extra_data`;
-DROP TABLE IF EXISTS `geo`;
+DROP TABLE IF EXISTS `locations`;
 DROP TABLE IF EXISTS `ingreso`;
 DROP TABLE IF EXISTS `sentencia_civil`;
 DROP TABLE IF EXISTS `sentencia_penal`;
@@ -117,7 +117,7 @@ DROP TABLE IF EXISTS `data_ec`;
 DROP TABLE IF EXISTS `educacion`;
 DROP TABLE IF EXISTS `experiencia`;
 DROP TABLE IF EXISTS `extra_data`;
-DROP TABLE IF EXISTS `geo`;
+DROP TABLE IF EXISTS `locations`;
 DROP TABLE IF EXISTS `ingreso`;
 DROP TABLE IF EXISTS `sentencia_civil`;
 DROP TABLE IF EXISTS `sentencia_penal`;
@@ -506,20 +506,20 @@ ALTER TABLE `data_ec`
   ON DELETE CASCADE ON UPDATE CASCADE;
 '''
 
-# New geo table and populate
+# New locations table and populate
 echo "----------------------------------------------"
-echo "#### Creating new table 'geo' for geographical coordinates"
+echo "#### Creating new table 'locations' for seats & geographical coordinates"
 mysql --login-path=local --database=op --local-infile=1 -e '''
-DROP TABLE IF EXISTS `geo`;
-CREATE TABLE `geo` (
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE `locations` (
   `id` smallint DEFAULT NULL,
-  `location` varchar(32) DEFAULT NULL,
+  `location` varchar(48) DEFAULT NULL,
   `lat` varchar(32) DEFAULT NULL,
   `lng` varchar(32) DEFAULT NULL,
-  `sitios` tinyint(2) DEFAULT NULL
+  `seats` tinyint(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-LOAD DATA LOCAL INFILE "./geo.csv"
-INTO TABLE geo
+LOAD DATA LOCAL INFILE "./locations.csv"
+INTO TABLE locations
 FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
 LINES TERMINATED BY "\n"
@@ -532,7 +532,7 @@ echo "#### Creating indexes for query optimization"
 mysql --login-path=local --database=op -e '''
 ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
-ALTER TABLE geo ADD INDEX (location, lat, lng);
+ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
 ALTER TABLE data_ec ADD INDEX (designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
 '''
 

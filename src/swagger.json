@@ -209,6 +209,72 @@
           }
         }
       }
+    },
+    "/locations": {
+      "get": {
+        "summary": "Returns all locations.",
+        "description": "Returns all location names by electoral district",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/{location}/seats": {
+      "get": {
+        "summary": "Returns seats per location.",
+        "description": "Returns available seats per location name",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "Location by electoral district name",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TUMBES",
+                "PIURA",
+                "LAMBAYEQUE",
+                "LA LIBERTAD",
+                "ANCASH",
+                "LIMA",
+                "LIMA PROVINCIAS",
+                "ICA",
+                "AREQUIPA",
+                "MOQUEGUA",
+                "TACNA",
+                "CAJAMARCA",
+                "HUANUCO",
+                "PASCO",
+                "JUNIN",
+                "HUANCAVELICA",
+                "AYACUCHO",
+                "APURIMAC",
+                "CUSCO",
+                "PUNO",
+                "LORETO",
+                "AMAZONAS",
+                "SAN MARTIN",
+                "MADRE DE DIOS",
+                "UCAYALI",
+                "PERUANOS RESIDENTES EN EL EXTRANJERO",
+                "CALLAO"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
