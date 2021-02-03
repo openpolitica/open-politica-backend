@@ -616,7 +616,7 @@ ALTER TABLE `sentencias_ec`
 ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
-ALTER TABLE data_ec ADD INDEX (designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);  
+ALTER TABLE data_ec ADD INDEX (designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
 '''
 
 # Update data for special cases
