@@ -210,6 +210,36 @@
         }
       }
     },
+    "/candidates/count": {
+      "get": {
+        "summary": "Returns candidates count.",
+        "description": "Returns candidates count, filtered by role if desired",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "role",
+            "description": "Candidate Role",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PRESIDENTE",
+                "PRIMER VICEPRESIDENTE",
+                "SEGUNDO VICEPRESIDENTE",
+                "CONGRESISTA"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/locations": {
       "get": {
         "summary": "Returns all locations.",

@@ -111,8 +111,33 @@ const getCandidateByDNI = async (id_dni) => {
   };
 };
 
+const getCandidatesCount = async (params) => {
+  const { role } = params;
+
+  let arguments = [];
+
+  let query =
+    "SELECT COUNT(*) as count FROM candidato ";
+
+  if (role) {
+    query += "WHERE cargo_nombre LIKE ? ";
+    if (role === "CONGRESISTA") arguments.push("%" + role + "%");
+    else arguments.push(role + "%");
+  }
+
+  let count = [];
+
+  try {
+    count = await db.query(query, arguments);
+    return count[0];
+  } catch (error) {
+    throw new Error("Error al consultar los candidatos");
+  }
+};
+
 module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
-  getCandidateByDNI
+  getCandidateByDNI,
+  getCandidatesCount
 };
