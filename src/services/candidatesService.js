@@ -66,7 +66,7 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   judgements = await db.query(query_judgements, hoja_vida_id);
 
   return {
-    candidate,
+    ...candidate[0],
     education,
     experience,
     bienes_muebles,
@@ -102,7 +102,7 @@ const getCandidateByDNI = async (id_dni) => {
   judgements = await db.query(query_judgements, id_dni);
 
   return {
-    candidate,
+    ...candidate[0],
     education,
     experience,
     bienes_muebles,
