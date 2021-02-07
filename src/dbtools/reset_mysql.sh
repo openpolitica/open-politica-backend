@@ -606,8 +606,8 @@ WHERE hoja_vida_id = 136670
 # Militancy: Download data in sqlite
 echo "----------------------------------------------"
 echo "#### Militancy: Downloading data in sqlite"
-wget https://github.com/openpolitica/jne-elecciones/raw/17a0baca76dfbcd6d25f07b03d4393295270b088/data/infogob/2021-militancia-candidatos-congresales.db
-wget https://github.com/openpolitica/jne-elecciones/raw/17a0baca76dfbcd6d25f07b03d4393295270b088/data/infogob/2021-militancia-candidatos-presidenciales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-congresales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-presidenciales.db
 
 # Militancy: Convert data in sqlite to mariadb
 echo "----------------------------------------------"
