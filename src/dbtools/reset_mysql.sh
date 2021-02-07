@@ -536,6 +536,37 @@ LINES TERMINATED BY "\n"
 IGNORE 1 ROWS;
 '''
 
+# New dirty lists table and populate
+echo "----------------------------------------------"
+echo "#### Creating new dirty_lists table for parties with sanctions"
+mysql --login-path=local --database=op -e '''
+DROP TABLE IF EXISTS `dirty_lists`;
+CREATE TABLE dirty_lists (SELECT postula_distrito, candidato.org_politica_nombre,
+SUM(extra_data.sentencias_ec_penal_cnt) AS sentencias_penales,
+SUM(extra_data.sentencias_ec_civil_cnt) AS sentencias_civiles,
+SUM(data_ec.deuda_sunat) AS deuda_sunat,
+SUM(data_ec.papeletas_sat) AS papeletas_sat,
+SUM(IF(data_ec.sancion_servir_registro NOT LIKE "No registra", 1, 0)) AS sancion_servir,
+GROUP_CONCAT(data_ec.licencia_conducir) AS licencia_conducir
+FROM candidato
+INNER JOIN extra_data ON candidato.hoja_vida_id = extra_data.hoja_vida_id
+INNER JOIN data_ec ON candidato.hoja_vida_id = data_ec.hoja_vida_id
+WHERE candidato.cargo_nombre LIKE "%CONGRESISTA%"
+AND ((candidato.postula_distrito = "LIMA" AND candidato.posicion > 0 AND candidato.posicion < 6)
+OR (candidato.postula_distrito != "LIMA" AND candidato.posicion > 0 AND candidato.posicion < 3))
+AND (extra_data.sentencias_ec_penal_cnt > 0
+OR extra_data.sentencias_ec_civil_cnt > 0
+OR data_ec.deuda_sunat > 0
+OR data_ec.papeletas_sat > 0
+OR data_ec.sancion_servir_registro NOT LIKE "No registra"
+OR data_ec.licencia_conducir LIKE "%retenida%"
+OR data_ec.licencia_conducir LIKE "%inhabilita%"
+OR data_ec.licencia_conducir LIKE "%cancelada%"
+OR data_ec.licencia_conducir LIKE "%suspendida%"
+)
+GROUP BY  postula_distrito, org_politica_nombre)
+'''
+
 # Delete useless data
 echo "----------------------------------------------"
 echo "#### Delete data from tables that does not belong to any candidate"
@@ -562,11 +593,68 @@ DELETE FROM `sentencias_ec`
 WHERE `sentencias_ec`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
 '''
 
+
+# Update data for special cases
+echo "----------------------------------------------"
+echo "#### Updating candidates special information"
+mysql --login-path=local --database=op -e '''
+UPDATE candidato
+SET id_nombres = "GAHELA TSENEG", id_sexo = "F"
+WHERE hoja_vida_id = 136670
+'''
+
+# Militancy: Download data in sqlite
+echo "----------------------------------------------"
+echo "#### Militancy: Downloading data in sqlite"
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-congresales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-presidenciales.db
+
+# Militancy: Convert data in sqlite to mariadb
+echo "----------------------------------------------"
+echo "#### Militancy: Converting data from sqlite to mariadb"
+java -jar client-0.0.5.jar convert --output-format=mariadb 2021-militancia-candidatos-congresales.db ./outputMilitanciaCongreso
+java -jar client-0.0.5.jar convert --output-format=mariadb 2021-militancia-candidatos-presidenciales.db ./outputMilitanciaPresidentes
+
+# Militancy: Import Presidentes first
+echo "----------------------------------------------"
+echo "#### Militancy: Importing candidates: Presidentes"
+mysql --login-path=local --database=op < outputMilitanciaPresidentes/data.sql
+
+# Replace DROP & CREATE lines in the file Congreso
+echo "----------------------------------------------"
+echo "#### Preparing the 'Congresistas' file to be appended instead of replacing the existing data"
+if [[ $(uname -s) == Linux ]]
+then
+    sed -i "/DROP TABLE/d" outputMilitanciaCongreso/data.sql
+    sed -i "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputMilitanciaCongreso/data.sql
+else
+    sed -i "" -e "/DROP TABLE/d" outputMilitanciaCongreso/data.sql
+    sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputMilitanciaCongreso/data.sql
+fi
+
+# Militancy: Import Congreso
+echo "----------------------------------------------"
+echo "#### Militancy: Importing candidates: Congreso"
+mysql --login-path=local --database=op < outputMilitanciaCongreso/data.sql
+
+# Militancy: Remove duplicates and useless
+echo "----------------------------------------------"
+echo "#### Militancy: removing duplicate entries individually"
+mysql --login-path=local --database=op -e '''
+CREATE TABLE temp_afiliacion SELECT DISTINCT * FROM afiliacion;
+ALTER TABLE afiliacion RENAME junk;
+ALTER TABLE temp_afiliacion RENAME afiliacion;
+DROP TABLE IF EXISTS `junk`;
+DROP TABLE IF EXISTS `temp_afiliacion`;
+DELETE FROM `afiliacion`
+WHERE `afiliacion`.dni NOT IN (SELECT id_dni FROM candidato);
+'''
+
 # Create definite indexes and relations!
 echo "----------------------------------------------"
 echo "#### Creating indexes and relations betweeen tables"
 mysql --login-path=local --database=op -e '''
-ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado);
+ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado, id_dni);
 ALTER TABLE `ingreso`
   ADD CONSTRAINT `ingreso_fk1` FOREIGN KEY (`hoja_vida_id`) 
   REFERENCES `candidato` (`hoja_vida_id`) 
@@ -612,20 +700,16 @@ ALTER TABLE `extra_data`
 ALTER TABLE `sentencias_ec`
   ADD CONSTRAINT `sentencias_ec_fk1` FOREIGN KEY (`hoja_vida_id`) 
   REFERENCES `candidato` (`hoja_vida_id`) 
-  ON DELETE CASCADE ON UPDATE CASCADE;  
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `afiliacion`
+  ADD CONSTRAINT `afiliacion_fk1` FOREIGN KEY (`dni`)
+  REFERENCES `candidato` (`id_dni`)
+  ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
 ALTER TABLE data_ec ADD INDEX (designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
-'''
-
-# Update data for special cases
-echo "----------------------------------------------"
-echo "#### Updating candidates special information"
-mysql --login-path=local --database=op -e '''
-UPDATE candidato
-SET id_nombres = "GAHELA TSENEG", id_sexo = "F"
-WHERE hoja_vida_id = 136670
+ALTER TABLE afiliacion ADD INDEX (vigente, dni, org_politica, afiliacion_inicio, afiliacion_cancelacion)
 '''
 
 # Delete downloads
