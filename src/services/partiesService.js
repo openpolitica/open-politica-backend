@@ -13,7 +13,6 @@ const getDirtyLists = async (params) => {
     ? "SELECT * FROM dirty_lists d WHERE 1 "
     : "SELECT * FROM dirty_lists d";
 
-  console.log(params);
   if (party) {
     query += "AND d.org_politica_nombre = ? ";
     arguments.push(party);
@@ -22,8 +21,6 @@ const getDirtyLists = async (params) => {
     query += "AND d.postula_distrito = ? ";
     arguments.push(region);
   }
-
-  console.log(query, arguments);
 
   let lists = [];
 
