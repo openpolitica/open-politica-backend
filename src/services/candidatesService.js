@@ -23,7 +23,7 @@ const getCandidates = async (params) => {
   }
   if (vacancia) {
     query += "AND b.vacancia = ? ";
-    arguments.push(vacancia ? 1 : 0);
+    arguments.push(vacancia === "true" ? 1 : 0);
   }
 
   let candidates = [];
