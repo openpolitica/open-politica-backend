@@ -135,8 +135,10 @@ echo "#### Making varchars wider"
 if [[ $(uname -s) == Linux ]]
 then
     sed -i "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
+    sed -i "s/varchar(9)/varchar(36)/g" outputPresidentes/data.sql
 else
     sed -i "" -e "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
+    sed -i "" -e "s/varchar(9)/varchar(36)/g" outputPresidentes/data.sql
 fi
 
 # Import Presidenciales
@@ -453,7 +455,7 @@ CREATE TABLE `data_ec` (
   `procesos_electorales_ganados` tinyint(2) DEFAULT 0,
   `papeletas_sat` smallint DEFAULT 0,
   `papeletas_monto` mediumint DEFAULT 0,
-  `licencia_conducir` varchar(32) DEFAULT NULL,
+  `licencia_conducir` varchar(64) DEFAULT NULL,
   `sancion_servir_registro` varchar(32) DEFAULT NULL,
   `sancion_servir_institucion` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
