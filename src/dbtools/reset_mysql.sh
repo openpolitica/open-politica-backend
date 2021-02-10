@@ -14,8 +14,8 @@ rm -rf output*
 # Download data in sqlite
 echo "----------------------------------------------"
 echo "#### Downloading data in sqlite"
-wget https://github.com/openpolitica/jne-elecciones/raw/main/data/2021-candidatos-presidenciales.db
-wget https://github.com/openpolitica/jne-elecciones/raw/main/data/2021-candidatos-congresales.db 
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-presidenciales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-congresales.db
 
 # Convert data in sqlite to mariadb
 echo "----------------------------------------------"
