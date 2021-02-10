@@ -52,12 +52,14 @@ ALTER TABLE `bien_inmueble`
   DROP FOREIGN KEY IF EXISTS `bien_inmueble_fk1`;
 ALTER TABLE `bien_mueble`
   DROP FOREIGN KEY IF EXISTS `bien_mueble_fk1`;
+ALTER TABLE `afiliacion`
+  DROP FOREIGN KEY IF EXISTS `afiliacion_fk1`;
 ALTER TABLE `ingreso`
   DROP INDEX IF EXISTS `ingreso_fk1`;
 ALTER TABLE `extra_data`
   DROP INDEX IF EXISTS `extra_data_fk1`;
 ALTER TABLE `experiencia`
-  DROP INDEX IF EXISTS `experiencia_fk1`; 
+  DROP INDEX IF EXISTS `experiencia_fk1`;
 ALTER TABLE `educacion`
   DROP INDEX IF EXISTS `educacion_fk1`;
 ALTER TABLE `sentencia_civil`
@@ -69,9 +71,11 @@ ALTER TABLE `data_ec`
 ALTER TABLE `sentencias_ec`
   DROP INDEX IF EXISTS `sentencias_ec_fk1`;
 ALTER TABLE `bien_mueble`
-  DROP INDEX IF EXISTS `bien_mueble_fk1`;  
+  DROP INDEX IF EXISTS `bien_mueble_fk1`;
 ALTER TABLE `bien_inmueble`
-  DROP INDEX IF EXISTS `bien_inmueble_fk1`;    
+  DROP INDEX IF EXISTS `bien_inmueble_fk1`;
+ALTER TABLE `afiliacion`
+  DROP INDEX IF EXISTS `afiliacion_fk1`;
 '''
 
 # Drop tables
@@ -91,6 +95,7 @@ DROP TABLE IF EXISTS `candidato`;
 DROP TABLE IF EXISTS `bien_inmueble`;
 DROP TABLE IF EXISTS `bien_mueble`;
 DROP TABLE IF EXISTS `bien_otro`;
+DROP TABLE IF EXISTS `afiliacion`;
 '''
 
 # Import Congreso first
@@ -657,6 +662,7 @@ echo "----------------------------------------------"
 echo "#### Creating indexes and relations betweeen tables"
 mysql --login-path=local --database=op -e '''
 ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado, id_dni);
+ALTER TABLE candidato ADD PRIMARY KEY(id_dni);
 ALTER TABLE `ingreso`
   ADD CONSTRAINT `ingreso_fk1` FOREIGN KEY (`hoja_vida_id`) 
   REFERENCES `candidato` (`hoja_vida_id`) 
