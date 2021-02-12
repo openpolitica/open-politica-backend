@@ -141,9 +141,13 @@ if [[ $(uname -s) == Linux ]]
 then
     sed -i "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
     sed -i "s/varchar(9)/varchar(36)/g" outputPresidentes/data.sql
+    sed -i "s/varchar(8)/varchar(48)/g" outputPresidentes/data.sql
+    sed -i "s/varchar(17)/varchar(48)/g" outputPresidentes/data.sql
 else
     sed -i "" -e "s/varchar(11)/varchar(36)/g" outputPresidentes/data.sql
     sed -i "" -e "s/varchar(9)/varchar(36)/g" outputPresidentes/data.sql
+    sed -i "" -e "s/varchar(8)/varchar(48)/g" outputPresidentes/data.sql
+    sed -i "" -e "s/varchar(17)/varchar(48)/g" outputPresidentes/data.sql
 fi
 
 # Import Presidenciales
@@ -199,7 +203,9 @@ ALTER TABLE `candidato`
 
 DELETE FROM `candidato`
 WHERE expediente_estado LIKE "%IMPROCEDENTE%"
-OR expediente_estado LIKE "%EXCLUSION%";
+OR expediente_estado LIKE "%EXCLUSION%"
+OR expediente_estado LIKE "%RENUNCI%"
+OR expediente_estado LIKE "%RETIRO%";
 
 CREATE TABLE temp_educacion SELECT DISTINCT * FROM educacion;
 ALTER TABLE educacion RENAME junk;
