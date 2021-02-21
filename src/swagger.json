@@ -15,7 +15,10 @@
     }
   },
   "servers": [
-    { "url": "https://tip.magiqapps.com", "description": "Production Server" },
+    {
+      "url": "https://api.openpolitica.com",
+      "description": "Production Server"
+    },
     { "url": "http://localhost:3000", "description": "Development Server" }
   ],
   "paths": {
@@ -103,10 +106,10 @@
             "schema": {
               "type": "string",
               "enum": [
-                "CONGRESISTA DE LA REPÚBLICA",
-                "PRESIDENTE DE LA REPÚBLICA",
-                "PRIMER VICEPRESIDENTE DE LA REPÚBLICA",
-                "SEGUNDO VICEPRESIDENTE DE LA REPÚBLICA"
+                "PRESIDENTE",
+                "PRIMER VICEPRESIDENTE",
+                "SEGUNDO VICEPRESIDENTE",
+                "CONGRESISTA"
               ]
             },
             "required": false
@@ -159,30 +162,6 @@
         }
       }
     },
-    "/candidates/{id}": {
-      "get": {
-        "summary": "Returns a single candidate by database ID.",
-        "description": "Returns a single candidate by database ID.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "ID assigned by database",
-            "schema": {
-              "type": "string"
-            },
-            "required": false
-          }
-        ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/candidates/hoja_vida_id/{hoja_vida_id}": {
       "get": {
         "summary": "Returns a single candidate by 'Hoja Vida ID'.",
@@ -218,6 +197,188 @@
             "description": "JNE - id_dni.string",
             "schema": {
               "type": "integer"
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/candidates/count": {
+      "get": {
+        "summary": "Returns candidates count.",
+        "description": "Returns candidates count, filtered by role if desired",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "role",
+            "description": "Candidate Role",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PRESIDENTE",
+                "PRIMER VICEPRESIDENTE",
+                "SEGUNDO VICEPRESIDENTE",
+                "CONGRESISTA"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations": {
+      "get": {
+        "summary": "Returns all locations.",
+        "description": "Returns all location names by electoral district",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/{location}/seats": {
+      "get": {
+        "summary": "Returns seats per location.",
+        "description": "Returns available seats per location name",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "Location by electoral district name",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TUMBES",
+                "PIURA",
+                "LAMBAYEQUE",
+                "LA LIBERTAD",
+                "ANCASH",
+                "LIMA",
+                "LIMA PROVINCIAS",
+                "ICA",
+                "AREQUIPA",
+                "MOQUEGUA",
+                "TACNA",
+                "CAJAMARCA",
+                "HUANUCO",
+                "PASCO",
+                "JUNIN",
+                "HUANCAVELICA",
+                "AYACUCHO",
+                "APURIMAC",
+                "CUSCO",
+                "PUNO",
+                "LORETO",
+                "AMAZONAS",
+                "SAN MARTIN",
+                "MADRE DE DIOS",
+                "UCAYALI",
+                "PERUANOS RESIDENTES EN EL EXTRANJERO",
+                "CALLAO"
+              ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/parties/dirtylists": {
+      "get": {
+        "summary": "Returns lists with sanctions.",
+        "description": "Returns lists with sanctions, can be filter by party and/or region",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "region",
+            "description": "Location by electoral district name",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "TUMBES",
+                "PIURA",
+                "LAMBAYEQUE",
+                "LA LIBERTAD",
+                "ANCASH",
+                "LIMA",
+                "LIMA PROVINCIAS",
+                "ICA",
+                "AREQUIPA",
+                "MOQUEGUA",
+                "TACNA",
+                "CAJAMARCA",
+                "HUANUCO",
+                "PASCO",
+                "JUNIN",
+                "HUANCAVELICA",
+                "AYACUCHO",
+                "APURIMAC",
+                "CUSCO",
+                "PUNO",
+                "LORETO",
+                "AMAZONAS",
+                "SAN MARTIN",
+                "MADRE DE DIOS",
+                "UCAYALI",
+                "PERUANOS RESIDENTES EN EL EXTRANJERO",
+                "CALLAO"
+              ]
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "party",
+            "description": "Political Party",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ACCION POPULAR",
+                "ALIANZA PARA EL PROGRESO",
+                "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+                "DEMOCRACIA DIRECTA",
+                "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+                "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
+                "FUERZA POPULAR",
+                "JUNTOS POR EL PERU",
+                "PARTIDO APRISTA PERUANO",
+                "PARTIDO DEMOCRATICO SOMOS PERU",
+                "PARTIDO MORADO",
+                "PARTIDO POLÍTICO CONTIGO",
+                "PARTIDO POPULAR CRISTIANO - PPC",
+                "PERU LIBRE",
+                "PERU NACION",
+                "PERU PATRIA SEGURA",
+                "PODEMOS PERU",
+                "RENACIMIENTO UNIDO NACIONAL",
+                "RENOVACION POPULAR",
+                "UNION POR EL PERU",
+                "VAMOS PERU",
+                "VICTORIA NACIONAL"
+              ]
             },
             "required": false
           }

@@ -12,6 +12,17 @@ const getParties = async (req, res) => {
   }
 };
 
+const getDirtyLists = async (req, res) => {
+  try {
+    let result = await partiesService.getDirtyLists(req.query);
+    responseBuilder.success(result, req.method);
+  } catch (error) {
+    responseBuilder.error(error);
+  } finally {
+    return res.status(responseBuilder.getStatusCode()).json(responseBuilder);
+  }
+};
+
 const findOneParty = async (req, res) => {
   try {
     let result = await partiesService.findOneParty(req.params.id);
@@ -25,5 +36,6 @@ const findOneParty = async (req, res) => {
 
 module.exports = {
   getParties,
+  getDirtyLists,
   findOneParty
 };

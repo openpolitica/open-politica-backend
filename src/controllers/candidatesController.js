@@ -36,9 +36,9 @@ const getCandidateByDNI = async (req, res) => {
   }
 };
 
-const getCandidateById = async (req, res) => {
+const getCandidatesCount = async (req, res) => {
   try {
-    let result = await candidateService.getCandidateById(req.params.id);
+    let result = await candidateService.getCandidatesCount(req.query);
     responseBuilder.success(result, req.method);
   } catch (error) {
     responseBuilder.error(error);
@@ -51,5 +51,5 @@ module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
   getCandidateByDNI,
-  getCandidateById
+  getCandidatesCount
 };
