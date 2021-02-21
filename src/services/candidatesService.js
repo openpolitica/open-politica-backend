@@ -35,6 +35,10 @@ const getCandidates = async (params) => {
 
   try {
     candidates = await db.query(query, arguments);
+    await db.query(
+      "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
+      region
+    );
     return {
       candidates
     };
