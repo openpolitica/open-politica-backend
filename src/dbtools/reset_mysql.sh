@@ -539,7 +539,8 @@ CREATE TABLE `locations` (
   `location` varchar(48) DEFAULT NULL,
   `lat` varchar(32) DEFAULT NULL,
   `lng` varchar(32) DEFAULT NULL,
-  `seats` tinyint(2) DEFAULT NULL
+  `seats` tinyint(2) DEFAULT NULL,
+  `apicounts` mediumint DEFAULT 0,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 LOAD DATA LOCAL INFILE "./locations.csv"
 INTO TABLE locations
