@@ -59,7 +59,7 @@ const getCandidates = async (params) => {
 
   query += ` ORDER BY FIELD(b.org_politica_alias,${"'" +
     partiesAliasOrder.reverse().join("','") +
-    "'"}) DESC;`;
+    "'"}) DESC, a.posicion ASC;`;
 
   try {
     candidates = await db.query(query, arguments);
