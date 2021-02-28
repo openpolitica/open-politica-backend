@@ -52,9 +52,9 @@ const getCandidates = async (params) => {
 
   let candidates = [];
   if (sentencias === "false") {
-    query += "AND b.sentencias_ec_civil_cnt + b.sentencias_ec_penal_cnt = 0";
+    query += "AND b.sentencias_ec_penal_cnt = 0";
   } else if (sentencias === "true") {
-    query += "AND b.sentencias_ec_civil_cnt + b.sentencias_ec_penal_cnt > 0";
+    query += "AND b.sentencias_ec_penal_cnt > 0";
   }
 
   query += ` ORDER BY FIELD(b.org_politica_alias,${"'" +
