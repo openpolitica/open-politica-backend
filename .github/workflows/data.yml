@@ -22,6 +22,7 @@ jobs:
             datasette
             sqlite-utils
             datasette-copyable
+            csvs-to-sqlite
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
