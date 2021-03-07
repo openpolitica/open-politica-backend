@@ -1,7 +1,7 @@
 const db = require("../database");
 
 const getTopics = async () => {
-  let query = "SELECT * FROM Topico";
+  let query = "SELECT * FROM topico";
   let response = await db.query(query);
   return response;
 };
@@ -13,7 +13,7 @@ const getQuestions = async (params) => {
     topics = [topics];
   }
   let query =
-    "SELECT * FROM Pregunta a JOIN Topico b WHERE a.codTopico = b.codTopico AND b.topico IN (?)";
+    "SELECT * FROM Pregunta a JOIN topico b WHERE a.codTopico = b.codTopico AND b.topico IN (?)";
   const response = await db.query(query, [topics]);
 
   let mapped = response.reduce(function (r, a) {
@@ -37,7 +37,7 @@ const getPolicyResults = async (body) => {
     return value.answerId;
   });
 
-  let query = `SELECT a.partido, COUNT(*) AS total FROM (SELECT * FROM partidoxrespuesta WHERE codPregunta IN (?) AND codRespuesta IN (?)) a GROUP BY a.partido ORDER BY total DESC`;
+  let query = `SELECT a.partido, COUNT(*) AS total FROM (SELECT * FROM partido_x_respuesta WHERE codPregunta IN (?) AND codRespuesta IN (?)) a GROUP BY a.partido ORDER BY total DESC`;
   let response = await db.query(query, [preguntas, respuestas]);
 
   let partyResults = response.reduce(function (r, a) {
