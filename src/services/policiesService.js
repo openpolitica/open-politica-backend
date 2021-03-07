@@ -1,16 +1,9 @@
 const db = require("../database");
 
-// Temporary mock data
 const getTopics = async () => {
-  return [
-    "Educación",
-    "Salud",
-    "Gobernabilidad",
-    "Medio Ambiente",
-    "Seguridad",
-    "Derechos Civiles",
-    "Economía"
-  ];
+  let query = "SELECT * FROM Topico";
+  let response = await db.query(query);
+  return response;
 };
 
 const getQuestions = async (params) => {
@@ -19,105 +12,42 @@ const getQuestions = async (params) => {
   if (typeof topics === "string") {
     topics = [topics];
   }
+  let query =
+    "SELECT * FROM Pregunta a JOIN Topico b WHERE a.codTopico = b.codTopico AND b.topico IN (?)";
+  const response = await db.query(query, [topics]);
 
-  // Temporary mock data
-  const questionsPerTopic = {
-    Educación: [
-      { edu1: "¿Cómo mejorar la educación durante la pandemia?" },
-      { edu2: "¿Cómo mejorar la calidad de la educación escolar?" },
-      { edu3: "¿Cómo mejorar la educación superior?" }
-    ],
-    Salud: [
-      {
-        sal1: "¿Cómo obtener mejores resultados en la lucha contra el Covid-19?"
-      },
-      {
-        sal2:
-          "¿Cómo reformar la estructura y el funcionamiento del sistema público de salud?"
-      },
-      { sal3: "¿Cómo disminuir el gasto de las personas en salud?" }
-    ],
-    Gobernabilidad: [
-      { gob1: "¿Qué opinas sobre modificar la Constitución?" },
-      {
-        gob2:
-          "Si se dieran cambios en la Constitución, ¿en qué temas preferirías que sean?"
-      },
-      {
-        gob3:
-          "¿Qué quieres que opine el candidato presidencial de tu elección sobre la vacancia del 9 de noviembre?"
-      }
-    ],
-    "Medio Ambiente": [
-      {
-        med1:
-          "¿Cual crees que es la mejor forma de combatir la deforestación de la Amazonía?"
-      },
-      { med2: "¿Cómo lograr la transición hacia energías renovables?" },
-      {
-        med3:
-          "¿Cual es la mejor forma de abordar los desastres naturales en el país?"
-      }
-    ],
-    Seguridad: [
-      {
-        seg1:
-          "¿Cuál cree que es la mejor forma de mejorar la lucha contra el crimen?"
-      },
-      {
-        seg2:
-          "¿Cúal es la mejor manera de mejorar la atención policial de casos de violencia de género?"
-      },
-      {
-        seg3:
-          "¿Cuál de las siguientes opciones sería más efectiva para mejorar la formación de la policía?"
-      }
-    ],
-    "Derechos Civiles": [
-      { der1: "¿Está a favor del matrimonio civil igualitario?" },
-      {
-        der2:
-          "¿Qué tipo de apoyo cree que debería dar el gobierno a las personas con discapacidad?"
-      },
-      {
-        der3:
-          "¿Cómo se debe apoyar a las poblaciones y comunidades nativas del país?"
-      }
-    ],
-    Economía: [
-      {
-        der4:
-          "¿Cuál es la mejor forma de crear nuevos empleos formales en el Perú?"
-      },
-      { der5: "La regulación laboral debe:" },
-      {
-        der6:
-          "En una reforma tributaria, ¿Cual de las siguientes opciones es la más efectiva para mejorar la recaudación de impuestos en el país?"
-      }
-    ]
-  };
+  let mapped = response.reduce(function (r, a) {
+    const { topico, codPregunta, pregunta } = a;
 
-  let questions = [];
-
-  topics.forEach((topic) => {
-    let object = {};
-    object[topic] = questionsPerTopic[topic];
-    console.log(object);
-    questions.push(object);
-  });
-
-  return questions;
+    r[topico] = r[topico] || [];
+    r[topico].push({
+      [codPregunta]: pregunta
+    });
+    return r;
+  }, Object.create(null));
+  return mapped;
 };
 
 const getPolicyResults = async (body) => {
-  console.log(body);
-  // Temporary mock data
-  const partyResults = {
-    "Partido Morado": 35,
-    "Fuerza Popular": 41,
-    Frepap: 11,
-    "Juntos por el Perú": 63
-  };
+  const preguntas = body.candidates.map(function (value) {
+    return value.questionId;
+  });
+
+  const respuestas = body.candidates.map(function (value) {
+    return value.answerId;
+  });
+
+  let query = `SELECT a.partido, COUNT(*) AS total FROM (SELECT * FROM partidoxrespuesta WHERE codPregunta IN (?) AND codRespuesta IN (?)) a GROUP BY a.partido ORDER BY total DESC`;
+  let response = await db.query(query, [preguntas, respuestas]);
+
+  let partyResults = response.reduce(function (r, a) {
+    const { partido, total } = a;
+
+    r[partido] = r[partido] || [];
+    r[partido] = total;
+    return r;
+  }, Object.create(null));
+
   return partyResults;
 };
 

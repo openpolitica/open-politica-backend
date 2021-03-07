@@ -448,28 +448,43 @@
         "description": "Given a questions-ansewrs mapping, returns compatibility results.",
         "consumes": ["application/json"],
         "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "questions-answers mapping",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "questionId": {
-                    "type": "string"
-                  },
-                  "answerId": {
-                    "type": "string"
+        "requestBody": {
+          "description": "questions-answers mapping",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "questionId": {
+                      "type": "string"
+                    },
+                    "answerId": {
+                      "type": "string"
+                    }
                   }
                 }
+              },
+              "example": {
+                "candidates": [
+                  {
+                    "questionId": "edu1",
+                    "answerId": "a"
+                  },
+                {
+                    "questionId": "edu1",
+                    "answerId": "b"
+                  },
+                {
+                    "questionId": "sal1",
+                    "answerId": "c"
+                  }
+                ]
               }
             }
           }
-        ],
+        },
         "responses": {
           "405": {
             "description": "Invalid input"
