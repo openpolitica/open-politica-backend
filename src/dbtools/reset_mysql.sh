@@ -769,7 +769,6 @@ DROP TABLE IF EXISTS pregunta;
  codPregunta VARCHAR(45),
   codTopico VARCHAR(45),
   pregunta VARCHAR(500),
-  alternativa varchar(1),
   PRIMARY KEY (codPregunta),
   CONSTRAINT FK_preg_codTopico FOREIGN KEY (codTopico)
         REFERENCES topico(codTopico)
@@ -780,7 +779,7 @@ FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
 LINES TERMINATED BY "\n"
 IGNORE 1 ROWS;
-'''
+
 
 
 ALTER TABLE respuesta
@@ -828,7 +827,7 @@ ENCLOSED BY "\""
 LINES TERMINATED BY "\n"
 IGNORE 1 ROWS;
 
-
+'''
 # Delete downloads
 echo "----------------------------------------------"
 echo "#### Deleting downloads"
