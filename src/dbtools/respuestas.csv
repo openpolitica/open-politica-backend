@@ -1,0 +1,173 @@
+codPregunta;codRespuesta;respuesta
+edu1;a;Medidas para atender la deserción universitaria (becas, acompañamiento, etc.)
+edu1;b;Incluir estrategias complementarias de reforzamiento y recuperación de clases
+edu1;c;Implementar un modelo de educación semipresencial
+edu1;d;Brindar recursos tecnológicos para educación a distancia (tablets, internet, etc.)
+edu1;e;"Hacer un ""Aprendo en casa"" por grado para escolares"
+edu1;f;No menciona
+edu2;a;Adoptar estándares internacionales de calidad educativa
+edu2;b;Sistema para garantizar condiciones básicas de calidad de colegios (similar a SUNEDU)
+edu2;c;Regular el aumento de pensiones y cuotas de ingreso en colegios privados
+edu2;d;Prohibir colegios con fines de lucro
+edu2;e;No menciona
+edu3;a;Eliminar las exoneraciones tributarias de las universidades con fines de lucro
+edu3;b;Dar continuidad a los resultados del proceso de licenciamiento a universidades por SUNEDU
+edu3;c;Continuar con el proceso de licenciamiento de Institutos de educación superior (además del de universidades por SUNEDU)
+edu3;d;Adecuar la oferta formativa técnica superior a las necesidades de cada región
+edu3;e;Crear nuevas formas de oferta de educación superior (universidades o institutos de Alto Rendimiento, Emblemáticos, Digitales u otros)
+edu3;f;No menciona
+edu4;a;Aumentar la cantidad de becas otorgadas para estudios superiores (técnicos, pedagógicos o universitarios)
+edu4;b;Nuevos grupos beneficiarios de becas para estudios superiores (técnicos, pedagógicos o universitarios)
+edu4;c;Ampliar la cantidad de créditos educativos de bajo interés para estudios técnicos o universitarios
+edu4;d;Crear un nuevo programa de becas para estudios de maestrías y doctorado (distinto a los existentes)
+edu4;e;Que los estudiantes de instituciones públicas de educación superior devuelvan la totalidad del costo mediante descuentos de sus ingresos laborales
+edu4;f;No menciona
+edu5;a;Intervenciones para mejorar la carrera docente (malla curricular, fortalecer las escuelas de formación pedagógica)
+edu5;b;Intervenciones para mejorar la formación de los docentes activos (centros de formación continua, capacitaciones, acompañamiento pedagógico)
+edu5;c;Implementar un SERUMS para docentes (como el de los doctores)
+edu5;d;Brindar incentivos adicionales (becas para que los docentes que enseñen en zonas rurales, o reintegro del costo de estudios de maestría y doctorado)
+edu5;e;Aumentar el salario de los docentes
+edu5;f;No menciona
+edu6;a;Una mejor adaptación de la currícula escolar a la diversidad cultural del país
+edu6;b;Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB)
+edu6;c;Enseñar quechua en los colegios
+edu6;d;No menciona
+edu7;a;Adaptar el Currículo Escolar a sus necesidades
+edu7;b;Ampliar y mejorar los servicios para atender sus necesidades educativas especiales (capacitación docente, psicólogos escolares, etc.)
+edu7;c;Darles reforzamiento escolar gestionado por las municipalidades
+edu7;d;No menciona
+sal1;a;Estrategia de rastreo de contactos y aislamiento de casos positivos
+sal1;b;Detección temprana con pruebas moleculares (no con pruebas rápidas)
+sal1;c;Campaña de sensibilización e informativa para que las personas cumplan con las medidas de seguridad
+sal1;d;Aumentar la cantidad disponible de oxígeno medicinal (aquel que puede ser usado para pacientes de Covid-19)
+sal1;e;Apoyo alimentario o de vivienda para casos positivos que deban mantenerse aislados
+sal1;f;No menciona
+sal2;a;Unificar el sistema de salud público (Minsa, EsSalud, FFAA y PNP)
+sal2;b;Pasos previos para unificar el sistema: integrar sistemas de información de salud del Minsa, EsSalud, FFAA y PNP
+sal2;c;Pasos previos para unificar el sistema: estandarizar los niveles de servicios, costos operativos y condiciones laborales entre Minsa, EsSalud, FFAA y PNP
+sal2;d;Pasos previos para unificar el sistema: separar funciones de rectoría (monitoreo y estrategia), financiamiento y prestación (quienes brindan los servicios en el día a día)
+sal2;e;Fortalecer el primer nivel de atención de salud
+sal2;f;No menciona
+sal3;a;Garantizar la venta de medicamentos a bajo precio en farmacias públicas o centros de salud del Estado
+sal3;b;Obligar que las farmacias tengan medicamentos básicos (aquellos incluidos en los Petitorios del Minsa, EsSalud, FFAA y PNP)
+sal3;c;Eliminar monopolios y oligopolios en el mercado peruano de salud y medicamentos
+sal3;d;Ampliar la cobertura de los seguros públicos y combinar su uso con seguros privados, tomar medidas para evitar la duplicidad de exámenes de diagnóstico
+sal3;e;Continuar con medidas actuales (venta de medicamentos genéricos, compras públicas masivas del Estado, exoneración de impuestos a algunos medicamentos)
+sal3;f;No menciona
+sal4;a;Servicios de salud sexual y reproductiva (planificación familiar y educación sexual)
+sal4;b;Servicios de salud interculturales (adecuar los servicios a la cultura, casas de maternidad, servicios itinerantes, incorporar medicina tradicional)
+sal4;c;Enfoque de salud familiar (médicos y enfermedas de familia, dar soporte a las familias de pacientes con enfermedades crónicas)
+sal4;d;Ninguno
+sal5;a;Sí, en las primeras 12 semanas de embarazo
+sal5;b;Solo en casos de violación
+sal5;c;Ninguna
+sal5;d;No menciona
+gob1;a;Se debe hacer una nueva Constitución
+gob1;b;Se deben hacer algunos cambios a la Constitución
+gob1;c;No se debe cambiar nada de la Constitución
+gob1;d;No menciona
+gob2;a;Sanciones para delincuentes y actos de corrupción
+gob2;b;Relación entre los poderes del Estado (Congreso, Ejecutivo, Judicial)
+gob2;c;Reglas del sistema político y elecciones
+gob2;d;Rol del Estado en la economía y la regulación del sector privado
+gob2;e;Derechos sociales y derechos para poblaciones vulnerables (prueblos indígenas, LGTBI+, etc.)
+gob2;f;No menciona
+gob3;a;Fue ilegítima o inconstitucional
+gob3;b;Fue un error
+gob3;c;El partido votó a favor de la vacancia, pero el candidato presidencial declaró que fue un error y/o exigió la renuncia de Merino
+gob3;d;Estuvo bien
+gob3;e;No menciona
+amb1;a;Prohibir la deforestacion para monocultivos, y fortalecer sistemas de monitoreo estatales y ciudadanos
+amb1;b;Generar alternativas a la agricultura migratoria y usar monitoreo a gran escala apoyado en imágenes satelitales
+amb1;c;Tener una política de reforestación y explotación sustentada, que respete a las comunidades nativas
+amb1;d;No menciona
+amb2;a;A través de subvenciones
+amb2;b;Elimiar las barreras regulatorias y de entrada al mercado, e incrementar la inversión
+amb2;c;A través de alianzas público-privadas
+amb2;d;Priorizar e impulsar la investigación científica y el desarrollo tecnológico
+amb2;e;No menciona
+amb3;a;Establecer protocolos transversales de respuesta y mitigación de efectos negativos
+amb3;b;Integrar a las instituciones involucradas para prevenir desastres y capacitar a la poblacion
+amb3;c;Usar tecnología para guiar las estrategias de prevención de desastres, mitigación de impactos y articular con Fuerzas Armadas y Gobiernos Regionales
+amb3;d;Reducir las brechas de infraestructura y equipamiento en las zonas más expuestas
+amb3;e;No menciona
+amb4;a;Integrarse o alinearse al acuerdo de Escazú
+amb4;b;Establecer una economía circular en la que se reduzcan desechos y se use material reciclado y reaprovechable
+amb4;c;Promover la educación o participación ambiental ciudadana
+amb4;d;No menciona
+seg1;a;Generar incentivos que aumenten el número de policías y fortalezcan las comisarías
+seg1;b;Utilizar herramientas tecnológicas para hacer más efectivo el patrullaje, persecucion criminal y las acciones policiales
+seg1;c;Capacitar a los policías y fortalecer unidades de inteligencia e investigación
+seg1;d;Fortalecer e incluir a los serenazgos dentro de las estrategias de lucha contra el crimen
+seg1;e;Fortalecer y trabajar con los comités ciudadanos de seguridad, juntas vecinales, rondas y comunidades campesinas y nativas
+seg1;f;No menciona
+seg2;a;Eliminar excepciones al cumplimiento completo del proceso educativo en escuelas policiales
+seg2;b;Reducir el número de escuelas policiales para mejorar la calidad educativa
+seg2;c;Crear nuevas alternativas de formación policial especializadas
+seg2;d;Reformar el currículo educativo policial y centrarlo en un enfoque de derechos humanos
+seg2;e;Iniciar una reforma educativa policial que incluya una segunda especialización
+seg2;f;No menciona
+seg3;a;Establecer procedimientos claros que faciliten la denuncia, seguimiento y sanción
+seg3;b;Formar a la policía en el manejo adecuado de casos de violencia de género
+seg3;c;Fortalecer y crear mas Centros de Emergencia Mujer en comisarías y puntos de atención para casos de violencia de género
+seg3;d;No menciona
+seg4;a;Fortalecer oficinas de control interno para prevenir y sancionar actos de corrupcion
+seg4;b;
+seg4;c;
+seg4;d;
+seg4;e;
+seg4;f;No menciona
+der1;a;Si, con igualdad de derechos respecto a parejas heterosexuales
+der1;b;No, pero sí de la unión civil
+der1;c;No
+der1;d;No menciona
+der2;a;Establecer cuotas de representación en el congreso y otros niveles de gobierno
+der2;b;Utilizar un enfoque intercultural en los diferentes niveles de gobierno
+der2;c;Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB)
+der2;d;Fomentar el emprendimiento dentro de las comunidades en temas culturales y productivos
+der2;e;Promover sus valores culturales y revalorizar, recuperar y proteger su identidad, patrimonio y tradiciones
+der2;f;No menciona
+der3;a;Ampliar pensiones a personas con discapacidad en situacion vulnerable
+der3;b;"Dar apoyo a las familias en el acceso a terapias, medicamentos y transporte; y potenciar emprendimientos innovadores dirigidos a este segmento"
+der3;c;Adaptar el Currículo Escolar a sus necesidades
+der3;d;Ampliar y mejorar los servicios para atender sus necesidades educativas especificas (capacitación docente, psicólogos escolares, etc.)
+der3;e;Visibilizar su situación y darles de herramientas educativas y laborales
+der2;a;No menciona
+cre1;a;Revisar la regulación y crear planes de promoción empresarial y de mejora de capacidades de la mano de obra
+cre1;b;Reducir y reformular las barreras legales y tributarias que enfrentan las empresas
+cre1;c;Requerir que todos los proveedores del estado tengan trabajadores en planilla
+cre1;d;Dar un subsidio a la formalización
+cre1;e;Prohibir la intermediación y la tercerización laboral (services)
+cre1;f;No menciona
+cre2;a;Ser única para todos los trabajadores del país
+cre2;b;Poder adaptarse a las características y necesidades de los diferentes sectores productivos
+cre2;c;Debe poder diferenciarse para distintos grupos de edad
+cre2;d;No menciona
+cre3;a;Desregular para eliminar trabas y que el libre mercado guie el crecimiento
+cre3;b;Fortalecer a INDECOPI y la regulación que promueva la competencia
+cre3;c;Revisar toda la regulacion relacionada a servcios publicos
+cre3;d;No menciona
+cre4;a;Promover la innovación aplicada y startups
+cre4;b;Atraer o repatriar investigadores exitosos
+cre4;c;Incrementar el financiamiento e incentivos para startups y proyectos de negocio innovadores
+cre4;d;Disponer de incentivos financieros para la investigación y atraer o repatriar investigadores exitosos
+cre4;e;Promover la investigacion cientifica en programas de postgrado, brindandoles lineas de financiamiento e incentivos
+cre4;f;No menciona
+imp1;a;Simplificar el regimen tributario y reducir el numero de impuestos
+imp1;b;Combatir la evasión por paraisos fiscales y tributacion en el extranjero
+imp1;c;Revisar beneficios tributarios a empresas y sectores productivos
+imp1;d;Añadir un impuesto a la riqueza
+imp1;e;Hacer más enfasis en impuestos directos y menos en impuestos indirectos
+imp1;f;No menciona
+imp2;a;Unificar ambos sistemas actuales (AFP y ONP) bajo el estado
+imp2;b;Unificar todos los sistemas de protección social (pensiones y EsSalud)
+imp2;c;Cambiar a un sistema de cuentas individuales administrado por las AFP
+imp2;d;Establecer un sistema mixto
+imp2;e;Garantizar una pensión básica para adultos mayores
+imp2;f;No menciona
+imp3;a;Debe contar con un pilar redistributivo
+imp3;b;Debe tener más alternativas de administración de fondos
+imp3;c;Debe establecer un límite al tamaño del fondo acumulable obligatorio
+imp3;d;Debe tener una mayor tasa de aporte
+imp3;e;Deb reasignar un porcentaje de tus pagos de IGV a tu cuenta individual de pensiones
+imp3;f;No menciona
