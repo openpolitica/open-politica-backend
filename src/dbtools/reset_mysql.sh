@@ -126,6 +126,7 @@ mysql --login-path=local --database=$DATABASE_NAME < outputCongreso/data.sql
 echo "----------------------------------------------"
 echo "#### Modifying the datatypes in table"
 mysql --login-path=local --database=$DATABASE_NAME -e '''
+ALTER TABLE `candidato` MODIFY COLUMN hoja_vida_id mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN id_dni int(11);
 ALTER TABLE `candidato` MODIFY COLUMN id_ce varchar(0);
 ALTER TABLE `candidato` MODIFY COLUMN id_sexo varchar(1);
@@ -133,14 +134,17 @@ ALTER TABLE `candidato` MODIFY COLUMN nacimiento_fecha varchar(10);
 ALTER TABLE `candidato` MODIFY COLUMN nacimiento_ubigeo mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN domicilio_ubigeo mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN postula_ubigeo mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN postula_distrito varchar(48);
 ALTER TABLE `candidato` MODIFY COLUMN postula_anio smallint(6);
 ALTER TABLE `candidato` MODIFY COLUMN proceso_electoral_id smallint(6);
 ALTER TABLE `candidato` MODIFY COLUMN candidato_id mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN posicion tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN cargo_id tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN org_politica_id smallint(6);
+ALTER TABLE `candidato` MODIFY COLUMN org_politica_nombre varchar(46);
 ALTER TABLE `candidato` MODIFY COLUMN estado_id tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN expediente_id mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN expediente_estado varchar(12);
 ALTER TABLE `candidato` MODIFY COLUMN tipo_eleccion_id tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN lista_solicitud_id mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN jurado_electoral_id tinyint(4);
