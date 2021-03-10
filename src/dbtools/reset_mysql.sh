@@ -641,6 +641,14 @@ DELETE FROM `afiliacion`
 WHERE `afiliacion`.dni NOT IN (SELECT id_dni FROM candidato);
 '''
 
+# Modify datatypes in candidates
+echo "----------------------------------------------"
+echo "#### Modifying the datatypes in table"
+mysql --login-path=local --database=$DATABASE_NAME -e '''
+ALTER TABLE `afiliacion` MODIFY COLUMN dni int(11);
+ALTER TABLE `proceso_electoral` MODIFY COLUMN dni int(11);
+'''
+
 # Create definite indexes and relations!
 echo "----------------------------------------------"
 echo "#### Creating indexes and relations betweeen tables"
