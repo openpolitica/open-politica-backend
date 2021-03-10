@@ -151,6 +151,13 @@ ALTER TABLE `candidato` MODIFY COLUMN jurado_electoral_id tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN candidatos_mujeres tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN candidatos_hombres tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN ubicacion_jurado_id smallint(6);
+ALTER TABLE `bien_mueble` MODIFY COLUMN hoja_vida_id mediumint(9);
+ALTER TABLE `bien_inmueble` MODIFY COLUMN hoja_vida_id mediumint(9);
+ALTER TABLE `educacion` MODIFY COLUMN hoja_vida_id mediumint(9);
+ALTER TABLE `experiencia` MODIFY COLUMN hoja_vida_id mediumint(9);
+ALTER TABLE `ingreso` MODIFY COLUMN hoja_vida_id mediumint(9);
+ALTER TABLE `sentencia_civil` MODIFY COLUMN hoja_vida_id mediumint(9);
+ALTER TABLE `sentencia_penal` MODIFY COLUMN hoja_vida_id mediumint(9);
 '''
 
 # Expand cargo_nombre field and remove new duplicates
