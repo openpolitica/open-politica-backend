@@ -391,6 +391,94 @@
           }
         }
       }
+    },
+    "/policies/topics": {
+      "get": {
+        "summary": "Returns all topics.",
+        "description": "Returns all topic names",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/questions": {
+      "get": {
+        "summary": "Returns questions per topic.",
+        "description": "Returns all questions per topic, requires a set of topics.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "topics",
+            "description": "Set of topics",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Educación",
+                  "Salud",
+                  "Gobernabilidad",
+                  "Medio Ambiente",
+                  "Seguridad",
+                  "Derechos Civiles",
+                  "Economía"
+                ]
+              }
+            },
+            "required": true
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/results": {
+      "post": {
+        "summary": "Returns results according to answers",
+        "description": "Given a questions-ansewrs mapping, returns compatibility results.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "questions-answers mapping",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "questionId": {
+                    "type": "string"
+                  },
+                  "answerId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
