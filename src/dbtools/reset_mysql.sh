@@ -23,8 +23,8 @@ echo "----------------------------------------------"
 echo "#### Login to MySQL"
 mysql_config_editor set --login-path=local --skip-warn --user=root
 
-$LOGIN=local
-$DATABASE_NAME=test_op
+LOGIN=local
+DATABASE_NAME=test_op
 
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
