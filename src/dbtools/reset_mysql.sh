@@ -37,14 +37,14 @@ mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST create $D
 echo "----------------------------------------------"
 echo "#### Temporarily importing candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
-mkdir -p ./outputCongreso
-
-VERSION=`mysqldump --version | awk '{ print $3}' | awk 'BEGIN{FS="."} {print $1}'`
-if [ $VERSION == '8' ]; then
-  mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
-else
-  mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
-fi
+#mkdir -p ./outputCongreso
+#
+#VERSION=`mysqldump --version | awk '{ print $3}' | awk 'BEGIN{FS="."} {print $1}'`
+#if [ $VERSION == '8' ]; then
+#  mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
+#else
+#  mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
+#fi
 
 # Store in temporary table VicePresidentes that we know are Congresistas
 echo "----------------------------------------------"
@@ -105,22 +105,23 @@ DELETE FROM sentencia_penal
 WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 '''
 
-# Replace DROP & CREATE lines in the file Congreso
-echo "----------------------------------------------"
-echo "#### Preparing the 'Congresistas' file to be appended instead of replacing the existing data"
-if [[ $(uname -s) == Linux ]]
-then
-    sed -i "/DROP TABLE/d" outputCongreso/data.sql
-    sed -i "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
-else
-    sed -i "" -e "/DROP TABLE/d" outputCongreso/data.sql
-    sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
-fi
+## Replace DROP & CREATE lines in the file Congreso
+#echo "----------------------------------------------"
+#echo "#### Preparing the 'Congresistas' file to be appended instead of replacing the existing data"
+#if [[ $(uname -s) == Linux ]]
+#then
+#    sed -i "/DROP TABLE/d" outputCongreso/data.sql
+#    sed -i "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
+#else
+#    sed -i "" -e "/DROP TABLE/d" outputCongreso/data.sql
+#    sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputCongreso/data.sql
+#fi
 
 # Import Congreso again
 echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
-mysql --login-path=local --database=$DATABASE_NAME < outputCongreso/data.sql
+#mysql --login-path=local --database=$DATABASE_NAME < outputCongreso/data.sql
+sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
 
 # Modify datatypes in candidates
 echo "----------------------------------------------"
