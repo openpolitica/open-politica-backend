@@ -122,6 +122,33 @@ echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
 mysql --login-path=local --database=$DATABASE_NAME < outputCongreso/data.sql
 
+# Modify datatypes in candidates
+echo "----------------------------------------------"
+echo "#### Modifying the datatypes in table"
+mysql --login-path=local --database=$DATABASE_NAME -e '''
+ALTER TABLE `candidato` MODIFY COLUMN id_dni int(11);
+ALTER TABLE `candidato` MODIFY COLUMN id_ce varchar(0);
+ALTER TABLE `candidato` MODIFY COLUMN id_sexo varchar(1);
+ALTER TABLE `candidato` MODIFY COLUMN nacimiento_fecha varchar(10);
+ALTER TABLE `candidato` MODIFY COLUMN nacimiento_ubigeo mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN domicilio_ubigeo mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN postula_ubigeo mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN postula_anio smallint(6);
+ALTER TABLE `candidato` MODIFY COLUMN procesos_electoral_id smallint(6);
+ALTER TABLE `candidato` MODIFY COLUMN candidato_id mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN posicion tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN cargo_id tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN org_politica_id smallint(6);
+ALTER TABLE `candidato` MODIFY COLUMN estado_id tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN expediente_id mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN tipo_eleccion_id tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN lista_solicitud_id mediumint(9);
+ALTER TABLE `candidato` MODIFY COLUMN jurado_electoral_id tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN candidatos_mujeres tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN candidatos_hombres tinyint(4);
+ALTER TABLE `candidato` MODIFY COLUMN ubicacion_jurado_id smallint(6);
+'''
+
 # Expand cargo_nombre field and remove new duplicates
 echo "----------------------------------------------"
 echo "#### Altering some field types for supporting longer text and removing duplicate entries individually"
