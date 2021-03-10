@@ -589,16 +589,28 @@ echo "#### Militancy: Downloading data in sqlite"
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-congresales.db
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-presidenciales.db
 
-# Militancy: Convert data in sqlite to mariadb
-echo "----------------------------------------------"
-echo "#### Militancy: Converting data from sqlite to mariadb"
-java -jar client-0.0.5.jar convert --output-format=mariadb 2021-militancia-candidatos-congresales.db ./outputMilitanciaCongreso
-java -jar client-0.0.5.jar convert --output-format=mariadb 2021-militancia-candidatos-presidenciales.db ./outputMilitanciaPresidentes
 
 # Militancy: Import Presidentes first
 echo "----------------------------------------------"
 echo "#### Militancy: Importing candidates: Presidentes"
-mysql --login-path=local --database=$DATABASE_NAME < outputMilitanciaPresidentes/data.sql
+sqlite3mysql -f 2021-militancia-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
+
+
+# Use temporary database
+echo "----------------------------------------------"
+echo "#### Use temporary database"
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST -f drop
+temp
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST create
+temp
+mkdir -p ./outputMilitanciaCongreso
+
+VERSION=`mysqldump --version | awk '{ print $3}' | awk 'BEGIN{FS="."} {print $1}'`
+if [ $VERSION == '8' ]; then
+  mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputMilitanciaCongreso/data.sql
+else
+  mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputMilitanciaCongreso/data.sql
+fi
 
 # Replace DROP & CREATE lines in the file Congreso
 echo "----------------------------------------------"
