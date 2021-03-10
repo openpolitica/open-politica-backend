@@ -134,7 +134,7 @@ ALTER TABLE `candidato` MODIFY COLUMN nacimiento_ubigeo mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN domicilio_ubigeo mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN postula_ubigeo mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN postula_anio smallint(6);
-ALTER TABLE `candidato` MODIFY COLUMN procesos_electoral_id smallint(6);
+ALTER TABLE `candidato` MODIFY COLUMN proceso_electoral_id smallint(6);
 ALTER TABLE `candidato` MODIFY COLUMN candidato_id mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN posicion tinyint(4);
 ALTER TABLE `candidato` MODIFY COLUMN cargo_id tinyint(4);
