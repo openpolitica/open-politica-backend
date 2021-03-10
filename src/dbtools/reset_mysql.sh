@@ -24,7 +24,7 @@ echo "#### Login to MySQL"
 mysql_config_editor set --login-path=local --skip-warn --user=root
 
 LOGIN=local
-DATABASE_NAME=test_op #Temporarily test, in production replace by op
+DATABASE_NAME=op
 MYSQL_USER=root
 
 # Remove existing references so tables can be deleted
