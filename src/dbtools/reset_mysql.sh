@@ -30,13 +30,13 @@ MYSQL_USER=root
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
 echo "#### Removing existing database"
-mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST -f drop $DATABASE_NAME 
-mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST create $DATABASE_NAME
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --port=$MYSQL_TCP_PORT -f drop $DATABASE_NAME 
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --port=$MYSQL_TCP_PORT create $DATABASE_NAME
 
 # Import Congreso first
 echo "----------------------------------------------"
 echo "#### Temporarily importing candidates: Congresistas"
-sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
+sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # Store in temporary table VicePresidentes that we know are Congresistas
 echo "----------------------------------------------"
@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS `candidato`;
 # Import Presidenciales
 echo "----------------------------------------------"
 echo "#### Definitely importing first group of candidates: Presidentes & Vicepresidentes"
-sqlite3mysql -f 2021-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
+sqlite3mysql -f 2021-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # For VP+congres entries, delete duplicate info that comes from Presidenciales
 echo "----------------------------------------------"
@@ -100,7 +100,7 @@ WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 # Import Congreso again
 echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
-sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
+sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # Modify datatypes in candidates
 echo "----------------------------------------------"
@@ -573,8 +573,8 @@ wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-m
 # Militancy: Import Presidentes first
 echo "----------------------------------------------"
 echo "#### Militancy: Importing candidates: Presidentes"
-sqlite3mysql -f 2021-militancia-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
-sqlite3mysql -f 2021-militancia-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
+sqlite3mysql -f 2021-militancia-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+sqlite3mysql -f 2021-militancia-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 
 # Militancy: Remove duplicates and useless
