@@ -25,6 +25,7 @@ mysql_config_editor set --login-path=local --skip-warn --user=root
 
 LOGIN=local
 DATABASE_NAME=test_op
+MYSQL_USER=root
 
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
@@ -37,7 +38,7 @@ echo "----------------------------------------------"
 echo "#### Temporarily importing candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
 mkdir -p ./outputCongreso
-mysqldump --login-path=$LOGIN --skip-opt --databases $DATABASE_NAME > ./outputCongreso/data.sql
+mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
 
 # Store in temporary table VicePresidentes that we know are Congresistas
 echo "----------------------------------------------"
@@ -74,7 +75,7 @@ DROP TABLE IF EXISTS `candidato`;
 # Import Presidenciales
 echo "----------------------------------------------"
 echo "#### Definitely importing first group of candidates: Presidentes & Vicepresidentes"
-sqlite3mysql -f 2021-candidatos-presidenciales.db -d op -u root -p $MYSQL_PWD -h $MYSQL_HOST
+sqlite3mysql -f 2021-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
 
 # For VP+congres entries, delete duplicate info that comes from Presidenciales
 echo "----------------------------------------------"
