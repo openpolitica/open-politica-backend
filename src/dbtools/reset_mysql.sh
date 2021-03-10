@@ -594,40 +594,39 @@ wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-m
 echo "----------------------------------------------"
 echo "#### Militancy: Importing candidates: Presidentes"
 sqlite3mysql -f 2021-militancia-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
+sqlite3mysql -f 2021-militancia-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
 
 
-# Use temporary database
-echo "----------------------------------------------"
-echo "#### Use temporary database"
-mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST -f drop
-temp
-mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST create
-temp
-mkdir -p ./outputMilitanciaCongreso
-
-VERSION=`mysqldump --version | awk '{ print $3}' | awk 'BEGIN{FS="."} {print $1}'`
-if [ $VERSION == '8' ]; then
-  mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputMilitanciaCongreso/data.sql
-else
-  mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputMilitanciaCongreso/data.sql
-fi
-
-# Replace DROP & CREATE lines in the file Congreso
-echo "----------------------------------------------"
-echo "#### Preparing the 'Congresistas' file to be appended instead of replacing the existing data"
-if [[ $(uname -s) == Linux ]]
-then
-    sed -i "/DROP TABLE/d" outputMilitanciaCongreso/data.sql
-    sed -i "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputMilitanciaCongreso/data.sql
-else
-    sed -i "" -e "/DROP TABLE/d" outputMilitanciaCongreso/data.sql
-    sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputMilitanciaCongreso/data.sql
-fi
-
-# Militancy: Import Congreso
-echo "----------------------------------------------"
-echo "#### Militancy: Importing candidates: Congreso"
-mysql --login-path=local --database=$DATABASE_NAME < outputMilitanciaCongreso/data.sql
+## Use temporary database
+#echo "----------------------------------------------"
+#echo "#### Use temporary database"
+#mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST -f drop temp
+#mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST create temp
+#mkdir -p ./outputMilitanciaCongreso
+#
+#VERSION=`mysqldump --version | awk '{ print $3}' | awk 'BEGIN{FS="."} {print $1}'`
+#if [ $VERSION == '8' ]; then
+#  mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases temp > ./outputMilitanciaCongreso/data.sql
+#else
+#  mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases temp > ./outputMilitanciaCongreso/data.sql
+#fi
+#
+## Replace DROP & CREATE lines in the file Congreso
+#echo "----------------------------------------------"
+#echo "#### Preparing the 'Congresistas' file to be appended instead of replacing the existing data"
+#if [[ $(uname -s) == Linux ]]
+#then
+#    sed -i "/DROP TABLE/d" outputMilitanciaCongreso/data.sql
+#    sed -i "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputMilitanciaCongreso/data.sql
+#else
+#    sed -i "" -e "/DROP TABLE/d" outputMilitanciaCongreso/data.sql
+#    sed -i "" -e "s/CREATE TABLE/CREATE TABLE IF NOT EXISTS/g" outputMilitanciaCongreso/data.sql
+#fi
+#
+## Militancy: Import Congreso
+#echo "----------------------------------------------"
+#echo "#### Militancy: Importing candidates: Congreso"
+#mysql --login-path=local --database=$DATABASE_NAME < outputMilitanciaCongreso/data.sql
 
 # Militancy: Remove duplicates and useless
 echo "----------------------------------------------"
