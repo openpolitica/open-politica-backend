@@ -29,16 +29,15 @@ DATABASE_NAME=test_op
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
 echo "#### Removing existing database"
-mysqladmin --login-path=$LOGIN -f drop $DATABASE_NAME 
-mysqladmin --login-path=$LOGIN create $DATABASE_NAME
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST -f drop $DATABASE_NAME 
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST create $DATABASE_NAME
 
 # Import Congreso first
 echo "----------------------------------------------"
 echo "#### Temporarily importing candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
 mkdir -p ./outputCongreso
-mysqldump --login-path=$LOGIN --databases $DATABASE_NAME >
-./outputCongreso/data.sql
+mysqldump --login-path=$LOGIN --skip-opt --databases $DATABASE_NAME > ./outputCongreso/data.sql
 
 # Store in temporary table VicePresidentes that we know are Congresistas
 echo "----------------------------------------------"
