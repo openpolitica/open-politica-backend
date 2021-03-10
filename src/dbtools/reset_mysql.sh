@@ -646,7 +646,7 @@ echo "----------------------------------------------"
 echo "#### Modifying the datatypes in table"
 mysql --login-path=local --database=$DATABASE_NAME -e '''
 ALTER TABLE `afiliacion` MODIFY COLUMN dni int(11);
-ALTER TABLE `afiliacion` MODIFY COLUMN org_politica varchar(46);
+ALTER TABLE `afiliacion` MODIFY COLUMN org_politica varchar(64);
 ALTER TABLE `afiliacion` MODIFY COLUMN afiliacion_inicio varchar(10);
 ALTER TABLE `afiliacion` MODIFY COLUMN afiliacion_cancelacion varchar(10);
 ALTER TABLE `proceso_electoral` MODIFY COLUMN dni int(11);
