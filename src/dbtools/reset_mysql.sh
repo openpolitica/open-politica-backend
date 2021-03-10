@@ -38,7 +38,13 @@ echo "----------------------------------------------"
 echo "#### Temporarily importing candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST
 mkdir -p ./outputCongreso
-mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
+
+VERSION=`mysqldump --version | awk '{ print $3}' | awk 'BEGIN{FS="."} {print $1}'`
+if [ $VERSION == '8' ]; then
+  mysqldump --skip-opt --column-statistics=0 --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
+else
+  mysqldump --skip-opt --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --databases $DATABASE_NAME > ./outputCongreso/data.sql
+fi
 
 # Store in temporary table VicePresidentes that we know are Congresistas
 echo "----------------------------------------------"
