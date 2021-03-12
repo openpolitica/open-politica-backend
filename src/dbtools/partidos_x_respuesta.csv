@@ -1,445 +1,445 @@
-codPregunta;codRespuesta;partido
-edu1;a;Juntos por el Perú
-edu1;a;Podemos Perú
-edu1;b;Fuerza Popular
-edu1;c;Victoria Nacional
-edu1;c;Fuerza Popular
-edu1;d;Fuerza Popular
-edu1;d;Alianza para el Progreso
-edu1;d;Somos Perú
-edu1;d;Podemos Perú
-edu1;e;Alianza para el Progreso
-edu1;f;Partido Morado
-edu1;f;Acción Popular
-edu1;f;Avanza País
-edu1;f;Renovación Popular
-edu2;a;Acción Popular
-edu2;a;Podemos Perú
-edu2;b;Partido Morado
-edu2;b;Alianza para el Progreso
-edu2;b;Somos Perú
-edu2;b;Victoria Nacional
-edu2;c;Victoria Nacional
-edu2;d;Juntos por el Perú
-edu2;e;Fuerza Popular
-edu2;e;Avanza País
-edu2;e;Renovación Popular
-edu3;a;Juntos por el Perú
-edu3;a;Partido Morado*
-edu3;b;Juntos por el Perú
-edu3;b;Partido Morado
-edu3;b;Victoria Nacional
-edu3;b;Alianza para el Progreso
-edu3;b;Somos Perú
-edu3;b;Podemos Perú
-edu3;c;Partido Morado
-edu3;c;Victoria Nacional
-edu3;c;Fuerza Popular
-edu3;c;Somos Perú
-edu3;d;Juntos por el Perú
-edu3;d;Fuerza Popular
-edu3;d;Victoria Nacional
-edu3;e;Alianza para el Progreso
-edu3;e;Somos Perú
-edu3;e;Podemos Perú
-edu3;e;Acción Popular
-edu3;f;Avanza País
-edu3;f;Renovación Popular
-edu4;a;Juntos por el Perú
-edu4;a;Partido Morado
-edu4;a;Fuerza Popular
-edu4;a;Somos Perú
-edu4;a;Acción Popular
-edu4;a;Podemos Perú
-edu4;b;Fuerza Popular
-edu4;b;Somos Perú
-edu4;b;Acción Popular
-edu4;b;Podemos Perú
-edu4;c;Partido Morado
-edu4;c;Fuerza Popular
-edu4;d;Acción Popular
-edu4;d;Podemos Perú
-edu4;e;Alianza para el Progreso
-edu4;f;Avanza País
-edu4;f;Renovación Popular
-edu5;a;Partido Morado
-edu5;a;Fuerza Popular
-edu5;a;Somos Perú
-edu5;b;Partido Morado
-edu5;b;Victoria Nacional
-edu5;b;Podemos Perú
-edu5;c;Victoria Nacional
-edu5;d;Victoria Nacional
-edu5;d;Podemos Perú
-edu5;e;Juntos por el Perú
-edu5;e;Partido Morado
-edu5;e;Somos Perú
-edu5;e;Avanza País
-edu5;f;Acción popular
-edu5;f;Alianza para el Progreso
-edu5;f;Renovación Popular
-edu6;a;Juntos por el Perú
-edu6;a;Alianza para el Progreso
-edu6;b;Partido Morado
-edu6;b;Victoria Nacional
-edu6;b;Somos Perú
-edu6;c;Victoria Nacional
-edu6;c;Acción Popular
-edu6;d;Fuerza Popular
-edu6;d;Podemos Perú
-edu6;d;Avanza País
-edu6;d;Renovación Popular
-edu7;a;Juntos por el Perú
-edu7;b;Partido Morado
-edu7;b;Podemos Perú
-edu7;c;Victoria Nacional
-edu7;d;Fuerza Popular
-edu7;d;Acción Popular
-edu7;d;Alianza para el Progreso
-edu7;d;Somos Perú
-edu7;d;Avanza País
-edu7;d;Renovación Popular
-sal1;a;Juntos por el Perú
-sal1;a;Victoria Nacional
-sal1;a;Partido Morado
-sal1;b;Victoria Nacional
-sal1;b;Partido Morado
-sal1;c;Acción Popular
-sal1;c;Somos Perú
-sal1;d;Acción Popular
-sal1;d;Podemos Perú
-sal1;d;Victoria Nacional
-sal1;e;Fuerza Popular
-sal1;e;Partido Morado
-sal1;f;Alianza Para el Progreso
-sal1;f;Avanza País
-sal1;f;Renovación Popular
-sal2;a;Juntos por el Perú
-sal2;a;Fuerza Popular
-sal2;a;Partido Morado
-sal2;a;Victoria Nacional
-sal2;a;Alianza para el Progreso
-sal2;a;Somos Perú
-sal2;b;Partido Morado
-sal2;b;Fuerza Popular
-sal2;c;Partido Morado
-sal2;d;Fuerza popular
-sal2;e;Juntos por el Perú
-sal2;e;Fuerza Popular
-sal2;e;Partido Morado
-sal2;e;Victoria Nacional
-sal2;e;Acción Popular
-sal2;e;Somos Perú
-sal2;e;Podemos Perú
-sal2;e;Renovación Popular
-sal2;f;Avanza País
-sal3;a;Juntos por el Perú
-sal3;a;Victoria Nacional
-sal3;b;Renovación Popular
-sal3;c;Victoria Nacional
-sal3;c;Acción Popular
-sal3;d;Partido Morado
-sal3;e;Partido Morado
-sal3;e;Alianza para el Progreso
-sal3;e;Somos Perú
-sal3;e;Acción Popular
-sal3;f;Fuerza Popular
-sal3;f;Podemos Perú
-sal3;f;Avanza País
-sal4;a;Juntos por el Perú
-sal4;a;Partido Morado
-sal4;b;Juntos por el Perú
-sal4;b;Acción Popular
-sal4;c;Renovación Popular
-sal4;c;Partido Morado
-sal4;c;Victoria Nacional
-sal4;d;Fuerza Popular
-sal4;d;Alianza para el Progreso
-sal4;d;Somos Perú
-sal4;d;Podemos Perú
-sal4;d;Avanza País
-sal5;a;Juntos por el Perú
-sal5;b;Partido Morado*
-sal5;c;Victoria Nacional
-sal5;c;Fuerza Popular
-sal5;c;Renovación Popular
-sal5;c;Acción Popular*
-sal5;c;Alianza para el Progreso*
-sal5;c;Somos Perú*
-sal5;d;Podemos Perú
-sal5;d;Avanza País
-gob1;a;Juntos por el Perú
-gob1;a;Partido Morado
-gob1;a;Acción Popular
-gob1;a;Somos Perú
-gob1;b;Fuerza Popular
-gob1;b;Partido Morado
-gob1;b;Victoria Nacional
-gob1;b;Alianza para el Progreso
-gob1;b;Podemos Perú
-gob1;c;Avanza País*
-gob1;d;Renovación Popular
-gob2;a;Victoria Nacional
-gob2;b;Fuerza Popular
-gob2;b;Partido Morado
-gob2;b;Alianza para el Progreso
-gob2;b;Somos Perú
-gob2;c;Fuerza Popular
-gob2;c;Alianza para el Progreso
-gob2;c;Somos Perú
-gob2;c;Podemos Perú
-gob2;d;Juntos por el Perú
-gob2;d;Victoria Nacional
-gob2;d;Somos Perú
-gob2;d;Acción Popular*
-gob2;e;Juntos por el Perú
-gob2;e;Victoria Nacional
-gob2;f;Avanza País
-gob2;f;Renovación Popular
-gob3;a;Partido Morado*
-gob3;a;Somos Perú*
-gob3;a;Juntos por el Perú*
-gob3;a;Victoria Nacional*
-gob3;b;Avanza País*
-gob3;c;Acción Popular*
-gob3;c;Alianza para el Progreso*
-gob3;c;Fuerza Popular*
-gob3;c;Podemos Perú*
-gob3;d;Renovación Popular
-gob3;e;
-amb1;a;Juntos por el Perú
-amb1;a;Victoria Nacional
-amb1;b;Partido Morado
-amb1;b;Somos Perú
-amb1;c;Renovación Popular
-amb1;c;Alianza para el progreso
-amb1;c;Partido Morado
-amb1;c;Juntos por el Perú
-amb1;c;Victoria Nacional
-amb1;d;Fuerza Popular
-amb1;d;Podemos Perú
-amb1;d;Acción Popular
-amb1;d;Avanza País
-amb2;a;Juntos por el Perú
-amb2;a;Victoria Nacional
-amb2;b;Victoria Nacional
-amb2;b;Renovación Popular
-amb2;b;Somos Perú
-amb2;c;Fuerza Popular
-amb2;c;Alianza para el Progreso
-amb2;d;Partido Morado
-amb2;e;Podemos Perú
-amb2;e;Acción Popular
-amb2;e;Avanza País
-amb3;a;Victoria Nacional
-amb3;a;Juntos por el Perú
-amb3;b;Fuerza Popular
-amb3;c;Partido Morado
-amb3;c;Somos Perú
-amb3;d;Podemos Perú
-amb3;d;Fuerza Popular
-amb3;e;Acción Popular
-amb3;e;Renovación Popular
-amb3;e;Avanza País
-amb3;e;Alianza Para el Progreso
-amb4;a;Juntos por el Perú
-amb4;a;Victoria Nacional
-amb4;b;Juntos por el Perú
-amb4;b;Partido Morado
-amb4;b;Victoria Nacional
-amb4;b;Fuerza Popular
-amb4;b;Podemos Perú
-amb4;b;Somos Perú
-amb4;c;Renovación Popular
-amb4;c;Avanza País
-amb4;c;Fuerza Popular
-amb4;c;Juntos por el Perú
-amb4;c;Partido Morado
-amb4;d;Acción Popular
-amb4;d;Alianza por el Progreso
-seg1;a;Fuerza Popular
-seg1;a;Alianza para el Progreso
-seg1;a;Somos Perú
-seg1;a;Podemos Perú
-seg1;b;Fuerza Popular
-seg1;b;Partido Morado
-seg1;b;Acción Popular
-seg1;b;Alianza para el Progreso
-seg1;b;Somos Perú
-seg1;b;Avanza País
-seg1;b;Renovación Popular
-seg1;c;Fuerza Popular
-seg1;c;Partido Morado
-seg1;c;Victoria Nacional
-seg1;c;Somos Perú
-seg1;c;Juntos por el Perú
-seg1;c;Acción Popular
-seg1;d;Fuerza Popular
-seg1;d;Juntos por el Perú
-seg1;d;Partido Morado
-seg1;d;Somos Perú
-seg1;d;Podemos Perú
-seg1;d;Renovación Popular
-seg1;e;Juntos por el Perú
-seg1;e;Alianza para el Progreso
-seg1;e;Somos Perú
-seg1;e;Victoria Nacional
-seg1;f;
-seg2;a;Partido Morado
-seg2;b;Fuerza Popular
-seg2;b;Alianza Para el Progreso
-seg2;c;Podemos Perú
-seg2;c;Renovación Popular
-seg2;d;Juntos por el Perú
-seg2;d;Somos Perú
-seg2;e;Victoria Nacional
-seg2;f;Acción Popular
-seg2;f;Avanza País
-seg3;a;Fuerza Popular
-seg3;a;Alianza Para el Progreso
-seg3;b;Partido Morado
-seg3;b;Juntos por el Perú
-seg3;c;Victoria Nacional
-seg3;c;Podemos Perú
-seg3;c;Alianza para el Progreso
-seg3;c;Juntos Por el Perú
-seg3;c;Partido Morado
-seg3;c;Somos Perú
-seg3;d;Acción Popular
-seg3;d;Avanza País
-seg3;d;Renovación Popular
-seg4;a;
-seg4;b;
-seg4;c;
-seg4;d;
-seg4;e;
-seg4;f;
-der1;a;Juntos por el Perú
-der1;a;Partido Morado
-der1;b;Victoria Nacional
-der1;b;Renovación Popular
-der1;b;Acción Popular
-der1;b;Somos Perú
-der1;b;Fuerza Popular
-der1;b;Alianza para el Progreso
-der1;b;Avanza País
-der1;c;
-der1;d;Podemos Perú
-der2;a;Juntos por el Perú
-der2;b;Somos Perú
-der2;b;Podemos Perú
-der2;b;Juntos por el Perú
-der2;c;Partido Morado
-der2;c;Victoria Nacional
-der2;c;Somos Perú
-der2;d;Partido Morado
-der2;d;Renovación Popular
-der2;e;Partido Morado
-der2;e;Alianza para el Progreso
-der2;e;Renovación Popular
-der2;e;Juntos por el Perú
-der2;e;Fuerza Popular
-der2;f;Acción Popular
-der3;a;Juntos por el Perú
-der3;a;Alianza para el progreso
-der3;b;Partido Morado
-der3;c;Juntos por el Perú
-der3;c;Acción Popular
-der3;d;Partido Morado
-der3;d;Podemos Perú
-der3;e;Fuerza Popular
-der3;e;Victoria Nacional
-der3;e;Partido Morado
-der3;e;Somos Perú
-der2;a;Avanza País
-der2;a;Renovación Popular
-cre1;a;Partido Morado
-cre1;a;Renovación Popular
-cre1;a;Victoria Nacional
-cre1;b;Fuerza Popular
-cre1;b;Avanza País
-cre1;b;Somos Perú
-cre1;b;Alianza por el Progreso
-cre1;c;Somos Perú
-cre1;d;Podemos Perú
-cre1;e;Juntos por el Perú
-cre1;f;Acción Popular
-cre2;a;Juntos por el Perú
-cre2;b;Partido Morado
-cre2;b;Fuerza Popular
-cre2;b;Victoria Nacional
-cre2;c;Avanza País
-cre2;d;Acción Popular
-cre2;d;Somos Perú
-cre2;d;Renovación Popular
-cre2;d;Alianza Para el Progreso
-cre2;d;Podemos Perú
-cre3;a;Fuerza Popular
-cre3;a;Avanza País
-cre3;b;Partido Morado
-cre3;b;Victoria Nacional
-cre3;b;Juntos Por el Perú
-cre3;b;Acción Popular
-cre3;b;Alianza para el Progreso
-cre3;b;Podemos Perú
-cre3;c;Podemos Perú
-cre3;d;Somos Perú
-cre3;d;Renovación Popular
-cre4;a;Somos Perú
-cre4;b;Renovación Popular
-cre4;c;Podemos Perú
-cre4;c;Alianza para el Progreso
-cre4;c;Victoria Nacional
-cre4;d;Fuerza Popular
-cre4;d;Partido Morado
-cre4;e;Juntos por el Perú
-cre4;e;Partido Morado
-cre4;f;Acción Popular
-cre4;f;Avanza País
-imp1;a;Fuerza Popular
-imp1;a;Victoria Nacional
-imp1;a;Renovación Popular
-imp1;a;Alianza Por el Progreso
-imp1;a;Partido Morado
-imp1;a;Podemos Perú
-imp1;b;Juntos por el Perú
-imp1;b;Partido Morado
-imp1;c;Juntos por el Perú
-imp1;c;Partido Morado
-imp1;c;Acción Popular
-imp1;c;Podemos Perú
-imp1;c;Alianza por el Progreso
-imp1;d;Juntos por el Perú
-imp1;d;Acción Popular
-imp1;e;Avanza País
-imp1;e;Victoria Nacional
-imp1;f;Somos Perú
-imp2;a;Juntos por el Perú
-imp2;b;Avanza País
-imp2;b;Juntos por el Perú
-imp2;c;Avanza País
-imp2;d;Acción Popular
-imp2;d;Podemos Perú
-imp2;d;Victoria Nacional
-imp2;e;Acción Popular
-imp2;e;Podemos Perú
-imp2;e;Alianza Para el Progreso
-imp2;e;Juntos por el Perú
-imp2;e;Victoria Nacional
-imp2;e;Partido Morado
-imp2;e;Avanza País
-imp2;e;Fuerza Popular
-imp2;f;Somos Perú
-imp2;f;Renovación Popular
-imp3;a;Acción Popular
-imp3;a;Fuerza Popular
-imp3;b;Alianza para el progreso
-imp3;b;Fuerza Popular
-imp3;b;Victoria Nacional
-imp3;c;Avanza País
-imp3;d;Acción Popular
-imp3;e;Alianza para el progreso
-imp3;f;Somos Perú
-imp3;f;Renovación Popular
-imp3;f;Partido Morado
-imp3;f;Juntos por el Perú
+codPregunta,codRespuesta,partido
+edu1,a,Juntos por el Perú
+edu1,a,Podemos Perú
+edu1,b,Fuerza Popular
+edu1,c,Victoria Nacional
+edu1,c,Fuerza Popular
+edu1,d,Fuerza Popular
+edu1,d,Alianza para el Progreso
+edu1,d,Somos Perú
+edu1,d,Podemos Perú
+edu1,e,Alianza para el Progreso
+edu1,f,Partido Morado
+edu1,f,Acción Popular
+edu1,f,Avanza País
+edu1,f,Renovación Popular
+edu2,a,Acción Popular
+edu2,a,Podemos Perú
+edu2,b,Partido Morado
+edu2,b,Alianza para el Progreso
+edu2,b,Somos Perú
+edu2,b,Victoria Nacional
+edu2,c,Victoria Nacional
+edu2,d,Juntos por el Perú
+edu2,e,Fuerza Popular
+edu2,e,Avanza País
+edu2,e,Renovación Popular
+edu3,a,Juntos por el Perú
+edu3,a,Partido Morado*
+edu3,b,Juntos por el Perú
+edu3,b,Partido Morado
+edu3,b,Victoria Nacional
+edu3,b,Alianza para el Progreso
+edu3,b,Somos Perú
+edu3,b,Podemos Perú
+edu3,c,Partido Morado
+edu3,c,Victoria Nacional
+edu3,c,Fuerza Popular
+edu3,c,Somos Perú
+edu3,d,Juntos por el Perú
+edu3,d,Fuerza Popular
+edu3,d,Victoria Nacional
+edu3,e,Alianza para el Progreso
+edu3,e,Somos Perú
+edu3,e,Podemos Perú
+edu3,e,Acción Popular
+edu3,f,Avanza País
+edu3,f,Renovación Popular
+edu4,a,Juntos por el Perú
+edu4,a,Partido Morado
+edu4,a,Fuerza Popular
+edu4,a,Somos Perú
+edu4,a,Acción Popular
+edu4,a,Podemos Perú
+edu4,b,Fuerza Popular
+edu4,b,Somos Perú
+edu4,b,Acción Popular
+edu4,b,Podemos Perú
+edu4,c,Partido Morado
+edu4,c,Fuerza Popular
+edu4,d,Acción Popular
+edu4,d,Podemos Perú
+edu4,e,Alianza para el Progreso
+edu4,f,Avanza País
+edu4,f,Renovación Popular
+edu5,a,Partido Morado
+edu5,a,Fuerza Popular
+edu5,a,Somos Perú
+edu5,b,Partido Morado
+edu5,b,Victoria Nacional
+edu5,b,Podemos Perú
+edu5,c,Victoria Nacional
+edu5,d,Victoria Nacional
+edu5,d,Podemos Perú
+edu5,e,Juntos por el Perú
+edu5,e,Partido Morado
+edu5,e,Somos Perú
+edu5,e,Avanza País
+edu5,f,Acción popular
+edu5,f,Alianza para el Progreso
+edu5,f,Renovación Popular
+edu6,a,Juntos por el Perú
+edu6,a,Alianza para el Progreso
+edu6,b,Partido Morado
+edu6,b,Victoria Nacional
+edu6,b,Somos Perú
+edu6,c,Victoria Nacional
+edu6,c,Acción Popular
+edu6,d,Fuerza Popular
+edu6,d,Podemos Perú
+edu6,d,Avanza País
+edu6,d,Renovación Popular
+edu7,a,Juntos por el Perú
+edu7,b,Partido Morado
+edu7,b,Podemos Perú
+edu7,c,Victoria Nacional
+edu7,d,Fuerza Popular
+edu7,d,Acción Popular
+edu7,d,Alianza para el Progreso
+edu7,d,Somos Perú
+edu7,d,Avanza País
+edu7,d,Renovación Popular
+sal1,a,Juntos por el Perú
+sal1,a,Victoria Nacional
+sal1,a,Partido Morado
+sal1,b,Victoria Nacional
+sal1,b,Partido Morado
+sal1,c,Acción Popular
+sal1,c,Somos Perú
+sal1,d,Acción Popular
+sal1,d,Podemos Perú
+sal1,d,Victoria Nacional
+sal1,e,Fuerza Popular
+sal1,e,Partido Morado
+sal1,f,Alianza Para el Progreso
+sal1,f,Avanza País
+sal1,f,Renovación Popular
+sal2,a,Juntos por el Perú
+sal2,a,Fuerza Popular
+sal2,a,Partido Morado
+sal2,a,Victoria Nacional
+sal2,a,Alianza para el Progreso
+sal2,a,Somos Perú
+sal2,b,Partido Morado
+sal2,b,Fuerza Popular
+sal2,c,Partido Morado
+sal2,d,Fuerza popular
+sal2,e,Juntos por el Perú
+sal2,e,Fuerza Popular
+sal2,e,Partido Morado
+sal2,e,Victoria Nacional
+sal2,e,Acción Popular
+sal2,e,Somos Perú
+sal2,e,Podemos Perú
+sal2,e,Renovación Popular
+sal2,f,Avanza País
+sal3,a,Juntos por el Perú
+sal3,a,Victoria Nacional
+sal3,b,Renovación Popular
+sal3,c,Victoria Nacional
+sal3,c,Acción Popular
+sal3,d,Partido Morado
+sal3,e,Partido Morado
+sal3,e,Alianza para el Progreso
+sal3,e,Somos Perú
+sal3,e,Acción Popular
+sal3,f,Fuerza Popular
+sal3,f,Podemos Perú
+sal3,f,Avanza País
+sal4,a,Juntos por el Perú
+sal4,a,Partido Morado
+sal4,b,Juntos por el Perú
+sal4,b,Acción Popular
+sal4,c,Renovación Popular
+sal4,c,Partido Morado
+sal4,c,Victoria Nacional
+sal4,d,Fuerza Popular
+sal4,d,Alianza para el Progreso
+sal4,d,Somos Perú
+sal4,d,Podemos Perú
+sal4,d,Avanza País
+sal5,a,Juntos por el Perú
+sal5,b,Partido Morado*
+sal5,c,Victoria Nacional
+sal5,c,Fuerza Popular
+sal5,c,Renovación Popular
+sal5,c,Acción Popular*
+sal5,c,Alianza para el Progreso*
+sal5,c,Somos Perú*
+sal5,d,Podemos Perú
+sal5,d,Avanza País
+gob1,a,Juntos por el Perú
+gob1,a,Partido Morado
+gob1,a,Acción Popular
+gob1,a,Somos Perú
+gob1,b,Fuerza Popular
+gob1,b,Partido Morado
+gob1,b,Victoria Nacional
+gob1,b,Alianza para el Progreso
+gob1,b,Podemos Perú
+gob1,c,Avanza País*
+gob1,d,Renovación Popular
+gob2,a,Victoria Nacional
+gob2,b,Fuerza Popular
+gob2,b,Partido Morado
+gob2,b,Alianza para el Progreso
+gob2,b,Somos Perú
+gob2,c,Fuerza Popular
+gob2,c,Alianza para el Progreso
+gob2,c,Somos Perú
+gob2,c,Podemos Perú
+gob2,d,Juntos por el Perú
+gob2,d,Victoria Nacional
+gob2,d,Somos Perú
+gob2,d,Acción Popular*
+gob2,e,Juntos por el Perú
+gob2,e,Victoria Nacional
+gob2,f,Avanza País
+gob2,f,Renovación Popular
+gob3,a,Partido Morado*
+gob3,a,Somos Perú*
+gob3,a,Juntos por el Perú*
+gob3,a,Victoria Nacional*
+gob3,b,Avanza País*
+gob3,c,Acción Popular*
+gob3,c,Alianza para el Progreso*
+gob3,c,Fuerza Popular*
+gob3,c,Podemos Perú*
+gob3,d,Renovación Popular
+gob3,e,
+amb1,a,Juntos por el Perú
+amb1,a,Victoria Nacional
+amb1,b,Partido Morado
+amb1,b,Somos Perú
+amb1,c,Renovación Popular
+amb1,c,Alianza para el progreso
+amb1,c,Partido Morado
+amb1,c,Juntos por el Perú
+amb1,c,Victoria Nacional
+amb1,d,Fuerza Popular
+amb1,d,Podemos Perú
+amb1,d,Acción Popular
+amb1,d,Avanza País
+amb2,a,Juntos por el Perú
+amb2,a,Victoria Nacional
+amb2,b,Victoria Nacional
+amb2,b,Renovación Popular
+amb2,b,Somos Perú
+amb2,c,Fuerza Popular
+amb2,c,Alianza para el Progreso
+amb2,d,Partido Morado
+amb2,e,Podemos Perú
+amb2,e,Acción Popular
+amb2,e,Avanza País
+amb3,a,Victoria Nacional
+amb3,a,Juntos por el Perú
+amb3,b,Fuerza Popular
+amb3,c,Partido Morado
+amb3,c,Somos Perú
+amb3,d,Podemos Perú
+amb3,d,Fuerza Popular
+amb3,e,Acción Popular
+amb3,e,Renovación Popular
+amb3,e,Avanza País
+amb3,e,Alianza Para el Progreso
+amb4,a,Juntos por el Perú
+amb4,a,Victoria Nacional
+amb4,b,Juntos por el Perú
+amb4,b,Partido Morado
+amb4,b,Victoria Nacional
+amb4,b,Fuerza Popular
+amb4,b,Podemos Perú
+amb4,b,Somos Perú
+amb4,c,Renovación Popular
+amb4,c,Avanza País
+amb4,c,Fuerza Popular
+amb4,c,Juntos por el Perú
+amb4,c,Partido Morado
+amb4,d,Acción Popular
+amb4,d,Alianza por el Progreso
+seg1,a,Fuerza Popular
+seg1,a,Alianza para el Progreso
+seg1,a,Somos Perú
+seg1,a,Podemos Perú
+seg1,b,Fuerza Popular
+seg1,b,Partido Morado
+seg1,b,Acción Popular
+seg1,b,Alianza para el Progreso
+seg1,b,Somos Perú
+seg1,b,Avanza País
+seg1,b,Renovación Popular
+seg1,c,Fuerza Popular
+seg1,c,Partido Morado
+seg1,c,Victoria Nacional
+seg1,c,Somos Perú
+seg1,c,Juntos por el Perú
+seg1,c,Acción Popular
+seg1,d,Fuerza Popular
+seg1,d,Juntos por el Perú
+seg1,d,Partido Morado
+seg1,d,Somos Perú
+seg1,d,Podemos Perú
+seg1,d,Renovación Popular
+seg1,e,Juntos por el Perú
+seg1,e,Alianza para el Progreso
+seg1,e,Somos Perú
+seg1,e,Victoria Nacional
+seg1,f,
+seg2,a,Partido Morado
+seg2,b,Fuerza Popular
+seg2,b,Alianza Para el Progreso
+seg2,c,Podemos Perú
+seg2,c,Renovación Popular
+seg2,d,Juntos por el Perú
+seg2,d,Somos Perú
+seg2,e,Victoria Nacional
+seg2,f,Acción Popular
+seg2,f,Avanza País
+seg3,a,Fuerza Popular
+seg3,a,Alianza Para el Progreso
+seg3,b,Partido Morado
+seg3,b,Juntos por el Perú
+seg3,c,Victoria Nacional
+seg3,c,Podemos Perú
+seg3,c,Alianza para el Progreso
+seg3,c,Juntos Por el Perú
+seg3,c,Partido Morado
+seg3,c,Somos Perú
+seg3,d,Acción Popular
+seg3,d,Avanza País
+seg3,d,Renovación Popular
+seg4,a,
+seg4,b,
+seg4,c,
+seg4,d,
+seg4,e,
+seg4,f,
+der1,a,Juntos por el Perú
+der1,a,Partido Morado
+der1,b,Victoria Nacional
+der1,b,Renovación Popular
+der1,b,Acción Popular
+der1,b,Somos Perú
+der1,b,Fuerza Popular
+der1,b,Alianza para el Progreso
+der1,b,Avanza País
+der1,c,
+der1,d,Podemos Perú
+der2,a,Juntos por el Perú
+der2,b,Somos Perú
+der2,b,Podemos Perú
+der2,b,Juntos por el Perú
+der2,c,Partido Morado
+der2,c,Victoria Nacional
+der2,c,Somos Perú
+der2,d,Partido Morado
+der2,d,Renovación Popular
+der2,e,Partido Morado
+der2,e,Alianza para el Progreso
+der2,e,Renovación Popular
+der2,e,Juntos por el Perú
+der2,e,Fuerza Popular
+der2,f,Acción Popular
+der3,a,Juntos por el Perú
+der3,a,Alianza para el progreso
+der3,b,Partido Morado
+der3,c,Juntos por el Perú
+der3,c,Acción Popular
+der3,d,Partido Morado
+der3,d,Podemos Perú
+der3,e,Fuerza Popular
+der3,e,Victoria Nacional
+der3,e,Partido Morado
+der3,e,Somos Perú
+der2,a,Avanza País
+der2,a,Renovación Popular
+cre1,a,Partido Morado
+cre1,a,Renovación Popular
+cre1,a,Victoria Nacional
+cre1,b,Fuerza Popular
+cre1,b,Avanza País
+cre1,b,Somos Perú
+cre1,b,Alianza por el Progreso
+cre1,c,Somos Perú
+cre1,d,Podemos Perú
+cre1,e,Juntos por el Perú
+cre1,f,Acción Popular
+cre2,a,Juntos por el Perú
+cre2,b,Partido Morado
+cre2,b,Fuerza Popular
+cre2,b,Victoria Nacional
+cre2,c,Avanza País
+cre2,d,Acción Popular
+cre2,d,Somos Perú
+cre2,d,Renovación Popular
+cre2,d,Alianza Para el Progreso
+cre2,d,Podemos Perú
+cre3,a,Fuerza Popular
+cre3,a,Avanza País
+cre3,b,Partido Morado
+cre3,b,Victoria Nacional
+cre3,b,Juntos Por el Perú
+cre3,b,Acción Popular
+cre3,b,Alianza para el Progreso
+cre3,b,Podemos Perú
+cre3,c,Podemos Perú
+cre3,d,Somos Perú
+cre3,d,Renovación Popular
+cre4,a,Somos Perú
+cre4,b,Renovación Popular
+cre4,c,Podemos Perú
+cre4,c,Alianza para el Progreso
+cre4,c,Victoria Nacional
+cre4,d,Fuerza Popular
+cre4,d,Partido Morado
+cre4,e,Juntos por el Perú
+cre4,e,Partido Morado
+cre4,f,Acción Popular
+cre4,f,Avanza País
+imp1,a,Fuerza Popular
+imp1,a,Victoria Nacional
+imp1,a,Renovación Popular
+imp1,a,Alianza Por el Progreso
+imp1,a,Partido Morado
+imp1,a,Podemos Perú
+imp1,b,Juntos por el Perú
+imp1,b,Partido Morado
+imp1,c,Juntos por el Perú
+imp1,c,Partido Morado
+imp1,c,Acción Popular
+imp1,c,Podemos Perú
+imp1,c,Alianza por el Progreso
+imp1,d,Juntos por el Perú
+imp1,d,Acción Popular
+imp1,e,Avanza País
+imp1,e,Victoria Nacional
+imp1,f,Somos Perú
+imp2,a,Juntos por el Perú
+imp2,b,Avanza País
+imp2,b,Juntos por el Perú
+imp2,c,Avanza País
+imp2,d,Acción Popular
+imp2,d,Podemos Perú
+imp2,d,Victoria Nacional
+imp2,e,Acción Popular
+imp2,e,Podemos Perú
+imp2,e,Alianza Para el Progreso
+imp2,e,Juntos por el Perú
+imp2,e,Victoria Nacional
+imp2,e,Partido Morado
+imp2,e,Avanza País
+imp2,e,Fuerza Popular
+imp2,f,Somos Perú
+imp2,f,Renovación Popular
+imp3,a,Acción Popular
+imp3,a,Fuerza Popular
+imp3,b,Alianza para el progreso
+imp3,b,Fuerza Popular
+imp3,b,Victoria Nacional
+imp3,c,Avanza País
+imp3,d,Acción Popular
+imp3,e,Alianza para el progreso
+imp3,f,Somos Perú
+imp3,f,Renovación Popular
+imp3,f,Partido Morado
+imp3,f,Juntos por el Perú
