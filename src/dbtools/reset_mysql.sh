@@ -76,6 +76,16 @@ ALTER TABLE `bien_inmueble`
   DROP INDEX IF EXISTS `bien_inmueble_fk1`;
 ALTER TABLE `afiliacion`
   DROP INDEX IF EXISTS `afiliacion_fk1`;
+  
+ALTER TABLE `pregunta`
+  DROP FOREIGN KEY IF EXISTS `FK_preg_codTopico`;
+DROP TABLE IF EXISTS `pregunta`;
+ALTER TABLE `respuesta`
+DROP FOREIGN KEY IF EXISTS `FK_res_codPregunta`;
+ALTER TABLE `partido_x_respuesta`
+  DROP FOREIGN KEY IF EXISTS `FK_par_res_codPregunta`;
+ALTER TABLE partido_x_respuesta
+  DROP FOREIGN KEY IF EXISTS `FK_par_res_codRespuesta`;  
 '''
 
 # Drop tables
@@ -726,7 +736,112 @@ ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
 ALTER TABLE data_ec ADD INDEX (hoja_vida_id, designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
 ALTER TABLE afiliacion ADD INDEX (vigente, dni, org_politica, afiliacion_inicio, afiliacion_cancelacion)
 '''
+# DB Preguntas y Respuestas
+echo "----------------------------------------------"
+echo "#### Creating policies DB"
+mysql --login-path=local --database=op -e '''
 
+DROP TABLE IF EXISTS topico;
+CREATE TABLE topico
+(
+ codTopico VARCHAR(45),
+  topico VARCHAR(45),
+  PRIMARY KEY (codTopico)
+ );
+
+INSERT INTO topico (codTopico,topico)
+values ('edu','Educacion');
+INSERT INTO topico (codTopico,topico)
+values ('sal','Salud');
+INSERT INTO topico (codTopico,topico)
+values ('gob','Gobernabilidad');
+INSERT INTO topico (codTopico,topico)
+values ('amb','Ambiente');
+ INSERT INTO topico (codTopico,topico)
+values ('seg','Seguridad');
+INSERT INTO topico (codTopico,topico)
+values ('der','Derechos');
+INSERT INTO topico (codTopico,topico)
+values ('cre','Crecimiento');
+INSERT INTO topico (codTopico,topico)
+values ('imp','Impuestos y pensiones');
+
+'''
+# New pregunta table 
+echo "----------------------------------------------"
+echo "#### Creating pregunta table "
+mysql --login-path=local --database=op --local-infile=1 -e '''
+
+
+
+DROP TABLE IF EXISTS pregunta;
+ CREATE TABLE pregunta
+(
+ codPregunta VARCHAR(45),
+  codTopico VARCHAR(45),
+  pregunta VARCHAR(500),
+  alternativa varchar(1),
+  PRIMARY KEY (codPregunta),
+  CONSTRAINT FK_preg_codTopico FOREIGN KEY (codTopico)
+        REFERENCES topico(codTopico)
+ );
+
+LOAD DATA LOCAL INFILE "./pregunta.csv"
+INTO TABLE pregunta
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+
+'''
+# New respuesta table 
+echo "----------------------------------------------"
+echo "#### Creating respuesta table "
+mysql --login-path=local --database=op --local-infile=1 -e '''
+
+DROP TABLE IF EXISTS respuesta;
+  CREATE TABLE respuesta
+(
+  codPregunta VARCHAR(45),
+  codRespuesta VARCHAR(45),
+  respuesta VARCHAR(500),
+  PRIMARY KEY (codRespuesta),
+  CONSTRAINT FK_res_codPregunta FOREIGN KEY (codPregunta)
+        REFERENCES pregunta(codPregunta)
+ );
+
+LOAD DATA LOCAL INFILE "./respuesta.csv"
+INTO TABLE temp_experiencia
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+
+'''
+# New partido_x_respuesta table 
+echo "----------------------------------------------"
+echo "#### Creating partido_x_respuesta table "
+mysql --login-path=local --database=op --local-infile=1 -e '''
+
+DROP TABLE IF EXISTS partido_x_respuesta;
+CREATE TABLE partido_x_respuesta
+(
+ codPregunta VARCHAR(45),
+ codRespuesta VARCHAR(45),
+ partido VARCHAR(200),
+ CONSTRAINT FK_par_res_codPregunta FOREIGN KEY (codPregunta)
+        REFERENCES pregunta(codPregunta),
+ CONSTRAINT FK_par_res_codRespuesta FOREIGN KEY (codRespuesta)
+        REFERENCES respuesta(codRespuesta)
+ );
+ 
+LOAD DATA LOCAL INFILE "./partido_x_respuesta.csv"
+INTO TABLE partido_x_respuesta
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""	
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+'''
 # Delete downloads
 echo "----------------------------------------------"
 echo "#### Deleting downloads"
