@@ -96,6 +96,7 @@ DROP TABLE IF EXISTS `bien_inmueble`;
 DROP TABLE IF EXISTS `bien_mueble`;
 DROP TABLE IF EXISTS `bien_otro`;
 DROP TABLE IF EXISTS `afiliacion`;
+DROP TABLE IF EXISTS `redes_sociales`;
 '''
 
 # Import Congreso first
