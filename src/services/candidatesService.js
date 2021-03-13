@@ -112,7 +112,7 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
     bienes_inmuebles,
     judgements,
     afiliations,
-    redes_sociales
+    ...redes_sociales[0]
   };
 };
 
@@ -158,7 +158,7 @@ const getCandidateByDNI = async (id_dni) => {
     bienes_inmuebles,
     judgements,
     afiliations,
-    redes_sociales
+    ...redes_sociales[0]
   };
 };
 
