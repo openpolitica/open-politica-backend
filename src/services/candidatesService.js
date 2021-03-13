@@ -147,8 +147,8 @@ const getCandidateByDNI = async (id_dni) => {
   bienes_muebles = await db.query(query_bienes_muebles, id_dni);
   bienes_inmuebles = await db.query(query_bienes_inmuebles, id_dni);
   judgements = await db.query(query_judgements, id_dni);
-  afiliations = await db.query(query_afiliations, hoja_vida_id);
-  redes_sociales = await db.query(query_redes_sociales, hoja_vida_id);
+  afiliations = await db.query(query_afiliations, id_dni);
+  redes_sociales = await db.query(query_redes_sociales, id_dni);
 
   return {
     ...candidate[0],
