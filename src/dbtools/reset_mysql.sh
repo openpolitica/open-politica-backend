@@ -617,6 +617,23 @@ SET id_nombres = "GAHELA TSENEG", id_sexo = "F"
 WHERE hoja_vida_id = 136670
 '''
 
+# Add social network table
+echo "----------------------------------------------"
+echo "#### Add information for social_network"
+mysql --login-path=local --database=op --local-infile=1 -e '''
+DROP TABLE IF EXISTS `redes_sociales`;
+CREATE TABLE `redes_sociales` (
+  `hoja_vida_id` mediumint(9) DEFAULT NULL,
+  `facebook` text DEFAULT NULL,
+  `twitter` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+LOAD DATA LOCAL INFILE "./redes_sociales.csv"
+INTO TABLE redes_sociales
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+'''
 # Militancy: Download data in sqlite
 echo "----------------------------------------------"
 echo "#### Militancy: Downloading data in sqlite"
@@ -714,6 +731,10 @@ ALTER TABLE `extra_data`
   ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `sentencias_ec`
   ADD CONSTRAINT `sentencias_ec_fk1` FOREIGN KEY (`hoja_vida_id`) 
+  REFERENCES `candidato` (`hoja_vida_id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `redes_sociales`
+  ADD CONSTRAINT `redes_sociales_fk1` FOREIGN KEY (`hoja_vida_id`) 
   REFERENCES `candidato` (`hoja_vida_id`) 
   ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `afiliacion`
