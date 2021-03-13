@@ -750,21 +750,21 @@ CREATE TABLE topico
  );
 
 INSERT INTO topico (codTopico,topico)
-values ('edu','Educacion');
+values ("edu","Educacion");
 INSERT INTO topico (codTopico,topico)
-values ('sal','Salud');
+values ("sal","Salud");
 INSERT INTO topico (codTopico,topico)
-values ('gob','Gobernabilidad');
+values ("gob","Gobernabilidad");
 INSERT INTO topico (codTopico,topico)
-values ('amb','Ambiente');
+values ("amb","Ambiente");
  INSERT INTO topico (codTopico,topico)
-values ('seg','Seguridad');
+values ("seg","Seguridad");
 INSERT INTO topico (codTopico,topico)
-values ('der','Derechos');
+values ("der","Derechos");
 INSERT INTO topico (codTopico,topico)
-values ('cre','Crecimiento');
+values ("cre","Crecimiento");
 INSERT INTO topico (codTopico,topico)
-values ('imp','Impuestos y pensiones');
+values ("imp","Impuestos y pensiones");
 
 '''
 # New pregunta table 
@@ -780,11 +780,10 @@ DROP TABLE IF EXISTS pregunta;
  codPregunta VARCHAR(45),
   codTopico VARCHAR(45),
   pregunta VARCHAR(500),
-  alternativa varchar(1),
   PRIMARY KEY (codPregunta),
   CONSTRAINT FK_preg_codTopico FOREIGN KEY (codTopico)
         REFERENCES topico(codTopico)
- );
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;;
 
 LOAD DATA LOCAL INFILE "./pregunta.csv"
 INTO TABLE pregunta
@@ -808,10 +807,10 @@ DROP TABLE IF EXISTS respuesta;
   PRIMARY KEY (codRespuesta),
   CONSTRAINT FK_res_codPregunta FOREIGN KEY (codPregunta)
         REFERENCES pregunta(codPregunta)
- );
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-LOAD DATA LOCAL INFILE "./respuesta.csv"
-INTO TABLE temp_experiencia
+LOAD DATA LOCAL INFILE "./respuestas.csv"
+INTO TABLE respuesta
 FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
 LINES TERMINATED BY "\n"
@@ -833,9 +832,9 @@ CREATE TABLE partido_x_respuesta
         REFERENCES pregunta(codPregunta),
  CONSTRAINT FK_par_res_codRespuesta FOREIGN KEY (codRespuesta)
         REFERENCES respuesta(codRespuesta)
- );
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  
-LOAD DATA LOCAL INFILE "./partido_x_respuesta.csv"
+LOAD DATA LOCAL INFILE "./partidos_x_respuesta.csv"
 INTO TABLE partido_x_respuesta
 FIELDS TERMINATED BY ","
 ENCLOSED BY "\""	
