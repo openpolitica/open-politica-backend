@@ -631,7 +631,7 @@ LOAD DATA LOCAL INFILE "./redes_sociales.csv"
 INTO TABLE redes_sociales
 FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
-LINES TERMINATED BY "\n"
+LINES TERMINATED BY "\r\n"
 IGNORE 1 ROWS;
 '''
 # Militancy: Download data in sqlite
