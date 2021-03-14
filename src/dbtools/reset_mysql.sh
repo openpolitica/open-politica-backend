@@ -755,9 +755,7 @@ CREATE TABLE partido_x_respuesta
  codRespuesta VARCHAR(45),
  partido VARCHAR(200),
  CONSTRAINT FK_par_res_codPregunta FOREIGN KEY (codPregunta)
-        REFERENCES pregunta(codPregunta),
- CONSTRAINT FK_par_res_codRespuesta FOREIGN KEY (codRespuesta)
-        REFERENCES respuesta(codRespuesta)
+        REFERENCES pregunta(codPregunta)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  
 LOAD DATA LOCAL INFILE "./partidos_x_respuesta.csv"
