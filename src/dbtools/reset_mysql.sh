@@ -663,7 +663,108 @@ ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
 ALTER TABLE data_ec ADD INDEX (hoja_vida_id, designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
 ALTER TABLE afiliacion ADD INDEX (vigente, dni, org_politica, afiliacion_inicio, afiliacion_cancelacion)
 '''
+# DB Preguntas y Respuestas
+echo "----------------------------------------------"
+echo "#### Creating policies DB"
+mysql --login-path=local --database=op -e '''
 
+DROP TABLE IF EXISTS topico;
+CREATE TABLE topico
+(
+ codTopico VARCHAR(45),
+  topico VARCHAR(45),
+  PRIMARY KEY (codTopico)
+ );
+
+INSERT INTO topico (codTopico,topico)
+values ("edu","Educacion");
+INSERT INTO topico (codTopico,topico)
+values ("sal","Salud");
+INSERT INTO topico (codTopico,topico)
+values ("gob","Gobernabilidad");
+INSERT INTO topico (codTopico,topico)
+values ("amb","Medio Ambiente");
+ INSERT INTO topico (codTopico,topico)
+values ("seg","Seguridad");
+INSERT INTO topico (codTopico,topico)
+values ("der","Derechos");
+INSERT INTO topico (codTopico,topico)
+values ("cre","Crecimiento");
+INSERT INTO topico (codTopico,topico)
+values ("imp","Impuestos y pensiones");
+
+'''
+# New pregunta table 
+echo "----------------------------------------------"
+echo "#### Creating pregunta table "
+mysql --login-path=local --database=op --local-infile=1 -e '''
+
+
+
+DROP TABLE IF EXISTS pregunta;
+ CREATE TABLE pregunta
+(
+ codPregunta VARCHAR(45),
+  codTopico VARCHAR(45),
+  pregunta VARCHAR(500),
+  PRIMARY KEY (codPregunta),
+  CONSTRAINT FK_preg_codTopico FOREIGN KEY (codTopico)
+        REFERENCES topico(codTopico)
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;;
+
+LOAD DATA LOCAL INFILE "./pregunta.csv"
+INTO TABLE pregunta
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+
+'''
+# New respuesta table 
+echo "----------------------------------------------"
+echo "#### Creating respuesta table "
+mysql --login-path=local --database=op --local-infile=1 -e '''
+
+DROP TABLE IF EXISTS respuesta;
+  CREATE TABLE respuesta
+(
+  codPregunta VARCHAR(45),
+  codRespuesta VARCHAR(45),
+  respuesta VARCHAR(500),
+  CONSTRAINT FK_res_codPregunta FOREIGN KEY (codPregunta)
+        REFERENCES pregunta(codPregunta)
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOAD DATA LOCAL INFILE "./respuestas.csv"
+INTO TABLE respuesta
+FIELDS TERMINATED BY ";"
+ENCLOSED BY "\""
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+
+'''
+# New partido_x_respuesta table 
+echo "----------------------------------------------"
+echo "#### Creating partido_x_respuesta table "
+mysql --login-path=local --database=op --local-infile=1 -e '''
+
+DROP TABLE IF EXISTS partido_x_respuesta;
+CREATE TABLE partido_x_respuesta
+(
+ codPregunta VARCHAR(45),
+ codRespuesta VARCHAR(45),
+ partido VARCHAR(200),
+ CONSTRAINT FK_par_res_codPregunta FOREIGN KEY (codPregunta)
+        REFERENCES pregunta(codPregunta)
+ )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+ 
+LOAD DATA LOCAL INFILE "./partidos_x_respuesta.csv"
+INTO TABLE partido_x_respuesta
+FIELDS TERMINATED BY ","
+ENCLOSED BY "\""	
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+'''
 # Delete downloads
 echo "----------------------------------------------"
 echo "#### Deleting downloads"
