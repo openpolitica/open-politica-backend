@@ -29,24 +29,9 @@ MYSQL_USER=root
 
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
-echo "#### Deleting current tables"
-mysql --login-path=local --database=op -e '''
-DROP TABLE IF EXISTS `data_ec`;
-DROP TABLE IF EXISTS `educacion`;
-DROP TABLE IF EXISTS `experiencia`;
-DROP TABLE IF EXISTS `extra_data`;
-DROP TABLE IF EXISTS `locations`;
-DROP TABLE IF EXISTS `ingreso`;
-DROP TABLE IF EXISTS `sentencia_civil`;
-DROP TABLE IF EXISTS `sentencia_penal`;
-DROP TABLE IF EXISTS `sentencias_ec`;
-DROP TABLE IF EXISTS `candidato`;
-DROP TABLE IF EXISTS `bien_inmueble`;
-DROP TABLE IF EXISTS `bien_mueble`;
-DROP TABLE IF EXISTS `bien_otro`;
-DROP TABLE IF EXISTS `afiliacion`;
-DROP TABLE IF EXISTS `redes_sociales`;
-'''
+echo "#### Removing existing database"
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --port=$MYSQL_TCP_PORT -f drop $DATABASE_NAME 
+mysqladmin --user=$MYSQL_USER --password=$MYSQL_PWD --host=$MYSQL_HOST --port=$MYSQL_TCP_PORT create $DATABASE_NAME
 
 # Import Congreso first
 echo "----------------------------------------------"
