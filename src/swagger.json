@@ -19,6 +19,10 @@
       "url": "https://api.openpolitica.com",
       "description": "Production Server"
     },
+    {
+      "url": "https://staging-api.openpolitica.com",
+      "description": "Staging Server"
+    },
     { "url": "http://localhost:3000", "description": "Development Server" }
   ],
   "paths": {
