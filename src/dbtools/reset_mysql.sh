@@ -683,7 +683,7 @@ values ("sal","Salud");
 INSERT INTO topico (codTopico,topico)
 values ("gob","Gobernabilidad");
 INSERT INTO topico (codTopico,topico)
-values ("amb","Ambiente");
+values ("amb","Medio Ambiente");
  INSERT INTO topico (codTopico,topico)
 values ("seg","Seguridad");
 INSERT INTO topico (codTopico,topico)

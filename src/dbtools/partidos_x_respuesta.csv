@@ -25,7 +25,7 @@ edu2,e,Fuerza Popular
 edu2,e,Avanza País
 edu2,e,Renovación Popular
 edu3,a,Juntos por el Perú
-edu3,a,Partido Morado*
+edu3,a,Partido Morado
 edu3,b,Juntos por el Perú
 edu3,b,Partido Morado
 edu3,b,Victoria Nacional
@@ -308,12 +308,18 @@ seg3,c,Somos Perú
 seg3,d,Acción Popular
 seg3,d,Avanza País
 seg3,d,Renovación Popular
-seg4,a,
-seg4,b,
-seg4,c,
-seg4,d,
-seg4,e,
-seg4,f,
+seg4,a,Fuerza Popular
+seg4,a,Alianza Para el Progreso
+seg4,b,Somos Perú, Partido Morado
+seg4,b,Somos Perú, Partido Morado
+seg4,c,Acción Popular
+seg4,d,Alianza para el Progreso
+seg4,d,Somos Perú
+seg4,e,Fuerza Popular
+seg4,e,Renovación Popular
+seg4,f,Juntos por el Perú
+seg4,f,Avanza País
+seg4,f,Victoria Nacional
 der1,a,Juntos por el Perú
 der1,a,Partido Morado
 der1,b,Victoria Nacional
@@ -323,8 +329,16 @@ der1,b,Somos Perú
 der1,b,Fuerza Popular
 der1,b,Alianza para el Progreso
 der1,b,Avanza País
-der1,c,
+der1,c,Juntos por el Perú
+der1,c,Acción Popular
+der1,d,Partido Morado
 der1,d,Podemos Perú
+der1,e,Fuerza Popular
+der1,e,Victoria Nacional
+der1,e,Partido Morado
+der1,e,Somos Perú
+der1,f,Avanza País
+der1,f,Renovación Popular
 der2,a,Juntos por el Perú
 der2,b,Somos Perú
 der2,b,Podemos Perú

@@ -419,15 +419,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "Educación",
-                  "Salud",
-                  "Gobernabilidad",
-                  "Medio Ambiente",
-                  "Seguridad",
-                  "Derechos Civiles",
-                  "Economía"
-                ]
+                "enum": ["edu", "sal", "gob", "amb", "seg", "der", "cre", "imp"]
               }
             },
             "required": true
@@ -472,11 +464,11 @@
                     "questionId": "edu1",
                     "answerId": "a"
                   },
-                {
+                  {
                     "questionId": "edu1",
                     "answerId": "b"
                   },
-                {
+                  {
                     "questionId": "sal1",
                     "answerId": "c"
                   }
