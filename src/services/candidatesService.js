@@ -93,6 +93,8 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   let query_afiliations =
     "SELECT a.org_politica, a.afiliacion_inicio, a.afiliacion_cancelacion FROM afiliacion a INNER JOIN candidato c ON a.dni = c.id_dni  WHERE a.vigente = 0 and c.org_politica_nombre != a.org_politica AND c.hoja_vida_id = ?";
 
+  let query_redes_sociales = "SELECT * FROM redes_sociales WHERE hoja_vida_id = ?";
+
   candidate = await db.query(query_candidate, hoja_vida_id);
   education = await db.query(query_education, hoja_vida_id);
   experience = await db.query(query_experience, hoja_vida_id);
@@ -100,6 +102,7 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   bienes_inmuebles = await db.query(query_bienes_inmuebles, hoja_vida_id);
   judgements = await db.query(query_judgements, hoja_vida_id);
   afiliations = await db.query(query_afiliations, hoja_vida_id);
+  redes_sociales = await db.query(query_redes_sociales, hoja_vida_id);
 
   return {
     ...candidate[0],
@@ -108,7 +111,8 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
     bienes_muebles,
     bienes_inmuebles,
     judgements,
-    afiliations
+    afiliations,
+    ...redes_sociales[0]
   };
 };
 
@@ -134,13 +138,17 @@ const getCandidateByDNI = async (id_dni) => {
   let query_afiliations =
     "SELECT a.org_politica, a.afiliacion_inicio, a.afiliacion_cancelacion FROM afiliacion a INNER JOIN candidato c ON a.dni = c.id_dni  WHERE a.vigente = 0 and c.org_politica_nombre != a.org_politica AND c.id_dni = ?";
 
+  let query_redes_sociales =
+    "SELECT e.* FROM redes_sociales e INNER JOIN candidato c ON c.hoja_vida_id = e.hoja_vida_id WHERE c.id_dni = ?";
+
   candidate = await db.query(query_candidate, id_dni);
   education = await db.query(query_education, id_dni);
   experience = await db.query(query_experience, id_dni);
   bienes_muebles = await db.query(query_bienes_muebles, id_dni);
   bienes_inmuebles = await db.query(query_bienes_inmuebles, id_dni);
   judgements = await db.query(query_judgements, id_dni);
-  afiliations = await db.query(query_afiliations, hoja_vida_id);
+  afiliations = await db.query(query_afiliations, id_dni);
+  redes_sociales = await db.query(query_redes_sociales, id_dni);
 
   return {
     ...candidate[0],
@@ -149,7 +157,8 @@ const getCandidateByDNI = async (id_dni) => {
     bienes_muebles,
     bienes_inmuebles,
     judgements,
-    afiliations
+    afiliations,
+    ...redes_sociales[0]
   };
 };
 
