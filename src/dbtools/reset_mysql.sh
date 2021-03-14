@@ -731,7 +731,6 @@ DROP TABLE IF EXISTS respuesta;
   codPregunta VARCHAR(45),
   codRespuesta VARCHAR(45),
   respuesta VARCHAR(500),
-  PRIMARY KEY (codRespuesta),
   CONSTRAINT FK_res_codPregunta FOREIGN KEY (codPregunta)
         REFERENCES pregunta(codPregunta)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
