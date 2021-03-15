@@ -48,9 +48,16 @@ const getCandidates = async (params) => {
     arguments.push(region);
   }
 
+  let queryUpdateVacancyCount = "";
   if (vacancia) {
     query += "AND b.vacancia = ? ";
-    arguments.push(vacancia === "true" ? 1 : 0);
+    if (vacancia === "true") {
+      arguments.push(1);
+      queryUpdateVacancyCount = "UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?"
+    } else if (vacancia === "false") {
+      arguments.push(0);
+      queryUpdateVacancyCount = "UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?"
+    }
   }
 
   let candidates = [];
@@ -72,10 +79,7 @@ const getCandidates = async (params) => {
       "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
       region
     );
-
-    vacancia
-      ? await db.query("UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?", region)
-      : await db.query("UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?", region);
+    if (queryUpdateVacancyCount) await db.query(queryUpdateVacancyCount, region);
 
     return {
       candidates
