@@ -48,6 +48,9 @@ const getCandidates = async (params) => {
   if (vacancia) {
     query += "AND b.vacancia = ? ";
     arguments.push(vacancia === "true" ? 1 : 0);
+
+  } else {
+
   }
 
   let candidates = [];
@@ -67,6 +70,11 @@ const getCandidates = async (params) => {
       "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
       region
     );
+
+    vacancia
+      ? await db.query("UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?", region)
+      : await db.query("UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?", region);
+
     return {
       candidates
     };
