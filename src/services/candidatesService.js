@@ -36,24 +36,25 @@ const getCandidates = async (params) => {
     query += "AND a.org_politica_nombre IN (?) ";
     arguments.push(parties.split(","));
   }
+
   if (role) {
     query += "AND a.cargo_nombre LIKE ? ";
     if (role === "CONGRESISTA") arguments.push("%" + role + "%");
     else arguments.push(role + "%");
   }
+
   if (region) {
     query += "AND a.postula_distrito = ? ";
     arguments.push(region);
   }
+
   if (vacancia) {
     query += "AND b.vacancia = ? ";
     arguments.push(vacancia === "true" ? 1 : 0);
-
-  } else {
-
   }
 
   let candidates = [];
+
   if (sentencias === "false") {
     query += "AND b.sentencias_ec_penal_cnt = 0";
   } else if (sentencias === "true") {
@@ -66,6 +67,7 @@ const getCandidates = async (params) => {
 
   try {
     candidates = await db.query(query, arguments);
+
     await db.query(
       "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
       region
