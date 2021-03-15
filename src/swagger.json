@@ -463,13 +463,13 @@
                 }
               },
               "example": {
-                "candidates": [
+                "answers": [
                   {
                     "questionId": "edu1",
                     "answerId": "a"
                   },
                   {
-                    "questionId": "edu1",
+                    "questionId": "edu2",
                     "answerId": "b"
                   },
                   {

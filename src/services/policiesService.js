@@ -17,7 +17,7 @@ const getQuestions = async (params) => {
 
   const response = await db.query(query, [topics]);
 
-  let mapped = response.reduce(function (r, a) {
+  let mapped = response.reduce(function(r, a) {
     const { topico, codPregunta, pregunta } = a;
 
     r[topico] = r[topico] || [];
@@ -30,19 +30,18 @@ const getQuestions = async (params) => {
 };
 
 const getPolicyResults = async (body) => {
-  const preguntas = body.candidates.map(function (value) {
+  const preguntas = body.answers.map(function(value) {
     return value.questionId;
   });
 
-  const respuestas = body.candidates.map(function (value) {
+  const respuestas = body.answers.map(function(value) {
     return value.answerId;
   });
 
   let query = `SELECT a.partido, COUNT(*) AS total FROM (SELECT * FROM partido_x_respuesta WHERE codPregunta IN (?) AND codRespuesta IN (?)) a GROUP BY a.partido ORDER BY total DESC`;
   let response = await db.query(query, [preguntas, respuestas]);
-  console.log(partyResults);
 
-  let partyResults = response.reduce(function (r, a) {
+  let partyResults = response.reduce(function(r, a) {
     const { partido, total } = a;
 
     r[partido] = r[partido] || [];
