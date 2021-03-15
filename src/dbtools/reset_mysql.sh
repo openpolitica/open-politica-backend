@@ -488,7 +488,7 @@ CREATE TABLE `locations` (
   `seats` tinyint(2) DEFAULT NULL,
   `apicounts` mediumint unsigned DEFAULT 0,
   `si_vacancia` mediumint unsigned DEFAULT 0,
-  `no_vacancia` mediumint unsigned DEFAULT 0,
+  `no_vacancia` mediumint unsigned DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 LOAD DATA LOCAL INFILE "./locations.csv"
 INTO TABLE locations
