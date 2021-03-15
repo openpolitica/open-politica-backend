@@ -6,6 +6,14 @@ const getTopics = async () => {
   return response;
 };
 
+const isKeyInArray = (key,array) => {
+    for ( i in array ){
+      if( key in i.keys){
+        return true
+      }
+    }
+  return false;
+}
 const getQuestions = async (params) => {
   let { topics } = params;
 
@@ -13,17 +21,30 @@ const getQuestions = async (params) => {
     topics = [topics];
   }
   let query =
-    "SELECT * FROM pregunta a JOIN topico b WHERE a.codTopico = b.codTopico AND b.codTopico IN (?)";
+    "SELECT c.topico, b.codPregunta, b.pregunta, a.codRespuesta, a.respuesta FROM respuesta a INNER JOIN pregunta b ON a.codPregunta = b.codPregunta INNER JOIN topico c ON b.codTopico = c.codTopico WHERE b.codTopico IN (?)";
 
   const response = await db.query(query, [topics]);
 
   let mapped = response.reduce(function(r, a) {
-    const { topico, codPregunta, pregunta } = a;
+    const { topico, codPregunta, pregunta, codRespuesta, respuesta } = a;
 
     r[topico] = r[topico] || [];
-    r[topico].push({
-      [codPregunta]: pregunta
-    });
+
+    if (isKeyInArray(codPregunta,r[topico])){
+        r[topico][respuestas].push(
+          {
+            [codRespuesta]:respuesta
+          }
+        )
+    }else{
+        r[topico].push({
+          [codPregunta]: pregunta,
+          [respuestas] : {
+            [codRespuesta]: respuesta
+          }
+        });
+    }
+
     return r;
   }, Object.create(null));
   return mapped;
