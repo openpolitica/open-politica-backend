@@ -618,7 +618,7 @@ ALTER TABLE `proceso_electoral` MODIFY COLUMN dni int(11);
 echo "----------------------------------------------"
 echo "#### Creating indexes and relations betweeen tables"
 mysql --login-path=local --database=$DATABASE_NAME -e '''
-ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado, id_dni);
+ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, org_politica_id, id_sexo, expediente_estado, id_dni);
 ALTER TABLE candidato ADD PRIMARY KEY(id_dni);
 ALTER TABLE `ingreso`
   ADD CONSTRAINT `ingreso_fk1` FOREIGN KEY (`hoja_vida_id`) 
