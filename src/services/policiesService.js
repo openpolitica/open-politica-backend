@@ -31,7 +31,7 @@ const getQuestions = async (params) => {
     r[topico] = r[topico] || [];
 
     if (isKeyInArray(codPregunta,r[topico])){
-        r[topico][respuestas].push(
+        r[topico]["respuestas"].push(
           {
             [codRespuesta]:respuesta
           }
@@ -39,10 +39,11 @@ const getQuestions = async (params) => {
     }else{
         r[topico].push({
           [codPregunta]: pregunta,
-          [respuestas] : {
-            [codRespuesta]: respuesta
-          }
+          respuestas : []
         });
+        r[topico]["respuestas"].push({
+            [codRespuesta]:respuesta
+        })
     }
 
     return r;
