@@ -6,14 +6,6 @@ const getTopics = async () => {
   return response;
 };
 
-const isKeyInArray = (key,array) => {
-    for ( i in array ){
-      if( key in i.keys){
-        return true
-      }
-    }
-  return false;
-}
 const getQuestions = async (params) => {
   let { topics } = params;
 
@@ -30,20 +22,21 @@ const getQuestions = async (params) => {
 
     r[topico] = r[topico] || [];
 
-    if (isKeyInArray(codPregunta,r[topico])){
-        r[topico]["respuestas"].push(
+    idx = r[topico].findIndex( element => element[codPregunta] === pregunta )
+
+    if (idx < 0 ) {
+        r[topico].push({
+          [codPregunta]: pregunta,
+          respuestas : [{
+            [codRespuesta]:respuesta
+          }]
+        });
+    }else{
+        r[topico][idx]["respuestas"].push(
           {
             [codRespuesta]:respuesta
           }
-        )
-    }else{
-        r[topico].push({
-          [codPregunta]: pregunta,
-          respuestas : []
-        });
-        r[topico]["respuestas"].push({
-            [codRespuesta]:respuesta
-        })
+        );
     }
 
     return r;
