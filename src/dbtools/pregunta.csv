@@ -1,34 +1,34 @@
 codPregunta,codTopico,pregunta
-edu1,edu,¿Cómo mejorar la educación durante la pandemia?
-edu2,edu,¿Cómo mejorar la calidad de la educación escolar?
-edu3,edu,¿Cómo mejorar la educación superior?
-edu4,edu,¿Cómo mejorar el acceso a becas y financiamiento de estudios superiores?
-edu5,edu,¿Cómo mejorar la formación y condiciones laborales de los profesores?
-edu6,edu,¿Cómo mejorar la educación intercultural?
-edu7,edu,¿Cómo mejorar la educación de los alumnos con discapacidad?
-sal1,sal,¿Cómo obtener mejores resultados en la lucha contra el Covid-19?
-sal2,sal,¿Cómo reformar la estructura y el funcionamiento del sistema público de salud?
-sal3,sal,¿Cómo disminuir el gasto de las personas en salud?
-sal4,sal,¿Qué otros servicios de salud quisieras que estén en el Plan de Gobierno?
-sal5,sal,En el Perú el aborto cuando la vida de la madre está en peligro es legal ¿crees que otras causales de aborto deberían ser descriminalizadas? el aborto cuando la vida de la madre está en peligro es legal ¿crees que otras causales de aborto deberían ser descriminalizadas?
-gob1,gob,¿Qué opinas sobre modificar la Constitución?
-gob2,gob,Si se dieran cambios en la Constitución ¿en qué temas preferirías que sean? ¿en qué temas preferirías que sean?
-gob3,gob,¿Qué quieres que opine el candidato presidencial de tu elección sobre la vacancia del 9 de noviembre?
-amb1,amb,¿Cual crees que es la mejor forma de combatir la deforestación de la Amazonía?
-amb2,amb,¿Cómo lograr la transición hacia energías renovables?
-amb3,amb,¿Cual es la mejor forma de abordar los desastres naturales en el país?
-amb4,amb,De las siguientes medidas ambientales ¿Cual le parece esencial que esté en un plan de gobierno? ¿Cual le parece esencial que esté en un plan de gobierno?
-seg1,seg,¿Cuál cree que es la mejor forma de mejorar la lucha contra el crimen?
-seg2,seg,¿Cómo mejorar la formación de la policía?
-seg3,seg,¿Cúal es la mejor manera de mejorar la atención policial de casos de violencia de género?
-seg4,seg,OTROS. PDT
-der1,der,¿Está a favor del matrimonio civil igualitario?
-der2,der,¿Cómo se debe apoyar a las poblaciones y comunidades nativas del país?
-der3,der,¿Qué tipo de apoyo cree que debería dar el gobierno a las personas con discapacidad?
-cre1,cre,¿Como crear nuevos empleos formales en el Perú?
-cre2,cre,La regulación laboral debe:
-cre3,cre,¿Como aumentar la competencia y el crecimiento economico?
-cre4,cre,¿Como impulsar el desarrollo de la ciencia y tecnología?
-imp1,imp,¿Cual de las siguientes opciones es la más efectiva para mejorar la recaudación de impuestos en el país?
-imp2,imp,La reforma del sistema de pensiones debe:
-imp3,imp,¿Qué otras características considera que debería tener el nuevo sistema de pensiones?
+edu1,education,¿Cómo mejorar la educación durante la pandemia?
+edu2,education,¿Cómo mejorar la calidad de la educación escolar?
+edu3,education,¿Cómo mejorar la educación superior?
+edu4,education,¿Cómo mejorar el acceso a becas y financiamiento de estudios superiores?
+edu5,education,¿Cómo mejorar la formación y condiciones laborales de los profesores?
+edu6,education,¿Cómo mejorar la educación intercultural?
+edu7,education,¿Cómo mejorar la educación de los alumnos con discapacidad?
+sal1,health,¿Cómo obtener mejores resultados en la lucha contra el Covid-19?
+sal2,health,¿Cómo reformar la estructura y el funcionamiento del sistema público de salud?
+sal3,health,¿Cómo disminuir el gasto de las personas en salud?
+sal4,health,¿Qué otros servicios de salud quisieras que estén en el Plan de Gobierno?
+sal5,health,En el Perú el aborto cuando la vida de la madre está en peligro es legal ¿crees que otras causales de aborto deberían ser descriminalizadas? el aborto cuando la vida de la madre está en peligro es legal ¿crees que otras causales de aborto deberían ser descriminalizadas?
+gob1,governability,¿Qué opinas sobre modificar la Constitución?
+gob2,governability,Si se dieran cambios en la Constitución ¿en qué temas preferirías que sean? ¿en qué temas preferirías que sean?
+gob3,governability,¿Qué quieres que opine el candidato presidencial de tu elección sobre la vacancia del 9 de noviembre?
+amb1,environment,¿Cual crees que es la mejor forma de combatir la deforestación de la Amazonía?
+amb2,environment,¿Cómo lograr la transición hacia energías renovables?
+amb3,environment,¿Cual es la mejor forma de abordar los desastres naturales en el país?
+amb4,environment,De las siguientes medidas ambientales ¿Cual le parece esencial que esté en un plan de gobierno? ¿Cual le parece esencial que esté en un plan de gobierno?
+seg1,security,¿Cuál cree que es la mejor forma de mejorar la lucha contra el crimen?
+seg2,security,¿Cómo mejorar la formación de la policía?
+seg3,security,¿Cúal es la mejor manera de mejorar la atención policial de casos de violencia de género?
+seg4,security,OTROS. PDT
+der1,rights,¿Está a favor del matrimonio civil igualitario?
+der2,rights,¿Cómo se debe apoyar a las poblaciones y comunidades nativas del país?
+der3,rights,¿Qué tipo de apoyo cree que debería dar el gobierno a las personas con discapacidad?
+cre1,growth,¿Como crear nuevos empleos formales en el Perú?
+cre2,growth,La regulación laboral debe:
+cre3,growth,¿Como aumentar la competencia y el crecimiento economico?
+cre4,growth,¿Como impulsar el desarrollo de la ciencia y tecnología?
+imp1,taxes,¿Cual de las siguientes opciones es la más efectiva para mejorar la recaudación de impuestos en el país?
+imp2,taxes,La reforma del sistema de pensiones debe:
+imp3,taxes,¿Qué otras características considera que debería tener el nuevo sistema de pensiones?
