@@ -771,9 +771,12 @@ CREATE TABLE partido_x_respuesta
 (
  codPregunta VARCHAR(45),
  codRespuesta VARCHAR(45),
- partido VARCHAR(200),
+ org_politica_id smallint(6),
+ en_plan tinyint(1),
  CONSTRAINT FK_par_res_codPregunta FOREIGN KEY (codPregunta)
-        REFERENCES pregunta(codPregunta)
+        REFERENCES pregunta(codPregunta),
+ CONSTRAINT FK_alias FOREIGN KEY (org_politica_id)
+        REFERENCES partidos_alias(id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  
 LOAD DATA LOCAL INFILE "./partidos_x_respuesta.csv"
