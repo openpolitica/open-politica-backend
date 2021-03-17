@@ -700,21 +700,21 @@ CREATE TABLE topico
  );
 
 INSERT INTO topico (codTopico,topico)
-values ("edu","Educacion");
+values ("education","Educacion");
 INSERT INTO topico (codTopico,topico)
-values ("sal","Salud");
+values ("health","Salud");
 INSERT INTO topico (codTopico,topico)
-values ("gob","Gobernabilidad");
+values ("governability","Gobernabilidad");
 INSERT INTO topico (codTopico,topico)
-values ("amb","Medio Ambiente");
+values ("environment","Medio Ambiente");
  INSERT INTO topico (codTopico,topico)
-values ("seg","Seguridad");
+values ("security","Seguridad");
 INSERT INTO topico (codTopico,topico)
-values ("der","Derechos");
+values ("rights","Derechos");
 INSERT INTO topico (codTopico,topico)
-values ("cre","Crecimiento");
+values ("growth","Crecimiento");
 INSERT INTO topico (codTopico,topico)
-values ("imp","Impuestos y pensiones");
+values ("taxes","Impuestos y pensiones");
 
 '''
 # New pregunta table 
