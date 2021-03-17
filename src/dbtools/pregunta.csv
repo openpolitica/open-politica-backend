@@ -7,28 +7,28 @@ edu5,education,¿Cómo mejorar la formación y condiciones laborales de los prof
 edu6,education,¿Cómo mejorar la educación intercultural?
 edu7,education,¿Cómo mejorar la educación de los alumnos con discapacidad?
 sal1,health,¿Cómo obtener mejores resultados en la lucha contra el Covid-19?
-sal2,health,¿Cómo reformar la estructura y el funcionamiento del sistema público de salud?
+sal2,health,¿Cómo reformar el sistema público de salud?
 sal3,health,¿Cómo disminuir el gasto de las personas en salud?
 sal4,health,¿Qué otros servicios de salud quisieras que estén en el Plan de Gobierno?
-sal5,health,En el Perú el aborto cuando la vida de la madre está en peligro es legal ¿crees que otras causales de aborto deberían ser descriminalizadas? el aborto cuando la vida de la madre está en peligro es legal ¿crees que otras causales de aborto deberían ser descriminalizadas?
+sal5,health,"En el Perú, es legal abortar cuando la vida de la madre está en peligro, ¿en qué otras situaciones debería ser descriminalizadas?"
 gob1,governability,¿Qué opinas sobre modificar la Constitución?
-gob2,governability,Si se dieran cambios en la Constitución ¿en qué temas preferirías que sean? ¿en qué temas preferirías que sean?
-gob3,governability,¿Qué quieres que opine el candidato presidencial de tu elección sobre la vacancia del 9 de noviembre?
-amb1,environment,¿Cual crees que es la mejor forma de combatir la deforestación de la Amazonía?
-amb2,environment,¿Cómo lograr la transición hacia energías renovables?
-amb3,environment,¿Cual es la mejor forma de abordar los desastres naturales en el país?
-amb4,environment,De las siguientes medidas ambientales ¿Cual le parece esencial que esté en un plan de gobierno? ¿Cual le parece esencial que esté en un plan de gobierno?
-seg1,security,¿Cuál cree que es la mejor forma de mejorar la lucha contra el crimen?
+gob2,governability,"Si se dieran cambios en la Constitución, ¿en qué temas preferirías que sean?"
+gob3,governability,¿Qué quieres que opine el candidato presidencial sobre la vacancia del 9 de noviembre?
+amb1,environment,¿Cómo combatir la deforestación de la Amazonía?
+amb2,environment,¿Cómo transitar hacia energías renovables?
+amb3,environment,¿Cómo gestionar el problema de los desastres naturales en el país?
+amb4,environment,¿Qué otra medida ambiental quisieras que esté en el plan de gobierno?
+seg1,security,¿Cómo mejorar la lucha contra el crimen?
 seg2,security,¿Cómo mejorar la formación de la policía?
-seg3,security,¿Cúal es la mejor manera de mejorar la atención policial de casos de violencia de género?
-seg4,security,OTROS. PDT
-der1,rights,¿Está a favor del matrimonio civil igualitario?
-der2,rights,¿Cómo se debe apoyar a las poblaciones y comunidades nativas del país?
-der3,rights,¿Qué tipo de apoyo cree que debería dar el gobierno a las personas con discapacidad?
-cre1,growth,¿Como crear nuevos empleos formales en el Perú?
-cre2,growth,La regulación laboral debe:
-cre3,growth,¿Como aumentar la competencia y el crecimiento economico?
-cre4,growth,¿Como impulsar el desarrollo de la ciencia y tecnología?
-imp1,taxes,¿Cual de las siguientes opciones es la más efectiva para mejorar la recaudación de impuestos en el país?
+seg3,security,¿Cómo mejorar la atención policial de casos de violencia de género?
+seg4,security,¿Qué otra medida relacionada a la Policía quisieras que esté en el plan de gobierno?
+der1,rights,¿Cómo debería apoyar el gobierno a las personas con discapacidad?
+der2,rights,¿Cómo apoyar a las poblaciones y comunidades nativas del país?
+der3,rights,¿Está a favor del matrimonio civil igualitario?
+cre1,growth,¿Cómo crear nuevos empleos formales en el Perú?
+cre2,growth,¿Cómo aumentar la competencia y el crecimiento económico?
+cre3,growth,¿Cómo impulsar el desarrollo de la ciencia y tecnología?
+cre4,growth,¿Cómo reactivar la agricultura?
+imp1,taxes,¿Cómo mejorar la recaudación de impuestos en el país?
 imp2,taxes,La reforma del sistema de pensiones debe:
-imp3,taxes,¿Qué otras características considera que debería tener el nuevo sistema de pensiones?
+imp3,taxes,¿Qué otras características debería tener el nuevo sistema de pensiones?
