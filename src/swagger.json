@@ -423,7 +423,16 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": ["edu", "sal", "gob", "amb", "seg", "der", "cre", "imp"]
+                "enum": [
+                  "education", 
+                  "health", 
+                  "governability", 
+                  "environment", 
+                  "security",
+                  "rights",
+                  "growth",
+                  "taxes"
+                ]
               }
             },
             "required": true
