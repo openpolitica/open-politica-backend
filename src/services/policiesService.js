@@ -59,7 +59,6 @@ const getPolicyResults = async (body) => {
   let query = `SELECT a.org_politica_id, a.alias, count(*) AS total FROM (SELECT a.*, b.alias FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
 
   let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
-  console.log("responsePreguntaPartido", responsePreguntaPartido);
 
   let queryPresidentes = "SELECT * FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
   let responsePresidentes = await db.query(queryPresidentes);
