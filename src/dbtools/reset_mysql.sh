@@ -230,8 +230,7 @@ CREATE TABLE IF NOT EXISTS `extra_data` (
   `experiencia_publica` tinyint(1) DEFAULT 0,
   `experiencia_privada` tinyint(1) DEFAULT 0,
   `bienes_muebles_valor` decimal(12,2) DEFAULT 0,
-  `bienes_inmuebles_valor` decimal(12,2) DEFAULT 0,
-  `org_politica_alias` varchar(32) DEFAULT NULL
+  `bienes_inmuebles_valor` decimal(12,2) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 '''
 
@@ -296,26 +295,21 @@ DROP TABLE IF EXISTS `temp_experiencia`;
 '''
 ## Alias de partido
 mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
-DROP TABLE IF EXISTS `temp_partidos`;
-CREATE TABLE `temp_partidos` (
+DROP TABLE IF EXISTS `partidos_alias`;
+CREATE TABLE `partidos_alias` (
+  `id` smallint(6) DEFAULT NULL,
   `nombre` varchar(56) DEFAULT NULL,
-  `alias` varchar(56) DEFAULT NULL
+  `alias` varchar(56) DEFAULT NULL,
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 LOAD DATA LOCAL INFILE "./partidos_alias.csv"
-INTO TABLE temp_partidos
+INTO TABLE partidos_alias
 FIELDS TERMINATED BY ","
 ENCLOSED BY "\""
-LINES TERMINATED BY "\n"
+LINES TERMINATED BY "\r\n"
 IGNORE 1 ROWS;
-UPDATE `temp_partidos`
-SET nombre="EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
-alias="Frente Amplio"
-WHERE nombre="EL FRENTE AMPLIO POR JUSTICIA VIDA Y LIBERTAD";
-UPDATE extra_data e, candidato c, temp_partidos p
-SET e.org_politica_alias=REPLACE(REPLACE(p.alias, "\r", ""), "\n", "")
-WHERE e.hoja_vida_id = c.hoja_vida_id AND c.org_politica_nombre = p.nombre;
-DROP TABLE IF EXISTS `temp_partidos`;
 '''
+
 ## Educación mayor nivel
 mysql --login-path=local --database=$DATABASE_NAME -e '''
 UPDATE extra_data
@@ -344,7 +338,7 @@ WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e
 WHERE e.tipo = "POSTGRADO" AND e.concluyo = 1);
 UPDATE extra_data
 SET educacion_mayor_nivel="No Registra"
-WHERE educacion_mayor_nivel IS NULL
+WHERE educacion_mayor_nivel IS NULL;
 '''
 
 # New sentencias_ec table and populate extra_data
@@ -624,7 +618,7 @@ ALTER TABLE `proceso_electoral` MODIFY COLUMN dni int(11);
 echo "----------------------------------------------"
 echo "#### Creating indexes and relations betweeen tables"
 mysql --login-path=local --database=$DATABASE_NAME -e '''
-ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, id_sexo, expediente_estado, id_dni);
+ALTER TABLE candidato ADD INDEX (hoja_vida_id, postula_distrito, cargo_nombre, org_politica_nombre, org_politica_id, id_sexo, expediente_estado, id_dni);
 ALTER TABLE candidato ADD PRIMARY KEY(id_dni);
 ALTER TABLE `ingreso`
   ADD CONSTRAINT `ingreso_fk1` FOREIGN KEY (`hoja_vida_id`) 
@@ -683,6 +677,7 @@ ALTER TABLE `afiliacion`
 ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
+ALTER TABLE partidos_alias ADD INDEX (alias, id);
 ALTER TABLE data_ec ADD INDEX (hoja_vida_id, designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
 ALTER TABLE afiliacion ADD INDEX (vigente, dni, org_politica, afiliacion_inicio, afiliacion_cancelacion)
 '''
@@ -776,9 +771,12 @@ CREATE TABLE partido_x_respuesta
 (
  codPregunta VARCHAR(45),
  codRespuesta VARCHAR(45),
- partido VARCHAR(200),
+ org_politica_id smallint(6),
+ en_plan tinyint(1),
  CONSTRAINT FK_par_res_codPregunta FOREIGN KEY (codPregunta)
-        REFERENCES pregunta(codPregunta)
+        REFERENCES pregunta(codPregunta),
+ CONSTRAINT FK_alias FOREIGN KEY (org_politica_id)
+        REFERENCES partidos_alias(id)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
  
 LOAD DATA LOCAL INFILE "./partidos_x_respuesta.csv"

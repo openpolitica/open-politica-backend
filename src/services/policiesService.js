@@ -58,7 +58,7 @@ const getPolicyResults = async (body) => {
     return value.answerId;
   });
 
-  let query = `SELECT a.partido, COUNT(*) AS total FROM (SELECT * FROM partido_x_respuesta WHERE codPregunta IN (?) AND codRespuesta IN (?)) a GROUP BY a.partido ORDER BY total DESC`;
+  let query = `SELECT b.alias AS partido, COUNT(*) AS total FROM (SELECT * FROM partido_x_respuesta WHERE codPregunta IN (?) AND codRespuesta IN (?)) a INNER JOIN partidos_alias b GROUP BY b.alias ORDER BY total DESC`;
   let response = await db.query(query, [preguntas, respuestas]);
 
   let partyResults = response.reduce(function(r, a) {
