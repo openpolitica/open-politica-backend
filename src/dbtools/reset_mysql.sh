@@ -2,7 +2,7 @@
 
 ####### REQUIRES TO SET ENVIRONMENT VALUES #########
 # export MYSQL_HOST=localhost_or_remote_host
-# export MYSQL_PWD=password_for_root_user
+export MYSQL_PWD=root
 # export MYSQL_TCP_PORT=tcp_port_if_not_3306
 
 # Delete previous downloads
@@ -21,11 +21,14 @@ wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelec
 # Login to mysql
 echo "----------------------------------------------"
 echo "#### Login to MySQL"
-mysql_config_editor set --login-path=local --skip-warn --user=root
+mysql_config_editor set --skip-warn --user=root
 
 LOGIN=local
 DATABASE_NAME=op
 MYSQL_USER=root
+
+echo "----------------------------------------------"
+echo $MYSQL_USER
 
 # Remove existing references so tables can be deleted
 echo "----------------------------------------------"
@@ -41,7 +44,7 @@ sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYS
 # Store in temporary table VicePresidentes that we know are Congresistas
 echo "----------------------------------------------"
 echo "#### Getting the 'Vicepresidentes' that are 'Congresistas' and storing their ID in temporary table"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 DROP TABLE IF EXISTS `temp_vp_congreso`;
 CREATE TABLE temp_vp_congreso
 SELECT hoja_vida_id
@@ -52,7 +55,7 @@ WHERE cargo_nombre LIKE "%VICEPRESIDENTE%"
 # Drop tables
 echo "----------------------------------------------"
 echo "#### Deleting all tables except the temporary one"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 DROP TABLE IF EXISTS `data_ec`;
 DROP TABLE IF EXISTS `educacion`;
 DROP TABLE IF EXISTS `experiencia`;
@@ -78,7 +81,7 @@ sqlite3mysql -f 2021-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $
 # For VP+congres entries, delete duplicate info that comes from Presidenciales
 echo "----------------------------------------------"
 echo "#### Deleting 'Vicepresidentes' candidates that will also come from the 'Congresistas' base"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 DELETE FROM candidato
 WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 DELETE FROM educacion
@@ -105,7 +108,7 @@ sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYS
 # Modify datatypes in candidates
 echo "----------------------------------------------"
 echo "#### Modifying the datatypes in table"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 ALTER TABLE `candidato` MODIFY COLUMN hoja_vida_id mediumint(9);
 ALTER TABLE `candidato` MODIFY COLUMN id_dni int(11);
 ALTER TABLE `candidato` MODIFY COLUMN id_ce varchar(0);
@@ -143,7 +146,7 @@ ALTER TABLE `sentencia_penal` MODIFY COLUMN hoja_vida_id mediumint(9);
 # Expand cargo_nombre field and remove new duplicates
 echo "----------------------------------------------"
 echo "#### Altering some field types for supporting longer text and removing duplicate entries individually"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 ALTER TABLE `candidato`
   MODIFY COLUMN cargo_nombre varchar(64);
 
@@ -199,7 +202,7 @@ DROP TABLE IF EXISTS `temp_sentencia_penal`;
 # Change applicable Vicepresidentes to VP+Congresistas
 echo "----------------------------------------------"
 echo "#### Creating new 'cargo_nombre' type that mixes 'Vicepresidente + Congresista' where applicable"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 UPDATE candidato
 SET cargo_nombre="PRIMER VICEPRESIDENTE Y CONGRESISTA DE LA REPÚBLICA"
 WHERE cargo_nombre LIKE "PRIMER VICEPRESIDENTE%"
@@ -213,7 +216,7 @@ AND hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 # Create extra_data table
 echo "----------------------------------------------"
 echo "#### Creating new table for storing extra data that comes from other sources"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 DROP TABLE IF EXISTS `extra_data`;
 CREATE TABLE IF NOT EXISTS `extra_data` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
@@ -238,12 +241,12 @@ CREATE TABLE IF NOT EXISTS `extra_data` (
 echo "----------------------------------------------"
 echo "#### Populating extra_data table"
 ## hoja_vida_id
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 INSERT INTO extra_data (hoja_vida_id)
 SELECT hoja_vida_id FROM candidato
 '''
 ## vacancia
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 UPDATE extra_data
 SET vacancia=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM candidato c WHERE c.org_politica_nombre LIKE "ACCION POPULAR"
@@ -266,7 +269,7 @@ OR c.org_politica_nombre LIKE "UNION POR EL PERU"
 OR c.org_politica_nombre LIKE "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP");
 '''
 ## Experiencia pública y privada
-mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
+mysql  --database=$DATABASE_NAME --local-infile=1 -e '''
 DROP TABLE IF EXISTS `temp_experiencia`;
 CREATE TABLE `temp_experiencia` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
@@ -311,7 +314,7 @@ IGNORE 1 ROWS;
 '''
 
 ## Educación mayor nivel
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 UPDATE extra_data
 SET educacion_mayor_nivel="Primaria", educacion_primaria=1
 WHERE hoja_vida_id IN (SELECT hoja_vida_id FROM educacion e 
@@ -344,7 +347,7 @@ WHERE educacion_mayor_nivel IS NULL;
 # New sentencias_ec table and populate extra_data
 echo "----------------------------------------------"
 echo "#### Creating new table 'sentencias_ec' for data coming from EC source"
-mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
+mysql  --database=$DATABASE_NAME --local-infile=1 -e '''
 DROP TABLE IF EXISTS `sentencias_ec`;
 CREATE TABLE `sentencias_ec` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
@@ -377,7 +380,7 @@ WHERE `sentencias_ec`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
 # Update 'bienes' total values in extra_data
 echo "----------------------------------------------"
 echo "#### Populating 'bienes' total value in extra_data"
-mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
+mysql  --database=$DATABASE_NAME --local-infile=1 -e '''
 UPDATE extra_data as e, (SELECT hoja_vida_id, CAST(SUM(auto_valuo) as decimal(12,2)) as valor
 FROM bien_inmueble
 GROUP BY bien_inmueble.hoja_vida_id) as b
@@ -393,7 +396,7 @@ WHERE e.hoja_vida_id = b.hoja_vida_id;
 # New data_ec table and populate
 echo "----------------------------------------------"
 echo "#### Creating new table 'data_ec' for data coming from EC-TD source"
-mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
+mysql  --database=$DATABASE_NAME --local-infile=1 -e '''
 DROP TABLE IF EXISTS `data_ec`;
 CREATE TABLE `data_ec` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
@@ -472,7 +475,7 @@ WHERE sancion_servir_institucion IS NULL OR CHAR_LENGTH(sancion_servir_instituci
 # New locations table and populate
 echo "----------------------------------------------"
 echo "#### Creating new table 'locations' for seats & geographical coordinates"
-mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
+mysql  --database=$DATABASE_NAME --local-infile=1 -e '''
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` smallint DEFAULT NULL,
@@ -495,7 +498,7 @@ IGNORE 1 ROWS;
 # New dirty lists table and populate
 echo "----------------------------------------------"
 echo "#### Creating new dirty_lists table for parties with sanctions"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 DROP TABLE IF EXISTS `dirty_lists`;
 CREATE TABLE dirty_lists (SELECT postula_distrito, candidato.org_politica_nombre,
 SUM(extra_data.sentencias_ec_penal_cnt) AS sentencias_penales,
@@ -526,7 +529,7 @@ GROUP BY  postula_distrito, org_politica_nombre)
 # Delete useless data
 echo "----------------------------------------------"
 echo "#### Delete data from tables that does not belong to any candidate"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 DELETE FROM `ingreso`
 WHERE `ingreso`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
 DELETE FROM `experiencia`
@@ -553,7 +556,7 @@ WHERE `sentencias_ec`.hoja_vida_id NOT IN (SELECT hoja_vida_id FROM candidato);
 # Update data for special cases
 echo "----------------------------------------------"
 echo "#### Updating candidates special information"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 UPDATE candidato
 SET id_nombres = "GAHELA TSENEG", id_sexo = "F"
 WHERE hoja_vida_id = 136670
@@ -562,7 +565,7 @@ WHERE hoja_vida_id = 136670
 # Add social network table
 echo "----------------------------------------------"
 echo "#### Add information for social_network"
-mysql --login-path=local --database=op --local-infile=1 -e '''
+mysql  --database=op --local-infile=1 -e '''
 DROP TABLE IF EXISTS `redes_sociales`;
 CREATE TABLE `redes_sociales` (
   `hoja_vida_id` mediumint(9) DEFAULT NULL,
@@ -593,7 +596,7 @@ sqlite3mysql -f 2021-militancia-candidatos-congresales.db -d $DATABASE_NAME -u r
 # Militancy: Remove duplicates and useless
 echo "----------------------------------------------"
 echo "#### Militancy: removing duplicate entries individually"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 CREATE TABLE temp_afiliacion SELECT DISTINCT * FROM afiliacion;
 ALTER TABLE afiliacion RENAME junk;
 ALTER TABLE temp_afiliacion RENAME afiliacion;
@@ -606,7 +609,7 @@ WHERE `afiliacion`.dni NOT IN (SELECT id_dni FROM candidato);
 # Modify datatypes in candidates
 echo "----------------------------------------------"
 echo "#### Modifying the datatypes in table"
-mysql --login-path=local --database=$DATABASE_NAME -e '''
+mysql  --database=$DATABASE_NAME -e '''
 ALTER TABLE `afiliacion` MODIFY COLUMN dni int(11);
 ALTER TABLE `afiliacion` MODIFY COLUMN org_politica varchar(75);
 ALTER TABLE `afiliacion` MODIFY COLUMN afiliacion_inicio varchar(10);
@@ -684,7 +687,7 @@ ALTER TABLE afiliacion ADD INDEX (vigente, dni, org_politica, afiliacion_inicio,
 # DB Preguntas y Respuestas
 echo "----------------------------------------------"
 echo "#### Creating policies DB"
-mysql --login-path=local --database=op -e '''
+mysql  --database=op -e '''
 
 DROP TABLE IF EXISTS topico;
 CREATE TABLE topico
@@ -715,7 +718,7 @@ values ("taxes","Impuestos y pensiones");
 # New pregunta table 
 echo "----------------------------------------------"
 echo "#### Creating pregunta table "
-mysql --login-path=local --database=op --local-infile=1 -e '''
+mysql  --database=op --local-infile=1 -e '''
 
 
 
@@ -741,7 +744,7 @@ IGNORE 1 ROWS;
 # New respuesta table 
 echo "----------------------------------------------"
 echo "#### Creating respuesta table "
-mysql --login-path=local --database=op --local-infile=1 -e '''
+mysql  --database=op --local-infile=1 -e '''
 
 DROP TABLE IF EXISTS respuesta;
   CREATE TABLE respuesta
@@ -764,7 +767,7 @@ IGNORE 1 ROWS;
 # New partido_x_respuesta table 
 echo "----------------------------------------------"
 echo "#### Creating partido_x_respuesta table "
-mysql --login-path=local --database=op --local-infile=1 -e '''
+mysql  --database=op --local-infile=1 -e '''
 
 DROP TABLE IF EXISTS partido_x_respuesta;
 CREATE TABLE partido_x_respuesta
