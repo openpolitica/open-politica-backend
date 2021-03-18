@@ -13,28 +13,33 @@ const getQuestions = async (params) => {
     topics = [topics];
   }
   let query =
-    "SELECT c.topico, b.codPregunta, b.pregunta, a.codRespuesta, a.respuesta FROM respuesta a INNER JOIN pregunta b ON a.codPregunta = b.codPregunta INNER JOIN topico c ON b.codTopico = c.codTopico WHERE b.codTopico IN (?)";
+    "SELECT c.codTopico, b.codPregunta, b.pregunta, a.codRespuesta, a.respuesta FROM respuesta a INNER JOIN pregunta b ON a.codPregunta = b.codPregunta INNER JOIN topico c ON b.codTopico = c.codTopico WHERE b.codTopico IN (?)";
 
   const response = await db.query(query, [topics]);
 
   let mapped = response.reduce(function(r, a) {
-    const { topico, codPregunta, pregunta, codRespuesta, respuesta } = a;
+    const { codTopico, codPregunta, pregunta, codRespuesta, respuesta } = a;
 
-    r[topico] = r[topico] || [];
+    r[codTopico] = r[codTopico] || [];
 
-    idx = r[topico].findIndex( element => element[codPregunta] === pregunta )
+    idx = r[codTopico].findIndex( element => element["question"]["id"] === codPregunta )
 
     if (idx < 0 ) {
-        r[topico].push({
-          [codPregunta]: pregunta,
-          respuestas : [{
-            [codRespuesta]:respuesta
+        r[codTopico].push({
+          question: {
+            id: codPregunta,
+            label: pregunta
+          },
+          answers : [{
+            id: codRespuesta,
+            label: respuesta
           }]
         });
     }else{
-        r[topico][idx]["respuestas"].push(
+        r[codTopico][idx]["answers"].push(
           {
-            [codRespuesta]:respuesta
+            id: codRespuesta,
+            label: respuesta
           }
         );
     }
