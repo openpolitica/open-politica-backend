@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database");
 const swaggerUi = require("swagger-ui-express");
+Error.prototype.statusCode = 500;
 
 // Main route
 router.get("/", async (req, res) => {
