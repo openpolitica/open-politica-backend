@@ -177,8 +177,9 @@ gob1,b,1366,1,Fuerza Popular
 gob1,b,2840,1,Partido Morado
 gob1,b,2731,1,Podemos Perú
 gob1,b,21,1,Victoria Nacional
+gob1,b,22,1,Renovación Popular
 gob1,c,2173,0,Avanza País*
-gob1,d,22,1,Renovación Popular
+gob1,d,,,
 gob2,a,21,1,Victoria Nacional
 gob2,b,1257,1,Alianza para el Progreso
 gob2,b,1366,1,Fuerza Popular
@@ -190,12 +191,13 @@ gob2,c,2731,1,Podemos Perú
 gob2,c,14,1,Somos Perú
 gob2,d,4,0,Acción Popular*
 gob2,d,1264,1,Juntos por el Perú
+gob2,d,22,1,Renovación Popular
 gob2,d,14,1,Somos Perú
 gob2,d,21,1,Victoria Nacional
 gob2,e,1264,1,Juntos por el Perú
 gob2,e,21,1,Victoria Nacional
 gob2,f,2173,1,Avanza País
-gob2,g,22,1,Renovación Popular
+gob2,g,,,
 gob3,a,1264,0,Juntos por el Perú*
 gob3,a,2840,0,Partido Morado*
 gob3,a,14,0,Somos Perú*
