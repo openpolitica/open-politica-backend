@@ -49,15 +49,14 @@ const getCandidates = async (params) => {
   }
 
   let queryUpdateVacancyCount = "";
-  if (vacancia) {
+
+  if (vacancia && vacancia === "false") {
     query += "AND b.vacancia = ? ";
-    if (vacancia === "true") {
-      arguments.push(1);
-      queryUpdateVacancyCount = "UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?"
-    } else if (vacancia === "false") {
-      arguments.push(0);
-      queryUpdateVacancyCount = "UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?"
-    }
+    arguments.push(0);
+    queryUpdateVacancyCount = "UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?"
+  } else {
+    arguments.push(1);
+    queryUpdateVacancyCount = "UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?"
   }
 
   let candidates = [];
