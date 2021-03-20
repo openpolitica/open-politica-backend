@@ -24,7 +24,7 @@ edu4,e,No menciona
 edu5,a,"Intervenciones enfocadas en los estudios de docencia (malla curricular, fortalecer las escuelas de formación pedagógica)"
 edu5,b,"Intervenciones enfocadas en los docentes en actividad (centros de formación continua, capacitaciones, acompañamiento pedagógico)"
 edu5,c,Implementar un SERUMS para docentes (como el de los doctores)
-edu5,d,Brindar incentivos adicionales (becas para que los docentes que enseñen en zonas rurales o reintegro del costo de estudios de maestría y doctorado)
+edu5,d,"Brindar incentivos adicionales (becas para que los docentes que enseñen en zonas rurales, o reintegro del costo de estudios de maestría y doctorado)"
 edu5,e,Aumentar el salario de los docentes
 edu5,f,No menciona
 edu6,a,Adaptar mejor el Currículo Escolar a la diversidad cultural del país
@@ -133,6 +133,12 @@ der3,a,"Sí, con igualdad de derechos respecto a familias conformadas por pareja
 der3,b,"No, pero sí de la unión civil (es decir, sin reconocimiento de derechos sobre hijos e hijas)"
 der3,c,No
 der3,d,No menciona
+der4,a,Facilitar financiamiento y acompañamiento a mujeres emprendedoras
+der4,b,Dar capacitación para facilitar la inserción laboral de las mujeres
+der4,c,Reconocer o reducir la carga de trabajo no remunerado que enfrentan las mujeres
+der4,d,Reducir la brecha de participación de mujeres en carreras de ciencia y tecnología
+der4,e,Fortalecer las leyes para reducir la brecha salarial y generar igualdad de oportunidades
+der4,f,No menciona
 cre1,a,Revisar la regulación y crear planes de promoción empresarial y de mejora de capacidades de la mano de obra
 cre1,b,Reducir y reformular las barreras legales y tributarias que enfrentan las empresas
 cre1,c,Exigir que todos los proveedores del Estado tengan trabajadores en planilla
@@ -149,9 +155,9 @@ cre3,c,Incrementar el financiamiento e incentivos para startups y proyectos de n
 cre3,d,Disponer de incentivos financieros para la investigación y atraer a investigadores exitosos peruanos y extranjeros
 cre3,e,Promover la investigación científica en programas de postgrado y brindar líneas de financiamiento e incentivos
 cre3,f,No menciona
-cre4,a,Establecer un sistema de créditos agrarios para pequeños agricultores
-cre4,b,"Segunda reforma Agraria, que incluye financiamiento público del Plan de Agricultura Familiar y Rural"
-cre4,c,Proveer de mejoras tecnológicas a la agricultura familiar
+cre4,a,Dar créditos agrarios para pequeños agricultores
+cre4,b,"Hacer una segunda Reforma Agraria, con financiamiento público para un Plan de agricultura Familiar y Rural"
+cre4,c,Dar mejor tecnología para la agricultura familiar
 cre4,d,Fortalecer el Sistema de Compras Públicas de alimentos
 cre4,e,"Desarrollar la red de mercado mayoristas y minoristas, así como los servicios agrarios regionales"
 cre4,f,No menciona
@@ -171,5 +177,5 @@ imp3,a,Debe contar con un pilar redistributivo
 imp3,b,Debe tener más alternativas de administración de fondos
 imp3,c,Debe establecer un límite al tamaño del fondo acumulable obligatorio
 imp3,d,Debe tener una mayor tasa de aporte
-imp3,e,Deb reasignar un porcentaje de tus pagos de IGV a tu cuenta individual de pensiones
+imp3,e,Debe reasignar un porcentaje de tus pagos de IGV a tu cuenta individual de pensiones
 imp3,f,No menciona
