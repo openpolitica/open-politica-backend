@@ -9,4 +9,6 @@ router.get("/dirtylists", partiesController.getDirtyLists);
 
 router.get("/:id", partiesController.findOneParty);
 
+router.get("/presidential_lists/:party", partiesController.getPartyLeaders);
+
 module.exports = router;
