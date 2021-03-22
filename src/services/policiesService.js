@@ -60,7 +60,7 @@ const getPolicyResults = async (body) => {
     return [value.questionId, value.answerId];
   });
 
-  let query = `SELECT a.org_politica_id, a.alias, count(*) AS total FROM (SELECT a.*, b.alias FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
+  let query = `SELECT a.org_politica_id, a.nombre, a.alias, count(*) AS total FROM (SELECT a.*, b.alias, b.nombre FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
 
 
   let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
@@ -76,6 +76,7 @@ const getPolicyResults = async (body) => {
     return {
       name: item.alias,
       org_politica_id: item.org_politica_id,
+      org_politica_id: item.nombre,
       compatibility: (item.total / arrayPreguntas.length).toFixed(2),
       president: obtainPresidentByCargoId(1, item),
       firstVP: obtainPresidentByCargoId(2, item),
