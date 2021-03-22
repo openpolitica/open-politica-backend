@@ -396,6 +396,56 @@
         }
       }
     },
+    "/parties/presidential_lists/{party}": {
+      "get": {
+        "summary": "Returns the list of party leaders by org_politica_nombre",
+        "description": "Returns an object with the detail of each leader for a particular party",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "party",
+            "description": "Party Name - org_politica_nombre",
+            "schema": {
+              "type": "string",
+                "enum": [
+                  "ACCION POPULAR",
+                  "ALIANZA PARA EL PROGRESO",
+                  "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+                  "DEMOCRACIA DIRECTA",
+                  "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+                  "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
+                  "FUERZA POPULAR",
+                  "JUNTOS POR EL PERU",
+                  "PARTIDO APRISTA PERUANO",
+                  "PARTIDO DEMOCRATICO SOMOS PERU",
+                  "PARTIDO MORADO",
+                  "PARTIDO POLÍTICO CONTIGO",
+                  "PARTIDO POPULAR CRISTIANO - PPC",
+                  "PERU LIBRE",
+                  "PERU NACION",
+                  "PERU PATRIA SEGURA",
+                  "PODEMOS PERU",
+                  "RENACIMIENTO UNIDO NACIONAL",
+                  "RENOVACION POPULAR",
+                  "UNION POR EL PERU",
+                  "VAMOS PERU"
+                ]
+            },
+            "required": false
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Party Required"
+          }
+        }
+      }
+    },
     "/policies/topics": {
       "get": {
         "summary": "Returns all topics.",
