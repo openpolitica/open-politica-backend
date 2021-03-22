@@ -60,12 +60,12 @@ const getPolicyResults = async (body) => {
     return [value.questionId, value.answerId];
   });
 
-  let query = `SELECT a.org_politica_id, a.alias, count(*) AS total FROM (SELECT a.*, b.alias FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
+  let query = `SELECT a.org_politica_id, a.nombre, a.alias, count(*) AS total FROM (SELECT a.*, b.alias, b.nombre FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
 
 
   let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
 
-  let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, org_politica_nombre, enlace_foto, cargo_id, cargo_nombre, org_politica_id FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
+  let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, enlace_foto, cargo_id, cargo_nombre, org_politica_id, org_politica_nombre FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
   let responsePresidentes = await db.query(queryPresidentes);
 
   const obtainPresidentByCargoId = function (cargoId, item) {
@@ -76,6 +76,7 @@ const getPolicyResults = async (body) => {
     return {
       name: item.alias,
       org_politica_id: item.org_politica_id,
+      org_politica_nombre: item.nombre,
       compatibility: (item.total / arrayPreguntas.length).toFixed(2),
       president: obtainPresidentByCargoId(1, item),
       firstVP: obtainPresidentByCargoId(2, item),
