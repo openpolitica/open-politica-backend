@@ -65,7 +65,7 @@ const getPolicyResults = async (body) => {
 
   let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
 
-  let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, enlace_foto, cargo_id, cargo_nombre, org_politica_id, org_politica_nombre FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
+  let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, enlace_foto, cargo_id, cargo_nombre, org_politica_id, org_politica_alias, org_politica_nombre FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
   let responsePresidentes = await db.query(queryPresidentes);
 
   const obtainPresidentByCargoId = function (cargoId, item) {
