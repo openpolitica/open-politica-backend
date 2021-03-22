@@ -42,7 +42,7 @@ const findPartyLeaders = async (party) => {
       throw error;
     }
 
-    let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, org_politica_nombre, enlace_foto, cargo_id, cargo_nombre, org_politica_id FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%' AND org_politica_nombre = ?";
+    let queryPresidentes = "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.org_politica_nombre, a.enlace_foto, a.cargo_id, a.cargo_nombre, a.org_politica_id, b.alias as org_politica_alias FROM candidato a INNER JOIN partidos_alias b ON a.org_politica_id = b.id WHERE cargo_nombre LIKE '%PRESIDENTE%' AND org_politica_nombre = ?";
     let responsePresidentes = await db.query(queryPresidentes, party);
 
     const obtainPresidentByCargoId = function (cargoId) {
