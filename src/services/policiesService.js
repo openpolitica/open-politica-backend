@@ -1,124 +1,90 @@
 const db = require("../database");
 
-// Temporary mock data
 const getTopics = async () => {
-  return [
-    "Educación",
-    "Salud",
-    "Gobernabilidad",
-    "Medio Ambiente",
-    "Seguridad",
-    "Derechos Civiles",
-    "Economía"
-  ];
+  let query = "SELECT * FROM topico";
+  let response = await db.query(query);
+  return response;
 };
 
 const getQuestions = async (params) => {
+  if (params.topics.length < 3) {
+    const error = new Error("Se requiere al menos 3 tópicos seleccionados.");
+    error.statusCode = 400;
+    throw error;
+  }
+
   let { topics } = params;
 
   if (typeof topics === "string") {
     topics = [topics];
   }
+  let query =
+    "SELECT c.codTopico, b.codPregunta, b.pregunta, a.codRespuesta, a.respuesta FROM respuesta a INNER JOIN pregunta b ON a.codPregunta = b.codPregunta INNER JOIN topico c ON b.codTopico = c.codTopico WHERE b.codTopico IN (?)";
 
-  // Temporary mock data
-  const questionsPerTopic = {
-    Educación: [
-      { edu1: "¿Cómo mejorar la educación durante la pandemia?" },
-      { edu2: "¿Cómo mejorar la calidad de la educación escolar?" },
-      { edu3: "¿Cómo mejorar la educación superior?" }
-    ],
-    Salud: [
-      {
-        sal1: "¿Cómo obtener mejores resultados en la lucha contra el Covid-19?"
-      },
-      {
-        sal2:
-          "¿Cómo reformar la estructura y el funcionamiento del sistema público de salud?"
-      },
-      { sal3: "¿Cómo disminuir el gasto de las personas en salud?" }
-    ],
-    Gobernabilidad: [
-      { gob1: "¿Qué opinas sobre modificar la Constitución?" },
-      {
-        gob2:
-          "Si se dieran cambios en la Constitución, ¿en qué temas preferirías que sean?"
-      },
-      {
-        gob3:
-          "¿Qué quieres que opine el candidato presidencial de tu elección sobre la vacancia del 9 de noviembre?"
-      }
-    ],
-    "Medio Ambiente": [
-      {
-        med1:
-          "¿Cual crees que es la mejor forma de combatir la deforestación de la Amazonía?"
-      },
-      { med2: "¿Cómo lograr la transición hacia energías renovables?" },
-      {
-        med3:
-          "¿Cual es la mejor forma de abordar los desastres naturales en el país?"
-      }
-    ],
-    Seguridad: [
-      {
-        seg1:
-          "¿Cuál cree que es la mejor forma de mejorar la lucha contra el crimen?"
-      },
-      {
-        seg2:
-          "¿Cúal es la mejor manera de mejorar la atención policial de casos de violencia de género?"
-      },
-      {
-        seg3:
-          "¿Cuál de las siguientes opciones sería más efectiva para mejorar la formación de la policía?"
-      }
-    ],
-    "Derechos Civiles": [
-      { der1: "¿Está a favor del matrimonio civil igualitario?" },
-      {
-        der2:
-          "¿Qué tipo de apoyo cree que debería dar el gobierno a las personas con discapacidad?"
-      },
-      {
-        der3:
-          "¿Cómo se debe apoyar a las poblaciones y comunidades nativas del país?"
-      }
-    ],
-    Economía: [
-      {
-        der4:
-          "¿Cuál es la mejor forma de crear nuevos empleos formales en el Perú?"
-      },
-      { der5: "La regulación laboral debe:" },
-      {
-        der6:
-          "En una reforma tributaria, ¿Cual de las siguientes opciones es la más efectiva para mejorar la recaudación de impuestos en el país?"
-      }
-    ]
-  };
+  const response = await db.query(query, [topics]);
 
-  let questions = [];
+  let mapped = response.reduce(function (r, a) {
+    const { codTopico, codPregunta, pregunta, codRespuesta, respuesta } = a;
 
-  topics.forEach((topic) => {
-    let object = {};
-    object[topic] = questionsPerTopic[topic];
-    console.log(object);
-    questions.push(object);
-  });
+    r[codTopico] = r[codTopico] || [];
 
-  return questions;
+    idx = r[codTopico].findIndex(element => element["question"]["id"] === codPregunta)
+
+    if (idx < 0) {
+      r[codTopico].push({
+        question: {
+          id: codPregunta,
+          label: pregunta
+        },
+        answers: [{
+          id: codRespuesta,
+          label: respuesta
+        }]
+      });
+    } else {
+      r[codTopico][idx]["answers"].push(
+        {
+          id: codRespuesta,
+          label: respuesta
+        }
+      );
+    }
+
+    return r;
+  }, Object.create(null));
+  return mapped;
 };
 
 const getPolicyResults = async (body) => {
-  console.log(body);
-  // Temporary mock data
-  const partyResults = {
-    "Partido Morado": 35,
-    "Fuerza Popular": 41,
-    Frepap: 11,
-    "Juntos por el Perú": 63
-  };
-  return partyResults;
+  const arrayPreguntas = body.answers.map(function (value) {
+    return [value.questionId, value.answerId];
+  });
+
+  let query = `SELECT a.org_politica_id, a.nombre, a.alias, count(*) AS total FROM (SELECT a.*, b.alias, b.nombre FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
+
+
+  let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
+
+  let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, enlace_foto, cargo_id, cargo_nombre, org_politica_id, org_politica_nombre FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
+  let responsePresidentes = await db.query(queryPresidentes);
+
+  const obtainPresidentByCargoId = function (cargoId, item) {
+    return responsePresidentes.find((candidato) => item.org_politica_id === candidato.org_politica_id && candidato.cargo_id === cargoId);
+  }
+
+  let results = responsePreguntaPartido.map((item, index) => {
+    return {
+      name: item.alias,
+      org_politica_id: item.org_politica_id,
+      org_politica_nombre: item.nombre,
+      compatibility: (item.total / arrayPreguntas.length).toFixed(2),
+      president: obtainPresidentByCargoId(1, item),
+      firstVP: obtainPresidentByCargoId(2, item),
+      secondVP: obtainPresidentByCargoId(3, item)
+    }
+  });
+
+  return results;
 };
 
 module.exports = {

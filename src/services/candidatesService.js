@@ -30,43 +30,56 @@ const getCandidates = async (params) => {
   ];
 
   let query =
-    "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, a.org_politica_nombre, b.org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a, extra_data b, data_ec c, ingreso d WHERE a.hoja_vida_id = b.hoja_vida_id AND a.hoja_vida_id = c.hoja_vida_id AND a.hoja_vida_id = d.hoja_vida_id ";
+    "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, a.org_politica_nombre, e.alias AS org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a, extra_data b, data_ec c, ingreso d, partidos_alias e WHERE a.hoja_vida_id = b.hoja_vida_id AND a.hoja_vida_id = c.hoja_vida_id AND a.hoja_vida_id = d.hoja_vida_id AND a.org_politica_id = e.id ";
 
   if (parties) {
     query += "AND a.org_politica_nombre IN (?) ";
     arguments.push(parties.split(","));
   }
+
   if (role) {
     query += "AND a.cargo_nombre LIKE ? ";
     if (role === "CONGRESISTA") arguments.push("%" + role + "%");
     else arguments.push(role + "%");
   }
+
   if (region) {
     query += "AND a.postula_distrito = ? ";
     arguments.push(region);
   }
-  if (vacancia) {
+
+  let queryUpdateVacancyCount = "";
+
+  if (vacancia && vacancia === "false") {
     query += "AND b.vacancia = ? ";
-    arguments.push(vacancia === "true" ? 1 : 0);
+    arguments.push(0);
+    queryUpdateVacancyCount = "UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?"
+  } else {
+    arguments.push(1);
+    queryUpdateVacancyCount = "UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?"
   }
 
   let candidates = [];
+
   if (sentencias === "false") {
     query += "AND b.sentencias_ec_penal_cnt = 0";
   } else if (sentencias === "true") {
     query += "AND b.sentencias_ec_penal_cnt > 0";
   }
 
-  query += ` ORDER BY FIELD(b.org_politica_alias,${"'" +
+  query += ` ORDER BY FIELD(e.alias,${"'" +
     partiesAliasOrder.reverse().join("','") +
     "'"}) DESC, a.posicion ASC;`;
 
   try {
     candidates = await db.query(query, arguments);
+
     await db.query(
       "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
       region
     );
+    if (queryUpdateVacancyCount) await db.query(queryUpdateVacancyCount, region);
+
     return {
       candidates
     };
@@ -77,7 +90,7 @@ const getCandidates = async (params) => {
 
 const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   let query_candidate =
-    "SELECT a.hoja_vida_id, a.id_dni, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.nacimiento_provincia, a.nacimiento_departamento, a.nacimiento_pais, a.cargo_nombre, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, d.total_privado AS ingreso_total_privado, d.total_publico AS ingreso_total_publico, a.org_politica_nombre, b.org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, b.bienes_muebles_valor, b.bienes_inmuebles_valor, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a LEFT JOIN extra_data b ON a.hoja_vida_id = b.hoja_vida_id LEFT JOIN data_ec c ON a.hoja_vida_id = c.hoja_vida_id LEFT JOIN ingreso d ON a.hoja_vida_id = d.hoja_vida_id WHERE a.hoja_vida_id = ?";
+    "SELECT a.hoja_vida_id, a.id_dni, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.nacimiento_provincia, a.nacimiento_departamento, a.nacimiento_pais, a.cargo_nombre, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, d.total_privado AS ingreso_total_privado, d.total_publico AS ingreso_total_publico, a.org_politica_id, a.org_politica_nombre, e.alias AS org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, b.bienes_muebles_valor, b.bienes_inmuebles_valor, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a LEFT JOIN extra_data b ON a.hoja_vida_id = b.hoja_vida_id LEFT JOIN data_ec c ON a.hoja_vida_id = c.hoja_vida_id LEFT JOIN ingreso d ON a.hoja_vida_id = d.hoja_vida_id LEFT JOIN partidos_alias e ON a.org_politica_id = e.id WHERE a.hoja_vida_id = ?";
 
   let query_education = "SELECT * FROM educacion WHERE hoja_vida_id = ?";
 
@@ -93,6 +106,8 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   let query_afiliations =
     "SELECT a.org_politica, a.afiliacion_inicio, a.afiliacion_cancelacion FROM afiliacion a INNER JOIN candidato c ON a.dni = c.id_dni  WHERE a.vigente = 0 and c.org_politica_nombre != a.org_politica AND c.hoja_vida_id = ?";
 
+  let query_redes_sociales = "SELECT * FROM redes_sociales WHERE hoja_vida_id = ?";
+
   candidate = await db.query(query_candidate, hoja_vida_id);
   education = await db.query(query_education, hoja_vida_id);
   experience = await db.query(query_experience, hoja_vida_id);
@@ -100,6 +115,7 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   bienes_inmuebles = await db.query(query_bienes_inmuebles, hoja_vida_id);
   judgements = await db.query(query_judgements, hoja_vida_id);
   afiliations = await db.query(query_afiliations, hoja_vida_id);
+  redes_sociales = await db.query(query_redes_sociales, hoja_vida_id);
 
   return {
     ...candidate[0],
@@ -108,13 +124,14 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
     bienes_muebles,
     bienes_inmuebles,
     judgements,
-    afiliations
+    afiliations,
+    ...redes_sociales[0]
   };
 };
 
 const getCandidateByDNI = async (id_dni) => {
   let query_candidate =
-    "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.nacimiento_provincia, a.nacimiento_departamento, a.nacimiento_pais, a.cargo_nombre, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, d.total_privado AS ingreso_total_privado, d.total_publico AS ingreso_total_publico, a.org_politica_nombre, b.org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, b.bienes_muebles_valor, b.bienes_inmuebles_valor, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a LEFT JOIN extra_data b ON a.hoja_vida_id = b.hoja_vida_id LEFT JOIN data_ec c ON a.hoja_vida_id = c.hoja_vida_id LEFT JOIN ingreso d ON a.hoja_vida_id = d.hoja_vida_id WHERE a.id_dni = ?";
+    "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.nacimiento_provincia, a.nacimiento_departamento, a.nacimiento_pais, a.cargo_nombre, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, d.total_privado AS ingreso_total_privado, d.total_publico AS ingreso_total_publico, a.org_politica_id, a.org_politica_nombre, e.alias AS org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, b.bienes_muebles_valor, b.bienes_inmuebles_valor, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a LEFT JOIN extra_data b ON a.hoja_vida_id = b.hoja_vida_id LEFT JOIN data_ec c ON a.hoja_vida_id = c.hoja_vida_id LEFT JOIN ingreso d ON a.hoja_vida_id = d.hoja_vida_id LEFT JOIN partidos_alias e ON a.org_politica_id = e.id WHERE a.id_dni = ?";
 
   let query_education =
     "SELECT e.* FROM educacion e INNER JOIN candidato c ON c.hoja_vida_id = e.hoja_vida_id WHERE c.id_dni = ?";
@@ -134,13 +151,17 @@ const getCandidateByDNI = async (id_dni) => {
   let query_afiliations =
     "SELECT a.org_politica, a.afiliacion_inicio, a.afiliacion_cancelacion FROM afiliacion a INNER JOIN candidato c ON a.dni = c.id_dni  WHERE a.vigente = 0 and c.org_politica_nombre != a.org_politica AND c.id_dni = ?";
 
+  let query_redes_sociales =
+    "SELECT e.* FROM redes_sociales e INNER JOIN candidato c ON c.hoja_vida_id = e.hoja_vida_id WHERE c.id_dni = ?";
+
   candidate = await db.query(query_candidate, id_dni);
   education = await db.query(query_education, id_dni);
   experience = await db.query(query_experience, id_dni);
   bienes_muebles = await db.query(query_bienes_muebles, id_dni);
   bienes_inmuebles = await db.query(query_bienes_inmuebles, id_dni);
   judgements = await db.query(query_judgements, id_dni);
-  afiliations = await db.query(query_afiliations, hoja_vida_id);
+  afiliations = await db.query(query_afiliations, id_dni);
+  redes_sociales = await db.query(query_redes_sociales, id_dni);
 
   return {
     ...candidate[0],
@@ -149,7 +170,8 @@ const getCandidateByDNI = async (id_dni) => {
     bienes_muebles,
     bienes_inmuebles,
     judgements,
-    afiliations
+    afiliations,
+    ...redes_sociales[0]
   };
 };
 
