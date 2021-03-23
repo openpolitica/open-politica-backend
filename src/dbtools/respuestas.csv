@@ -20,7 +20,7 @@ edu4,d,Crear un nuevo programa de becas para estudios de maestrías y doctorado 
 edu5,a,"Intervenciones enfocadas en los estudios de docencia (malla curricular, fortalecer las escuelas de formación pedagógica)."
 edu5,b,"Intervenciones enfocadas en los docentes en actividad (centros de formación continua, capacitaciones, acompañamiento pedagógico)."
 edu5,c,Implementar un SERUMS para docentes (como el de los doctores).
-edu5,d,"Brindar incentivos adicionales (becas para que los docentes que enseñen en zonas rurales, o reintegro del costo de estudios de maestría y doctorado)."
+edu5,d,"Brindar incentivos adicionales (becas para los docentes que enseñan en zonas rurales, o reintegro del costo de estudios de maestría y doctorado)."
 edu5,e,Aumentar el salario de los docentes.
 edu6,a,Adaptar mejor el Currículo Escolar a la diversidad cultural del país.
 edu6,b,Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB).
@@ -45,7 +45,7 @@ sal3,d,"Ampliar la cobertura de los seguros públicos y combinar su uso con segu
 sal3,e,"Continuar con medidas actuales (venta de medicamentos genéricos, compras públicas masivas del Estado, exoneración de impuestos a algunos medicamentos)."
 sal4,a,Servicios de salud sexual y reproductiva (planificación familiar y educación sexual).
 sal4,b,"Servicios de salud interculturales (adecuar los servicios a la cultura, casas de maternidad, servicios itinerantes, incorporar medicina tradicional)."
-sal4,c,"Enfoque de salud familiar (médicos y enfermedas de familia, dar soporte a las familias de pacientes con enfermedades crónicas)."
+sal4,c,"Enfoque de salud familiar (médicos y enfermeras de familia, dar soporte a las familias de pacientes con enfermedades crónicas)."
 sal4,d,Ninguno.
 sal5,a,Durante las primeras 12 semanas de embarazo.
 sal5,b,Solo en casos de violación.
@@ -71,7 +71,7 @@ amb2,b,"Eliminar las barreras regulatorias y de entrada al mercado, y aumentar l
 amb2,c,A través de alianzas público-privadas.
 amb2,d,Priorizar e impulsar la investigación científica y el desarrollo tecnológico.
 amb3,a,Establecer protocolos de respuesta y mitigación de efectos negativos articulados con distintos actores.
-amb3,b,Integrar a las instituciones involucradas para prevenir desastres y capacitar a la poblacion.
+amb3,b,Integrar a las instituciones involucradas para prevenir desastres y capacitar a la población.
 amb3,c,Usar tecnología para la prevención y mitigación de impactos; y articular con Fuerzas Armadas y Gobiernos Regionales.
 amb3,d,Mejorar la infraestructura y equipamiento en las zonas más expuestas.
 amb4,a,Integrarse o alinearse al acuerdo de Escazú.
@@ -82,7 +82,7 @@ seg1,b,"Utilizar tecnología para hacer más efectivo el patrullaje, la persecuc
 seg1,c,Capacitar a los policías y fortalecer unidades de inteligencia e investigación.
 seg1,d,Fortalecer e incluir a los serenazgos dentro de las estrategias de lucha contra el crimen.
 seg1,e,"Fortalecer y trabajar con los comités ciudadanos de seguridad, juntas vecinales, rondas y comunidades campesinas y nativas."
-seg2,a,"Asegurar que se cumplan los tres años de formacion para policias, sin excepciones."
+seg2,a,"Asegurar que se cumplan los tres años de formación para policías, sin excepciones."
 seg2,b,Reducir el número de escuelas policiales para mejorar la calidad educativa.
 seg2,c,Crear nuevas alternativas de formación policial especializadas.
 seg2,d,Reformar el currículo educativo policial con un enfoque en derechos humanos.
@@ -135,7 +135,7 @@ imp1,a,Simplificar el régimen tributario y reducir el número de impuestos.
 imp1,b,Combatir el uso de paraísos fiscales y tributación en el extranjero para evadir impuestos.
 imp1,c,Revisar beneficios tributarios a empresas y sectores productivos.
 imp1,d,Añadir un impuesto a la riqueza.
-imp1,e,Hacer más enfasis en impuestos directos y menos en impuestos indirectos.
+imp1,e,Hacer más énfasis en impuestos directos y menos en impuestos indirectos.
 imp2,a,Unificar ambos sistemas actuales (AFP y ONP) bajo el Estado.
 imp2,b,Establecer un sistema mixto (una parte del Estado y otra de las AFP).
 imp2,c,Cambiar a un sistema de cuentas individuales administrado por las AFP.
