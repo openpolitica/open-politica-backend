@@ -47,15 +47,12 @@ sal4,a,Servicios de salud sexual y reproductiva (planificación familiar y educa
 sal4,b,"Servicios de salud interculturales (adecuar los servicios a la cultura, casas de maternidad, servicios itinerantes, incorporar medicina tradicional)."
 sal4,c,"Enfoque de salud familiar (médicos y enfermeras de familia, dar soporte a las familias de pacientes con enfermedades crónicas)."
 sal4,d,Ninguno.
-sal5,a,Durante las primeras 12 semanas de embarazo.
-sal5,b,Solo en casos de violación.
-sal5,c,Ninguna.
 gob1,a,Se debe hacer una nueva Constitución.
 gob1,b,Se deben hacer algunos cambios a la Constitución.
 gob1,c,No se debe cambiar nada de la Constitución.
 gob2,a,Sanciones para delincuentes y actos de corrupción.
 gob2,b,"Relación entre los poderes del Estado (Congreso, Ejecutivo, Judicial)."
-gob2,c,Reglas del sistema político y elecciones.
+gob2,c,"Reglas del sistema electoral y de representación (voto preferencial, reelección, bicameralidad, etc)"
 gob2,d,Rol del Estado en la economía y la regulación del sector privado.
 gob2,e,"Derechos sociales y derechos para poblaciones vulnerables (pueblos indígenas, LGTBI+, etc.)."
 gob2,f,En ninguno.
@@ -113,6 +110,9 @@ der4,b,Dar capacitación para facilitar la inserción laboral de las mujeres.
 der4,c,Reconocer o reducir la carga de trabajo no remunerado que enfrentan las mujeres.
 der4,d,Reducir la brecha de participación de mujeres en carreras de ciencia y tecnología.
 der4,e,Fortalecer las leyes para reducir la brecha salarial y generar igualdad de oportunidades.
+der5,a,Durante las primeras 12 semanas de embarazo.
+der5,b,Solo en casos de violación.
+der5,c,Ninguna.
 cre1,a,Revisar la regulación y crear planes de promoción empresarial y de mejora de capacidades de la mano de obra.
 cre1,b,Reducir y reformular las barreras legales y tributarias que enfrentan las empresas.
 cre1,c,Exigir que todos los proveedores del Estado tengan trabajadores en planilla.

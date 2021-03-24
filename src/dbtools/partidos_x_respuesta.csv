@@ -126,15 +126,6 @@ sal4,d,2173,1,Avanza País
 sal4,d,1366,1,Fuerza Popular
 sal4,d,2731,1,Podemos Perú
 sal4,d,14,1,Somos Perú
-sal5,a,1264,1,Juntos por el Perú
-sal5,b,2840,0,Partido Morado*
-sal5,b,21,0,Victoria Nacional*
-sal5,b,2731,0,Podemos Perú*
-sal5,c,4,0,Acción Popular*
-sal5,c,1257,0,Alianza para el Progreso*
-sal5,c,1366,1,Fuerza Popular
-sal5,c,22,1,Renovación Popular
-sal5,c,14,0,Somos Perú*
 gob1,a,4,1,Acción Popular
 gob1,a,1264,1,Juntos por el Perú
 gob1,a,2840,1,Partido Morado
@@ -311,6 +302,15 @@ der4,c,21,1,Victoria Nacional
 der4,d,21,1,Victoria Nacional
 der4,e,2840,1,Partido Morado
 der4,e,2731,1,Podemos Perú
+der5,a,1264,1,Juntos por el Perú
+der5,b,2840,0,Partido Morado*
+der5,b,21,0,Victoria Nacional*
+der5,b,2731,0,Podemos Perú*
+der5,c,4,0,Acción Popular*
+der5,c,1257,0,Alianza para el Progreso*
+der5,c,1366,1,Fuerza Popular
+der5,c,22,1,Renovación Popular
+der5,c,14,0,Somos Perú*
 cre1,a,4,1,Acción Popular
 cre1,a,2840,1,Partido Morado
 cre1,a,22,1,Renovación Popular
