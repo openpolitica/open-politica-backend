@@ -72,7 +72,15 @@ const getPolicyResults = async (body) => {
     return responsePresidentes.find((candidato) => item.org_politica_id === candidato.org_politica_id && candidato.cargo_id === cargoId);
   }
 
-  let results = responsePreguntaPartido.map((item, index) => {
+  let listaIdPartidosObtenidos = responsePreguntaPartido.map((item) => item.org_politica_id);
+
+  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?)";
+
+  let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
+
+  let listaTotalPartidos = [...responsePreguntaPartido, ...responsePartidosSinCompatibilidad];
+
+  let results = listaTotalPartidos.map((item) => {
     return {
       name: item.alias,
       org_politica_id: item.org_politica_id,
