@@ -81,18 +81,22 @@ const getPolicyResults = async (body) => {
   let listaTotalPartidos = [...responsePreguntaPartido, ...responsePartidosSinCompatibilidad];
 
   let results = listaTotalPartidos.map((item) => {
-    return {
-      name: item.alias,
-      org_politica_id: item.org_politica_id,
-      org_politica_nombre: item.nombre,
-      compatibility: (item.total / arrayPreguntas.length).toFixed(2),
-      president: obtainPresidentByCargoId(1, item),
-      firstVP: obtainPresidentByCargoId(2, item),
-      secondVP: obtainPresidentByCargoId(3, item)
+    let presidenteData = obtainPresidentByCargoId(1, item);
+    if (presidenteData) {
+      return {
+        name: item.alias,
+        org_politica_id: item.org_politica_id,
+        org_politica_nombre: item.nombre,
+        compatibility: (item.total / arrayPreguntas.length).toFixed(2),
+        president: presidenteData,
+        firstVP: obtainPresidentByCargoId(2, item),
+        secondVP: obtainPresidentByCargoId(3, item)
+      }
     }
   });
 
-  return results;
+  //Remove null values for parties with no presidential leaders with filter
+  return results.filter((i) => i);
 };
 
 module.exports = {
