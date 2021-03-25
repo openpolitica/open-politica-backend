@@ -10,7 +10,6 @@ sal1,health,¿Cómo obtener mejores resultados en la lucha contra el Covid-19?
 sal2,health,¿Cómo reformar el sistema público de salud?
 sal3,health,¿Cómo disminuir el gasto de las personas en salud?
 sal4,health,¿Qué otros servicios de salud quisieras que estén en el Plan de Gobierno?
-sal5,health,"En el Perú, es legal abortar cuando la vida de la madre está en peligro, ¿en qué otras situaciones debería ser descriminalizadas?"
 gob1,governability,¿Qué opinas sobre modificar la Constitución?
 gob2,governability,"Si se dieran cambios en la Constitución, ¿en qué temas preferirías que sean?"
 gob3,governability,¿Qué quieres que opine el candidato presidencial sobre la vacancia del 9 de noviembre?
@@ -26,6 +25,7 @@ der1,rights,¿Cómo debería apoyar el gobierno a las personas con discapacidad?
 der2,rights,¿Cómo apoyar a las poblaciones y comunidades nativas del país?
 der3,rights,¿Está a favor del matrimonio civil igualitario?
 der4,rights,¿Cómo reducir las brechas económicas de género?
+der5,rights,"En el Perú, es legal abortar cuando la vida de la madre está en peligro, ¿en qué otras situaciones debería ser descriminalizadas?"
 cre1,growth,¿Cómo crear nuevos empleos formales en el Perú?
 cre2,growth,¿Cómo aumentar la competencia y el crecimiento económico?
 cre3,growth,¿Cómo impulsar el desarrollo de la ciencia y tecnología?
