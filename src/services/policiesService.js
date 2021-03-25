@@ -80,6 +80,13 @@ const getPolicyResults = async (body) => {
 
   let listaTotalPartidos = [...responsePreguntaPartido, ...responsePartidosSinCompatibilidad];
 
+  //Provitional fix so we can obtain only the parties which are on top of the political polls
+  //Check if it is possible to solve this issue in a more optimal way
+
+  let listaPartidosTop = [4, 14, 22, 21, 1366, 1264, 2173, 2731, 1257, 2840];
+
+  listaTotalPartidos = listaTotalPartidos.filter((item) => listaPartidosTop.includes(item.org_politica_id));
+
   let results = listaTotalPartidos.map((item) => {
     let presidenteData = obtainPresidentByCargoId(1, item);
     if (presidenteData) {
