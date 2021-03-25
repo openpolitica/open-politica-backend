@@ -74,18 +74,12 @@ const getPolicyResults = async (body) => {
 
   let listaIdPartidosObtenidos = responsePreguntaPartido.map((item) => item.org_politica_id);
 
-  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.nombre, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?)";
+  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.nombre, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?) AND a.id IN (SELECT org_politica_id FROM partido_x_respuesta)";
 
   let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
 
   let listaTotalPartidos = [...responsePreguntaPartido, ...responsePartidosSinCompatibilidad];
 
-  //Provitional fix so we can obtain only the parties which are on top of the political polls
-  //Check if it is possible to solve this issue in a more optimal way
-
-  let listaPartidosTop = [4, 14, 22, 21, 1366, 1264, 2173, 2731, 1257, 2840];
-
-  listaTotalPartidos = listaTotalPartidos.filter((item) => listaPartidosTop.includes(item.org_politica_id));
 
   let results = listaTotalPartidos.map((item) => {
     let presidenteData = obtainPresidentByCargoId(1, item);
