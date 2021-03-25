@@ -74,7 +74,7 @@ const getPolicyResults = async (body) => {
 
   let listaIdPartidosObtenidos = responsePreguntaPartido.map((item) => item.org_politica_id);
 
-  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?)";
+  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.nombre, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?)";
 
   let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
 
