@@ -7,6 +7,12 @@ const getTopics = async () => {
 };
 
 const getQuestions = async (params) => {
+  if (params.topics.length < 1) {
+    const error = new Error("Se requiere al menos 1 tópico seleccionados.");
+    error.statusCode = 400;
+    throw error;
+  }
+
   let { topics } = params;
 
   if (typeof topics === "string") {
