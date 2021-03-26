@@ -407,29 +407,29 @@
             "description": "Party Name - org_politica_nombre",
             "schema": {
               "type": "string",
-                "enum": [
-                  "ACCION POPULAR",
-                  "ALIANZA PARA EL PROGRESO",
-                  "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
-                  "DEMOCRACIA DIRECTA",
-                  "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
-                  "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
-                  "FUERZA POPULAR",
-                  "JUNTOS POR EL PERU",
-                  "PARTIDO APRISTA PERUANO",
-                  "PARTIDO DEMOCRATICO SOMOS PERU",
-                  "PARTIDO MORADO",
-                  "PARTIDO POLÍTICO CONTIGO",
-                  "PARTIDO POPULAR CRISTIANO - PPC",
-                  "PERU LIBRE",
-                  "PERU NACION",
-                  "PERU PATRIA SEGURA",
-                  "PODEMOS PERU",
-                  "RENACIMIENTO UNIDO NACIONAL",
-                  "RENOVACION POPULAR",
-                  "UNION POR EL PERU",
-                  "VAMOS PERU"
-                ]
+              "enum": [
+                "ACCION POPULAR",
+                "ALIANZA PARA EL PROGRESO",
+                "AVANZA PAIS - PARTIDO DE INTEGRACION SOCIAL",
+                "DEMOCRACIA DIRECTA",
+                "EL FRENTE AMPLIO POR JUSTICIA, VIDA Y LIBERTAD",
+                "FRENTE POPULAR AGRICOLA FIA DEL PERU - FREPAP",
+                "FUERZA POPULAR",
+                "JUNTOS POR EL PERU",
+                "PARTIDO APRISTA PERUANO",
+                "PARTIDO DEMOCRATICO SOMOS PERU",
+                "PARTIDO MORADO",
+                "PARTIDO POLÍTICO CONTIGO",
+                "PARTIDO POPULAR CRISTIANO - PPC",
+                "PERU LIBRE",
+                "PERU NACION",
+                "PERU PATRIA SEGURA",
+                "PODEMOS PERU",
+                "RENACIMIENTO UNIDO NACIONAL",
+                "RENOVACION POPULAR",
+                "UNION POR EL PERU",
+                "VAMOS PERU"
+              ]
             },
             "required": false
           }
@@ -442,6 +442,19 @@
           },
           "400": {
             "description": "Party Required"
+          }
+        }
+      }
+    },
+    "/parties/presidential_lists": {
+      "get": {
+        "summary": "Returns the list of parties",
+        "description": "Returns an object with the detail parties",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -474,10 +487,10 @@
               "items": {
                 "type": "string",
                 "enum": [
-                  "education", 
-                  "health", 
-                  "governability", 
-                  "environment", 
+                  "education",
+                  "health",
+                  "governability",
+                  "environment",
                   "security",
                   "rights",
                   "growth",

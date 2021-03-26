@@ -3,7 +3,7 @@ const responseBuilder = require("../utils/responseBuilder");
 
 const getParties = async (req, res) => {
   try {
-    let result = await partiesService.getParties();
+    let result = await partiesService.findParties();
     responseBuilder.success(result, req.method);
   } catch (error) {
     responseBuilder.error(error);
