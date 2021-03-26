@@ -1,7 +1,15 @@
 const db = require("../database");
 
-const getParties = async () => {
-  return;
+const findParties = async () => {
+  try {
+    let queryPresidentes =
+      "SELECT a.org_politica_id, a.org_politica_nombre, b.alias as org_politica_alias, a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.enlace_foto FROM candidato a INNER JOIN partidos_alias b ON a.org_politica_id = b.id WHERE cargo_nombre LIKE 'PRESIDENTE%'";
+    let responsePresidentes = await db.query(queryPresidentes);
+
+    return responsePresidentes;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getDirtyLists = async (params) => {
@@ -63,7 +71,7 @@ const findPartyLeaders = async (party) => {
 };
 
 module.exports = {
-  getParties,
+  findParties,
   getDirtyLists,
   findOneParty,
   findPartyLeaders
