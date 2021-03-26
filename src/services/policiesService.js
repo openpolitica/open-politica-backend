@@ -7,12 +7,6 @@ const getTopics = async () => {
 };
 
 const getQuestions = async (params) => {
-  if (params.topics.length < 3) {
-    const error = new Error("Se requiere al menos 3 tópicos seleccionados.");
-    error.statusCode = 400;
-    throw error;
-  }
-
   let { topics } = params;
 
   if (typeof topics === "string") {
