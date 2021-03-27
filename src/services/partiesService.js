@@ -1,7 +1,15 @@
 const db = require("../database");
 
-const getParties = async () => {
-  return;
+const findParties = async () => {
+  try {
+    let queryPresidentes =
+      "SELECT a.org_politica_id, a.org_politica_nombre, b.alias as org_politica_alias, a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.enlace_foto FROM candidato a INNER JOIN partidos_alias b ON a.org_politica_id = b.id WHERE cargo_nombre LIKE 'PRESIDENTE%'";
+    let responsePresidentes = await db.query(queryPresidentes);
+
+    return responsePresidentes;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getDirtyLists = async (params) => {
@@ -42,27 +50,28 @@ const findPartyLeaders = async (party) => {
       throw error;
     }
 
-    let queryPresidentes = "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.org_politica_nombre, a.enlace_foto, a.cargo_id, a.cargo_nombre, a.org_politica_id, b.alias as org_politica_alias FROM candidato a INNER JOIN partidos_alias b ON a.org_politica_id = b.id WHERE cargo_nombre LIKE '%PRESIDENTE%' AND org_politica_nombre = ?";
+    let queryPresidentes =
+      "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.org_politica_nombre, a.enlace_foto, a.cargo_id, a.cargo_nombre, a.org_politica_id, b.alias as org_politica_alias, b.plan_de_gobierno_url FROM candidato a INNER JOIN partidos_alias b ON a.org_politica_id = b.id WHERE cargo_nombre LIKE '%PRESIDENTE%' AND org_politica_nombre = ?";
     let responsePresidentes = await db.query(queryPresidentes, party);
 
-    const obtainPresidentByCargoId = function (cargoId) {
-      return responsePresidentes.find((candidato) => candidato.cargo_id === cargoId);
-    }
+    const obtainPresidentByCargoId = function(cargoId) {
+      return responsePresidentes.find(
+        (candidato) => candidato.cargo_id === cargoId
+      );
+    };
 
     return {
       president: obtainPresidentByCargoId(1),
       firstVP: obtainPresidentByCargoId(2),
       secondVP: obtainPresidentByCargoId(3)
-    }
-
+    };
   } catch (error) {
     throw error;
   }
-
-}
+};
 
 module.exports = {
-  getParties,
+  findParties,
   getDirtyLists,
   findOneParty,
   findPartyLeaders
