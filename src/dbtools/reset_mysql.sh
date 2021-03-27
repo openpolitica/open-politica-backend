@@ -298,6 +298,7 @@ mysql --login-path=local --database=$DATABASE_NAME --local-infile=1 -e '''
 DROP TABLE IF EXISTS `partidos_alias`;
 CREATE TABLE `partidos_alias` (
   `id` smallint(6) DEFAULT NULL,
+  `orden_cedula` smallint(6) DEFAULT NULL,
   `nombre` varchar(56) DEFAULT NULL,
   `alias` varchar(56) DEFAULT NULL,
   `plan_de_gobierno_url` varchar(96) DEFAULT NULL,
@@ -678,7 +679,7 @@ ALTER TABLE `afiliacion`
 ALTER TABLE ingreso ADD INDEX (total, hoja_vida_id);
 ALTER TABLE extra_data ADD INDEX (vacancia, experiencia_publica, sentencias_ec_civil_cnt, sentencias_ec_penal_cnt, educacion_mayor_nivel);
 ALTER TABLE locations ADD INDEX (location, seats, lat, lng);
-ALTER TABLE partidos_alias ADD INDEX (alias, id);
+ALTER TABLE partidos_alias ADD INDEX (alias, id, orden_cedula);
 ALTER TABLE data_ec ADD INDEX (hoja_vida_id, designado, inmuebles_total, muebles_total, deuda_sunat, aportes_electorales, procesos_electorales_participados, procesos_electorales_ganados, papeletas_sat, sancion_servir_registro);
 ALTER TABLE afiliacion ADD INDEX (vigente, dni, org_politica, afiliacion_inicio, afiliacion_cancelacion)
 '''
