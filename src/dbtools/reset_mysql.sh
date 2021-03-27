@@ -300,7 +300,7 @@ CREATE TABLE `partidos_alias` (
   `id` smallint(6) DEFAULT NULL,
   `nombre` varchar(56) DEFAULT NULL,
   `alias` varchar(56) DEFAULT NULL,
-  `plan_de_gobierno_url` varchar(128) DEFAULT NULL
+  `plan_de_gobierno_url` varchar(96) DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 LOAD DATA LOCAL INFILE "./partidos_alias.csv"
