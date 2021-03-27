@@ -1,4 +1,5 @@
 const db = require("../database");
+const { shuffle } = require("../utils/utilFunctions")
 
 const getTopics = async () => {
   let query = "SELECT * FROM topico";
@@ -52,6 +53,13 @@ const getQuestions = async (params) => {
 
     return r;
   }, Object.create(null));
+
+  for (topic in mapped) {
+    mapped[topic].forEach((item, index) => {
+      mapped[topic][index]["answers"] = shuffle(mapped[topic][index]["answers"]);
+    })
+  }
+
   return mapped;
 };
 
