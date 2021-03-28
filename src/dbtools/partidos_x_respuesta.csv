@@ -77,8 +77,10 @@ edu7,c,21,1,Victoria Nacional
 sal1,a,1264,1,Juntos por el Perú
 sal1,a,2840,1,Partido Morado
 sal1,a,21,1,Victoria Nacional
+sal1,a,1366,1,Fuerza Popular
 sal1,b,2840,1,Partido Morado
 sal1,b,21,1,Victoria Nacional
+sal1,b,1366,1,Fuerza Popular
 sal1,c,4,1,Acción Popular
 sal1,c,14,1,Somos Perú
 sal1,d,4,1,Acción Popular
@@ -332,11 +334,14 @@ cre2,b,21,1,Victoria Nacional
 cre2,c,2731,1,Podemos Perú
 cre3,a,14,1,Somos Perú
 cre3,b,22,1,Renovación Popular
+cre3,b,1366,1,Fuerza Popular
+cre3,b,2840,1,Partido Morado
 cre3,c,1257,1,Alianza Para el Progreso
 cre3,c,2731,1,Podemos Perú
 cre3,c,21,1,Victoria Nacional
 cre3,d,1366,1,Fuerza Popular
 cre3,d,2840,1,Partido Morado
+cre3,d,1264,1,Juntos por el Perú
 cre3,e,1264,1,Juntos por el Perú
 cre3,e,2840,1,Partido Morado
 cre4,a,4,1,Acción Popular
