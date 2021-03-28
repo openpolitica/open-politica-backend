@@ -538,15 +538,33 @@
                 "answers": [
                   {
                     "questionId": "edu1",
-                    "answerId": "a"
+                    "answerId": "a",
+                    "topic": "education"
                   },
                   {
                     "questionId": "edu2",
-                    "answerId": "b"
+                    "answerId": "b",
+                    "topic": "education"
+                  },
+                  {
+                    "questionId": "edu3",
+                    "answerId": "a",
+                    "topic": "education"
                   },
                   {
                     "questionId": "sal1",
-                    "answerId": "c"
+                    "answerId": "a",
+                    "topic": "health"
+                  },
+                  {
+                    "questionId": "sal2",
+                    "answerId": "a",
+                    "topic": "health"
+                  },
+                  {
+                    "questionId": "sal3",
+                    "answerId": "a",
+                    "topic": "health"
                   }
                 ]
               }
