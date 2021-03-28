@@ -64,16 +64,28 @@ const getQuestions = async (params) => {
 };
 
 const getPolicyResults = async (body) => {
+  //Object with the count of items by topic
+  //Ex: { health: 2, education: 3}
+  let topicCounter = {};
+
   const arrayPreguntas = body.answers.map(function (value) {
+    topicCounter[value.topic] ? topicCounter[value.topic]++ : topicCounter[value.topic] = 1;
     return [value.questionId, value.answerId];
   });
 
-  let query = `SELECT a.org_politica_id, a.orden_cedula, a.nombre, a.alias, count(*) AS total FROM (SELECT a.*, b.alias, b.nombre, b.orden_cedula FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC, a.alias ASC`;
-
+  let query = `SELECT x.codTopico, x.org_politica_id, x.nombre, x.alias, count(*) AS total FROM (SELECT a.*, c.codTopico, b.alias, b.nombre FROM partido_x_respuesta a, partidos_alias b, pregunta c WHERE (a.codPregunta, a.codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id AND a.codPregunta = c.codPregunta) x GROUP BY x.org_politica_id, x.codTopico ORDER BY x.codTopico, total DESC, x.alias ASC`;
 
   let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
 
+  //Grouping count of responses by topic
+  let groupedCountRespuestas = responsePreguntaPartido.reduce(function (r, a) {
+    r[a.codTopico] = r[a.codTopico] || [];
+    r[a.codTopico].push(a);
+    return r;
+  }, Object.create(null));
+
   let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, enlace_foto, cargo_id, cargo_nombre, org_politica_id, org_politica_nombre FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
+
   let responsePresidentes = await db.query(queryPresidentes);
 
   const obtainPresidentByCargoId = function (cargoId, item) {
@@ -88,16 +100,28 @@ const getPolicyResults = async (body) => {
 
   let listaTotalPartidos = [...responsePreguntaPartido, ...responsePartidosSinCompatibilidad];
 
-
   let results = listaTotalPartidos.map((item) => {
     let presidenteData = obtainPresidentByCargoId(1, item);
     if (presidenteData) {
+      //To create a compatibility object, just clone the topicCounter model : { education: ..., health: ...}
+      let compatibilityObject = { ...topicCounter };
+
+      for (const topic in compatibilityObject) {
+        //Find by topic if the party exists on the responses count list "groupedCountRespuestas"
+        let itemPartyResponse = groupedCountRespuestas[topic].find((itemResp) => itemResp.org_politica_id === item.org_politica_id);
+        if (itemPartyResponse) {
+          compatibilityObject[topic] = (itemPartyResponse.total / topicCounter[topic]).toFixed(2);
+        } else {
+          compatibilityObject[topic] = 0;
+        }
+      }
+
       return {
         name: item.alias,
         order: item.orden_cedula,
         org_politica_id: item.org_politica_id,
         org_politica_nombre: item.nombre,
-        compatibility: (item.total / arrayPreguntas.length).toFixed(2),
+        compatibility: compatibilityObject,
         president: presidenteData,
         firstVP: obtainPresidentByCargoId(2, item),
         secondVP: obtainPresidentByCargoId(3, item)
