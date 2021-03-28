@@ -1,4 +1,5 @@
 const db = require("../database");
+const { shuffle } = require("../utils/utilFunctions")
 
 const getTopics = async () => {
   let query = "SELECT * FROM topico";
@@ -52,6 +53,13 @@ const getQuestions = async (params) => {
 
     return r;
   }, Object.create(null));
+
+  for (topic in mapped) {
+    mapped[topic].forEach((item, index) => {
+      mapped[topic][index]["answers"] = shuffle(mapped[topic][index]["answers"]);
+    })
+  }
+
   return mapped;
 };
 
@@ -60,7 +68,7 @@ const getPolicyResults = async (body) => {
     return [value.questionId, value.answerId];
   });
 
-  let query = `SELECT a.org_politica_id, a.nombre, a.alias, count(*) AS total FROM (SELECT a.*, b.alias, b.nombre FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC`;
+  let query = `SELECT a.org_politica_id, a.orden_cedula, a.nombre, a.alias, count(*) AS total FROM (SELECT a.*, b.alias, b.nombre, b.orden_cedula FROM partido_x_respuesta a, partidos_alias b WHERE (codPregunta, codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id) a GROUP BY a.org_politica_id ORDER BY total DESC, a.alias ASC`;
 
 
   let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
@@ -74,7 +82,7 @@ const getPolicyResults = async (body) => {
 
   let listaIdPartidosObtenidos = responsePreguntaPartido.map((item) => item.org_politica_id);
 
-  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.nombre, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?) AND a.id IN (SELECT org_politica_id FROM partido_x_respuesta)";
+  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.orden_cedula, a.nombre, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?) AND a.id IN (SELECT org_politica_id FROM partido_x_respuesta) ORDER BY a.alias ASC";
 
   let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
 
@@ -86,6 +94,7 @@ const getPolicyResults = async (body) => {
     if (presidenteData) {
       return {
         name: item.alias,
+        order: item.orden_cedula,
         org_politica_id: item.org_politica_id,
         org_politica_nombre: item.nombre,
         compatibility: (item.total / arrayPreguntas.length).toFixed(2),
