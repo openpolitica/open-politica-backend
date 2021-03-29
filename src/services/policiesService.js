@@ -148,9 +148,11 @@ const getPolicyResults = async (body) => {
     return responsePresidentes.find((candidato) => item.org_politica_id === candidato.org_politica_id && candidato.cargo_id === cargoId);
   }
 
-  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.orden_cedula, a.nombre, a.alias FROM partidos_alias a WHERE a.id NOT IN (SELECT org_politica_id FROM partido_x_respuesta) ORDER BY a.alias ASC";
+  let listaIdPartidosObtenidos = partyList.map((item) => item.org_politica_id);
 
-  let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad);
+  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.orden_cedula, a.nombre, a.alias FROM partidos_alias a WHERE a.id NOT IN (?) AND a.id IN (SELECT org_politica_id FROM partido_x_respuesta) ORDER BY a.alias ASC";
+
+  let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
 
   let listaTotalPartidos = [...partyList, ...responsePartidosSinCompatibilidad];
 
