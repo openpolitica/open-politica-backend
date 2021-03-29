@@ -30,7 +30,7 @@ module.exports = {
    * @param {*} key key of every single object used to group
    * @returns Object with the agrupation separated by values of the key provided
    */
-  groupObjectListByKey(array, key) {
+  groupObjectListByKey: function (array, key) {
     return array.reduce(function (r, a) {
       r[a[key]] = r[a[key]] || [];
       r[a[key]].push(a);

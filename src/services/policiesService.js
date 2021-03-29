@@ -9,7 +9,7 @@ const getTopics = async () => {
 
 const getQuestions = async (params) => {
   if (params.topics.length < 1) {
-    const error = new Error("Se requiere al menos 1 tópico seleccionados.");
+    const error = new Error("Se requiere al menos 1 tópico seleccionado.");
     error.statusCode = 400;
     throw error;
   }
@@ -68,6 +68,15 @@ const getPolicyResults = async (body) => {
   const arrayPreguntas = body.answers.map(function (value) {
     questions.push(value.questionId);
     return [value.questionId, value.answerId];
+  });
+
+  //Validates if the response only has max. 2 answers by question
+  questions.forEach((item) => {
+    if (questions.filter(questionItem => questionItem === item).length > 2) {
+      const error = new Error("No está permitido más de 2 respuestas por pregunta.");
+      error.statusCode = 400;
+      throw error;
+    }
   });
 
   //List of parties obtained based on questions answered without agrupation and counting
