@@ -1,5 +1,5 @@
 const db = require("../database");
-const { shuffle } = require("../utils/utilFunctions")
+const { shuffle, groupObjectListByKey } = require("../utils/utilFunctions")
 
 const getTopics = async () => {
   let query = "SELECT * FROM topico";
@@ -64,25 +64,81 @@ const getQuestions = async (params) => {
 };
 
 const getPolicyResults = async (body) => {
+  let questions = [];
+  const arrayPreguntas = body.answers.map(function (value) {
+    questions.push(value.questionId);
+    return [value.questionId, value.answerId];
+  });
+
+  //List of parties obtained based on questions answered without agrupation and counting
+  let queryQuestionsTopics = `SELECT a.*, c.codTopico, b.alias, b.orden_cedula, b.nombre FROM partido_x_respuesta a, partidos_alias b, pregunta c WHERE (a.codPregunta, a.codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id AND a.codPregunta = c.codPregunta ORDER BY c.codTopico, a.codPregunta`;
+
+  let responseQuestionsTopics = await db.query(queryQuestionsTopics, [arrayPreguntas]);
+
   //Object with the count of items by topic
   //Ex: { health: 2, education: 3}
   let topicCounter = {};
 
-  const arrayPreguntas = body.answers.map(function (value) {
-    topicCounter[value.topic] ? topicCounter[value.topic]++ : topicCounter[value.topic] = 1;
-    return [value.questionId, value.answerId];
+  //Helper array used to count the number of questions based on its topic
+  let questionsCounterHelper = [];
+
+  //Main array where counting and grouping for every political party is added based on the first response (responseQuestionsTopics) obtained
+  let partyCountList = [];
+
+  responseQuestionsTopics.forEach((item) => {
+    if (partyCountList.some(itemList => itemList.org_politica_id === item.org_politica_id && itemList.codTopico === item.codTopico)) {
+      let indexPartyFounded = partyCountList.findIndex(itemList => itemList.org_politica_id === item.org_politica_id && itemList.codTopico === item.codTopico);
+
+      if (questions.filter(questionItem => item.codPregunta === questionItem).length > 1) {
+        partyCountList[indexPartyFounded].total += 0.5;
+      } else {
+        partyCountList[indexPartyFounded].total++;
+      }
+    } else {
+      let initialCounter = 0;
+
+      if (questions.filter(questionItem => item.codPregunta === questionItem).length > 1) {
+        initialCounter = 0.5;
+      } else {
+        initialCounter = 1;
+      }
+
+      partyCountList.push({
+        org_politica_id: item.org_politica_id,
+        orden_cedula: item.orden_cedula,
+        codTopico: item.codTopico,
+        nombre: item.nombre,
+        alias: item.alias,
+        total: initialCounter
+      })
+    }
+
+    //Count the number of questions by topic and save it in the topicCounter variable
+    if (!questionsCounterHelper.includes(item.codPregunta)) {
+      questionsCounterHelper.push(item.codPregunta);
+      topicCounter[item.codTopico] ? topicCounter[item.codTopico]++ : topicCounter[item.codTopico] = 1;
+      topicCounter["total"] ? topicCounter["total"]++ : topicCounter["total"] = 1;
+    }
   });
 
-  let query = `SELECT x.codTopico, x.org_politica_id, x.nombre, x.alias, count(*) AS total FROM (SELECT a.*, c.codTopico, b.alias, b.nombre FROM partido_x_respuesta a, partidos_alias b, pregunta c WHERE (a.codPregunta, a.codRespuesta) IN (VALUES ?) AND a.org_politica_id = b.id AND a.codPregunta = c.codPregunta) x GROUP BY x.org_politica_id, x.codTopico ORDER BY x.codTopico, total DESC, x.alias ASC`;
+  //Group the array of parties count based on the "codTopico" key
+  let groupedCountRespuestas = groupObjectListByKey(partyCountList, "codTopico");
 
-  let responsePreguntaPartido = await db.query(query, [arrayPreguntas]);
+  //The variable partyList will have a list of parties removing the duplicate entries because the topic agroupation on partyCountList
+  //Ex: partyCountList : [{ alias: 'Fuerza Popular', codTopico: 'health', total: 3.5, ...}, { alias: 'Fuerza Popular', codTopico: 'education', total: 2, ...}]
+  // partyList: [ alias: 'Fuerza Popular', codTopico: 'health', ...}]
+  let partyList = [];
 
-  //Grouping count of responses by topic
-  let groupedCountRespuestas = responsePreguntaPartido.reduce(function (r, a) {
-    r[a.codTopico] = r[a.codTopico] || [];
-    r[a.codTopico].push(a);
-    return r;
-  }, Object.create(null));
+  partyCountList.forEach((item) => {
+    if (!partyList.some(itemList => itemList.org_politica_id === item.org_politica_id)) {
+      partyList.push({
+        org_politica_id: item.org_politica_id,
+        orden_cedula: item.orden_cedula,
+        nombre: item.nombre,
+        alias: item.alias
+      })
+    }
+  })
 
   let queryPresidentes = "SELECT hoja_vida_id, id_nombres, id_apellido_paterno, id_apellido_materno, id_sexo, enlace_foto, cargo_id, cargo_nombre, org_politica_id, org_politica_nombre FROM candidato WHERE cargo_nombre LIKE '%PRESIDENTE%'";
 
@@ -92,29 +148,31 @@ const getPolicyResults = async (body) => {
     return responsePresidentes.find((candidato) => item.org_politica_id === candidato.org_politica_id && candidato.cargo_id === cargoId);
   }
 
-  let listaIdPartidosObtenidos = responsePreguntaPartido.map((item) => item.org_politica_id);
+  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.orden_cedula, a.nombre, a.alias FROM partidos_alias a WHERE a.id NOT IN (SELECT org_politica_id FROM partido_x_respuesta) ORDER BY a.alias ASC";
 
-  let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.orden_cedula, a.nombre, a.alias, 0 AS total FROM partidos_alias a WHERE a.id NOT IN (?) AND a.id IN (SELECT org_politica_id FROM partido_x_respuesta) ORDER BY a.alias ASC";
+  let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad);
 
-  let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
-
-  let listaTotalPartidos = [...responsePreguntaPartido, ...responsePartidosSinCompatibilidad];
+  let listaTotalPartidos = [...partyList, ...responsePartidosSinCompatibilidad];
 
   let results = listaTotalPartidos.map((item) => {
     let presidenteData = obtainPresidentByCargoId(1, item);
     if (presidenteData) {
-      //To create a compatibility object, just clone the topicCounter model : { education: ..., health: ...}
-      let compatibilityObject = { ...topicCounter };
+      //To create a compatibility object, just clone the topicCounter model : { education: ..., health: ..., total: ...}
+      let { total: totalCount, ...compatibilityObject } = { ...topicCounter };
 
+      let accumulatorByParty = 0;
       for (const topic in compatibilityObject) {
         //Find by topic if the party exists on the responses count list "groupedCountRespuestas"
         let itemPartyResponse = groupedCountRespuestas[topic].find((itemResp) => itemResp.org_politica_id === item.org_politica_id);
         if (itemPartyResponse) {
           compatibilityObject[topic] = (itemPartyResponse.total / topicCounter[topic]).toFixed(2);
+          accumulatorByParty += itemPartyResponse.total;
         } else {
           compatibilityObject[topic] = 0;
         }
       }
+
+      compatibilityObject.total = (accumulatorByParty / totalCount).toFixed(2);
 
       return {
         name: item.alias,
@@ -130,7 +188,8 @@ const getPolicyResults = async (body) => {
   });
 
   //Remove null values for parties with no presidential leaders with filter
-  return results.filter((i) => i);
+  //And sort the object list by the total compatibility
+  return results.filter((i) => i).sort((a, b) => b.compatibility.total - a.compatibility.total);
 };
 
 module.exports = {
