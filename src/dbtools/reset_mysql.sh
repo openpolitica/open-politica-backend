@@ -727,6 +727,7 @@ DROP TABLE IF EXISTS pregunta;
  codPregunta VARCHAR(45),
   codTopico VARCHAR(45),
   pregunta VARCHAR(500),
+  isMultiple tinyint(1),
   PRIMARY KEY (codPregunta),
   CONSTRAINT FK_preg_codTopico FOREIGN KEY (codTopico)
         REFERENCES topico(codTopico)
@@ -751,6 +752,7 @@ DROP TABLE IF EXISTS respuesta;
   codPregunta VARCHAR(45),
   codRespuesta VARCHAR(45),
   respuesta VARCHAR(500),
+  forceSingle tinyint(1),
   CONSTRAINT FK_res_codPregunta FOREIGN KEY (codPregunta)
         REFERENCES pregunta(codPregunta)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

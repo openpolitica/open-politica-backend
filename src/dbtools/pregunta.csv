@@ -1,35 +1,35 @@
-codPregunta,codTopico,pregunta
-edu1,education,¿Cómo mejorar la educación durante la pandemia?
-edu2,education,¿Cómo mejorar la calidad de la educación escolar?
-edu3,education,¿Cómo mejorar la educación superior?
-edu4,education,¿Cómo mejorar el acceso a becas y financiamiento de estudios superiores?
-edu5,education,¿Cómo mejorar la formación y condiciones laborales de los profesores?
-edu6,education,¿Cómo mejorar la educación intercultural?
-edu7,education,¿Cómo mejorar la educación de los alumnos con discapacidad?
-sal1,health,¿Cómo obtener mejores resultados en la lucha contra el Covid-19?
-sal2,health,¿Cómo reformar el sistema público de salud?
-sal3,health,¿Cómo disminuir el gasto de las personas en salud?
-sal4,health,¿Qué otros servicios de salud quisieras que estén en el Plan de Gobierno?
-gob1,governability,¿Qué opinas sobre modificar la Constitución?
-gob2,governability,"Si se dieran cambios en la Constitución, ¿en qué temas preferirías que sean?"
-gob3,governability,¿Qué quieres que opine el candidato presidencial sobre la vacancia del 9 de noviembre?
-amb1,environment,¿Cómo combatir la deforestación de la Amazonía?
-amb2,environment,¿Cómo transitar hacia energías renovables?
-amb3,environment,¿Cómo gestionar el problema de los desastres naturales en el país?
-amb4,environment,¿Qué otra medida ambiental quisieras que esté en el plan de gobierno?
-seg1,security,¿Cómo mejorar la lucha contra el crimen?
-seg2,security,¿Cómo mejorar la formación de la policía?
-seg3,security,¿Cómo mejorar la atención policial de casos de violencia de género?
-seg4,security,¿Qué otra medida relacionada a la Policía quisieras que esté en el plan de gobierno?
-der1,rights,¿Cómo debería apoyar el gobierno a las personas con discapacidad?
-der2,rights,¿Cómo apoyar a las poblaciones y comunidades nativas del país?
-der3,rights,¿Está a favor del matrimonio civil igualitario?
-der4,rights,¿Cómo reducir las brechas económicas de género?
-der5,rights,"En el Perú, el aborto es legal  cuando la vida de la madre está en peligro, ¿en qué otras situaciones debería ser descriminalizado?"
-cre1,growth,¿Cómo crear nuevos empleos formales en el Perú?
-cre2,growth,¿Cómo aumentar la competencia y el crecimiento económico?
-cre3,growth,¿Cómo impulsar el desarrollo de la ciencia y tecnología?
-cre4,growth,¿Cómo reactivar la agricultura?
-imp1,taxes,¿Cómo mejorar la recaudación de impuestos en el país?
-imp2,taxes,La reforma del sistema de pensiones debe:
-imp3,taxes,¿Qué otras características debería tener el nuevo sistema de pensiones?
+codPregunta,codTopico,pregunta,isMultiple
+edu1,education,¿Cómo mejorar la educación durante la pandemia?,1
+edu2,education,¿Cómo mejorar la calidad de la educación escolar?,1
+edu3,education,¿Cómo mejorar la educación superior?,1
+edu4,education,¿Cómo mejorar el acceso a becas y financiamiento de estudios superiores?,1
+edu5,education,¿Cómo mejorar la formación y condiciones laborales de los profesores?,1
+edu6,education,¿Cómo mejorar la educación intercultural?,1
+edu7,education,¿Cómo mejorar la educación de los alumnos con discapacidad?,1
+sal1,health,¿Cómo obtener mejores resultados en la lucha contra el Covid-19?,1
+sal2,health,¿Cómo reformar el sistema público de salud?,1
+sal3,health,¿Cómo disminuir el gasto de las personas en salud?,1
+sal4,health,¿Qué otros servicios de salud quisieras que estén en el Plan de Gobierno?,0
+gob1,governability,¿Qué opinas sobre modificar la Constitución?,0
+gob2,governability,"Si se dieran cambios en la Constitución, ¿en qué temas preferirías que sean?",1
+gob3,governability,¿Qué quieres que opine el candidato presidencial sobre la vacancia del 9 de noviembre?,0
+amb1,environment,¿Cómo combatir la deforestación de la Amazonía?,1
+amb2,environment,¿Cómo transitar hacia energías renovables?,1
+amb3,environment,¿Cómo gestionar el problema de los desastres naturales en el país?,1
+amb4,environment,¿Qué otra medida ambiental quisieras que esté en el plan de gobierno?,1
+seg1,security,¿Cómo mejorar la lucha contra el crimen?,1
+seg2,security,¿Cómo mejorar la formación de la policía?,1
+seg3,security,¿Cómo mejorar la atención policial de casos de violencia de género?,1
+seg4,security,¿Qué otra medida relacionada a la Policía quisieras que esté en el plan de gobierno?,1
+der1,rights,¿Cómo debería apoyar el gobierno a las personas con discapacidad?,1
+der2,rights,¿Cómo apoyar a las poblaciones y comunidades nativas del país?,1
+der3,rights,¿Está a favor del matrimonio civil igualitario?,0
+der4,rights,¿Cómo reducir las brechas económicas de género?,1
+der5,rights,"En el Perú, el aborto es legal  cuando la vida de la madre está en peligro, ¿en qué otras situaciones debería ser descriminalizado?",0
+cre1,growth,¿Cómo crear nuevos empleos formales en el Perú?,1
+cre2,growth,¿Cómo aumentar la competencia y el crecimiento económico?,0
+cre3,growth,¿Cómo impulsar el desarrollo de la ciencia y tecnología?,1
+cre4,growth,¿Cómo reactivar la agricultura?,1
+imp1,taxes,¿Cómo mejorar la recaudación de impuestos en el país?,1
+imp2,taxes,La reforma del sistema de pensiones debe:,0
+imp3,taxes,¿Qué otras características debería tener el nuevo sistema de pensiones?,1
