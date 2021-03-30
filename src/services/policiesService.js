@@ -59,7 +59,8 @@ const getQuestions = async (params) => {
     } else {
       r[codTopico][idx]["answers"].push({
         id: codRespuesta,
-        label: respuesta
+        label: respuesta,
+        forceSingle
       });
     }
 
