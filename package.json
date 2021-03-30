@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "lint": "eslint --ext js .",
+    "lint:fix": "npm run lint -- --fix",
+    "lint-only": "eslint --ext .js",
+    "lint-only:fix": "npm run lint-only -- --fix"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +22,11 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.6",
     "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
   }
 }
