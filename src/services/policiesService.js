@@ -183,14 +183,15 @@ const getPolicyResults = async (body) => {
         }
       }
 
-      compatibilityObject.total = (accumulatorByParty / totalCount).toFixed(2);
+      let compatibility = (accumulatorByParty / totalCount).toFixed(2);
 
       return {
         name: item.alias,
         order: item.orden_cedula,
         org_politica_id: item.org_politica_id,
         org_politica_nombre: item.nombre,
-        compatibility: compatibilityObject,
+        compatibility,
+        compatibility_per_topic: compatibilityObject,
         president: presidenteData,
         firstVP: obtainPresidentByCargoId(2, item),
         secondVP: obtainPresidentByCargoId(3, item)
@@ -200,7 +201,7 @@ const getPolicyResults = async (body) => {
 
   //Remove null values for parties with no presidential leaders with filter
   //And sort the object list by the total compatibility
-  return results.filter((i) => i).sort((a, b) => b.compatibility.total - a.compatibility.total);
+  return results.filter((i) => i).sort((a, b) => b.compatibility - a.compatibility);
 };
 
 module.exports = {
