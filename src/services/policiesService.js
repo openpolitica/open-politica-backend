@@ -20,35 +20,48 @@ const getQuestions = async (params) => {
     topics = [topics];
   }
   let query =
-    "SELECT c.codTopico, b.codPregunta, b.pregunta, a.codRespuesta, a.respuesta FROM respuesta a INNER JOIN pregunta b ON a.codPregunta = b.codPregunta INNER JOIN topico c ON b.codTopico = c.codTopico WHERE b.codTopico IN (?)";
+    "SELECT c.codTopico, b.codPregunta, b.pregunta, b.isMultiple, a.codRespuesta, a.respuesta, a.forceSingle FROM respuesta a INNER JOIN pregunta b ON a.codPregunta = b.codPregunta INNER JOIN topico c ON b.codTopico = c.codTopico WHERE b.codTopico IN (?)";
 
   const response = await db.query(query, [topics]);
 
   let mapped = response.reduce(function (r, a) {
-    const { codTopico, codPregunta, pregunta, codRespuesta, respuesta } = a;
+    const {
+      codTopico,
+      codPregunta,
+      pregunta,
+      isMultiple,
+      codRespuesta,
+      respuesta,
+      forceSingle
+    } = a;
 
     r[codTopico] = r[codTopico] || [];
 
-    idx = r[codTopico].findIndex(element => element["question"]["id"] === codPregunta)
+    idx = r[codTopico].findIndex(
+      (element) => element["question"]["id"] === codPregunta
+    );
 
     if (idx < 0) {
       r[codTopico].push({
         question: {
           id: codPregunta,
-          label: pregunta
+          label: pregunta,
+          isMultiple
         },
-        answers: [{
-          id: codRespuesta,
-          label: respuesta
-        }]
+        answers: [
+          {
+            id: codRespuesta,
+            label: respuesta,
+            forceSingle
+          }
+        ]
       });
     } else {
-      r[codTopico][idx]["answers"].push(
-        {
-          id: codRespuesta,
-          label: respuesta
-        }
-      );
+      r[codTopico][idx]["answers"].push({
+        id: codRespuesta,
+        label: respuesta,
+        forceSingle
+      });
     }
 
     return r;
@@ -56,8 +69,10 @@ const getQuestions = async (params) => {
 
   for (topic in mapped) {
     mapped[topic].forEach((item, index) => {
-      mapped[topic][index]["answers"] = shuffle(mapped[topic][index]["answers"]);
-    })
+      mapped[topic][index]["answers"] = shuffle(
+        mapped[topic][index]["answers"]
+      );
+    });
   }
 
   return mapped;
@@ -161,7 +176,10 @@ const getPolicyResults = async (body) => {
 
   let queryPartidosSinCompatibilidad = "SELECT a.id AS org_politica_id, a.orden_cedula, a.nombre, a.alias FROM partidos_alias a WHERE a.id NOT IN (?) AND a.id IN (SELECT org_politica_id FROM partido_x_respuesta) ORDER BY a.alias ASC";
 
-  let responsePartidosSinCompatibilidad = await db.query(queryPartidosSinCompatibilidad, [listaIdPartidosObtenidos]);
+  let responsePartidosSinCompatibilidad = await db.query(
+    queryPartidosSinCompatibilidad,
+    [listaIdPartidosObtenidos]
+  );
 
   let listaTotalPartidos = [...partyList, ...responsePartidosSinCompatibilidad];
 
@@ -195,7 +213,7 @@ const getPolicyResults = async (body) => {
         president: presidenteData,
         firstVP: obtainPresidentByCargoId(2, item),
         secondVP: obtainPresidentByCargoId(3, item)
-      }
+      };
     }
   });
 
