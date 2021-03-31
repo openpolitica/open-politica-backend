@@ -545,8 +545,20 @@
                     "answerId": "b"
                   },
                   {
+                    "questionId": "edu3",
+                    "answerId": "a"
+                  },
+                  {
                     "questionId": "sal1",
-                    "answerId": "c"
+                    "answerId": "a"
+                  },
+                  {
+                    "questionId": "sal1",
+                    "answerId": "b"
+                  },
+                  {
+                    "questionId": "sal3",
+                    "answerId": "a"
                   }
                 ]
               }

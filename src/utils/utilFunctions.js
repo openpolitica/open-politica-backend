@@ -2,7 +2,7 @@ module.exports = {
   /**
    * The de-facto unbiased shuffle algorithm is the Fisher-Yates (aka Knuth) Shuffle.
    * See https://github.com/coolaj86/knuth-shuffle
-   * @param {*} array : Array to shuffle
+   * @param {*} array Array to shuffle
    * @returns  Shuffled array
    */
   shuffle: function (array) {
@@ -22,5 +22,19 @@ module.exports = {
     }
 
     return array;
+  },
+
+  /**
+   * Group an array of objects defined by a key on every object
+   * @param {*} array Array of objects to group
+   * @param {*} key key of every single object used to group
+   * @returns Object with the agrupation separated by values of the key provided
+   */
+  groupObjectListByKey: function (array, key) {
+    return array.reduce(function (r, a) {
+      r[a[key]] = r[a[key]] || [];
+      r[a[key]].push(a);
+      return r;
+    }, Object.create(null));
   }
 }
