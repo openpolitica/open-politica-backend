@@ -194,14 +194,15 @@ const getPolicyResults = async (body) => {
         //Find by topic if the party exists on the responses count list "groupedCountRespuestas"
         let itemPartyResponse = groupedCountRespuestas[topic].find((itemResp) => itemResp.org_politica_id === item.org_politica_id);
         if (itemPartyResponse) {
-          compatibilityObject[topic] = (itemPartyResponse.total / topicCounter[topic]).toFixed(2);
+          let topicCompatibility = (itemPartyResponse.total / topicCounter[topic]);
+          compatibilityObject[topic] = topicCompatibility ? +topicCompatibility.toFixed(2) : topicCompatibility;
           accumulatorByParty += itemPartyResponse.total;
         } else {
           compatibilityObject[topic] = 0;
         }
       }
-
-      let compatibility = (accumulatorByParty / totalCount).toFixed(2);
+      let totalCompatibility = (accumulatorByParty / totalCount);
+      let compatibility = totalCompatibility ? +totalCompatibility.toFixed(2) : totalCompatibility;
 
       return {
         name: item.alias,
