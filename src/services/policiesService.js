@@ -82,6 +82,7 @@ const getPolicyResults = async (body) => {
   let questions = [];
   let arrayPreguntas = [];
   body.answers.forEach(function (value) {
+    questions.push(value.questionId);
     if (value.answerId === null && value.answers.length > 0) {
       //Pregunta múltiple
       //answers: ['a', 'b']
@@ -91,15 +92,6 @@ const getPolicyResults = async (body) => {
       //answers: null
       //answerId: 'c'
       arrayPreguntas.push([value.questionId, value.answerId]);
-    }
-  });
-
-  //Validates if the response only has max. 2 answers by question
-  questions.forEach((item) => {
-    if (questions.filter(questionItem => questionItem === item).length > 2) {
-      const error = new Error("No está permitido más de 2 respuestas por pregunta.");
-      error.statusCode = 400;
-      throw error;
     }
   });
 
