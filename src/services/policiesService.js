@@ -94,8 +94,6 @@ const getPolicyResults = async (body) => {
     }
   });
 
-  console.log(arrayPreguntas);
-
   //Validates if the response only has max. 2 answers by question
   questions.forEach((item) => {
     if (questions.filter(questionItem => questionItem === item).length > 2) {
