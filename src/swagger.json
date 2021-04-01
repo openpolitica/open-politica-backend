@@ -538,27 +538,23 @@
                 "answers": [
                   {
                     "questionId": "edu1",
-                    "answerId": "a"
+                    "answerId": "a",
+                    "answers": null
                   },
                   {
                     "questionId": "edu2",
-                    "answerId": "b"
-                  },
-                  {
-                    "questionId": "edu3",
-                    "answerId": "a"
+                    "answerId": null,
+                    "answers": ["a", "b"]
                   },
                   {
                     "questionId": "sal1",
-                    "answerId": "a"
-                  },
-                  {
-                    "questionId": "sal1",
-                    "answerId": "b"
+                    "answerId": null,
+                    "answers": ["a", "c"]
                   },
                   {
                     "questionId": "sal3",
-                    "answerId": "a"
+                    "answerId": "a",
+                    "answers": null
                   }
                 ]
               }
