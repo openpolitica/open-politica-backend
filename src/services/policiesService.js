@@ -80,10 +80,21 @@ const getQuestions = async (params) => {
 
 const getPolicyResults = async (body) => {
   let questions = [];
-  const arrayPreguntas = body.answers.map(function (value) {
-    questions.push(value.questionId);
-    return [value.questionId, value.answerId];
+  let arrayPreguntas = [];
+  body.answers.forEach(function (value) {
+    if (value.answerId === null && value.answers.length > 0) {
+      //Pregunta múltiple
+      //answers: ['a', 'b']
+      value.answers.forEach((answer) => arrayPreguntas.push([value.questionId, answer]));
+    } else if (value.answers === null && !!value.answerId) {
+      //Pregunta única
+      //answers: null
+      //answerId: 'c'
+      arrayPreguntas.push([value.questionId, value.answerId]);
+    }
   });
+
+  console.log(arrayPreguntas);
 
   //Validates if the response only has max. 2 answers by question
   questions.forEach((item) => {
