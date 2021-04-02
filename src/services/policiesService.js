@@ -82,15 +82,18 @@ const getPolicyResults = async (body) => {
   let questions = [];
   let arrayPreguntas = [];
   body.answers.forEach(function (value) {
-    questions.push(value.questionId);
     if (value.answerId === null && value.answers.length > 0) {
       //Pregunta múltiple
       //answers: ['a', 'b']
-      value.answers.forEach((answer) => arrayPreguntas.push([value.questionId, answer]));
+      value.answers.forEach((answer) => {
+        arrayPreguntas.push([value.questionId, answer]);
+        questions.push(value.questionId);
+      });
     } else if (value.answers === null && !!value.answerId) {
       //Pregunta única
       //answers: null
       //answerId: 'c'
+      questions.push(value.questionId);
       arrayPreguntas.push([value.questionId, value.answerId]);
     }
   });
