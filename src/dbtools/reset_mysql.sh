@@ -589,6 +589,7 @@ echo "----------------------------------------------"
 echo "#### Militancy: Downloading data in sqlite"
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-congresales.db
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-presidenciales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-parlamento-andino.db
 
 
 # Militancy: Import Presidentes first
@@ -596,6 +597,7 @@ echo "----------------------------------------------"
 echo "#### Militancy: Importing candidates: Presidentes"
 sqlite3mysql -f 2021-militancia-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 sqlite3mysql -f 2021-militancia-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+sqlite3mysql -f 2021-militancia-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 
 # Militancy: Remove duplicates and useless
