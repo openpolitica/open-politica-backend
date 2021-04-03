@@ -113,7 +113,8 @@
                 "PRESIDENTE",
                 "PRIMER VICEPRESIDENTE",
                 "SEGUNDO VICEPRESIDENTE",
-                "CONGRESISTA"
+                "CONGRESISTA",
+                "PARLAMENTO ANDINO"
               ]
             },
             "required": false
