@@ -5,32 +5,8 @@ const getCandidates = async (params) => {
 
   let arguments = [];
 
-  let partiesAliasOrder = [
-    "Frepap",
-    "Partido Nacionalista",
-    "Frente Amplio",
-    "Partido Morado",
-    "Perú Patria Segura",
-    "Victoria Nacional",
-    "Acción Popular",
-    "Avanza País",
-    "Podemos Perú",
-    "Juntos por el Perú",
-    "Partido Aprista Peruano",
-    "Partido Popular Cristiano",
-    "Fuerza Popular",
-    "Partido Político Contigo",
-    "Unión por el Perú",
-    "Renovación Popular",
-    "Renacimiento Unido Nacional",
-    "Somos Perú",
-    "Perú Libre",
-    "Democracia Directa",
-    "Alianza para el Progreso"
-  ];
-
   let query =
-    "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, a.org_politica_nombre, e.alias AS org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a, extra_data b, data_ec c, ingreso d, partidos_alias e WHERE a.hoja_vida_id = b.hoja_vida_id AND a.hoja_vida_id = c.hoja_vida_id AND a.hoja_vida_id = d.hoja_vida_id AND a.org_politica_id = e.id ";
+    "SELECT a.hoja_vida_id, a.id_nombres, a.id_apellido_paterno, a.id_apellido_materno, a.id_sexo, a.nacimiento_fecha, a.postula_distrito, a.posicion, a.enlace_foto, d.total AS ingreso_total, a.org_politica_nombre, e.alias AS org_politica_alias, b.educacion_mayor_nivel, b.sentencias_ec_civil_cnt, b.sentencias_ec_penal_cnt, b.educacion_primaria, b.educacion_secundaria, b.educacion_superior_tecnica, b.educacion_superior_nouniversitaria, b.educacion_superior_universitaria, b.educacion_postgrado, b.experiencia_publica, b.experiencia_privada, c.papeletas_sat, c.licencia_conducir, c.sancion_servir_registro, c.licencia_conducir, c.deuda_sunat, c.aportes_electorales, c.sancion_servir_registro, c.procesos_electorales_participados, c.procesos_electorales_ganados, c.designado FROM candidato a LEFT JOIN extra_data b ON a.hoja_vida_id = b.hoja_vida_id LEFT JOIN data_ec c ON a.hoja_vida_id = c.hoja_vida_id LEFT JOIN ingreso d ON a.hoja_vida_id = d.hoja_vida_id LEFT JOIN partidos_alias e ON a.org_politica_id = e.id WHERE a.hoja_vida_id IS NOT NULL ";
 
   if (parties) {
     query += "AND a.org_politica_nombre IN (?) ";
@@ -40,6 +16,7 @@ const getCandidates = async (params) => {
   if (role) {
     query += "AND a.cargo_nombre LIKE ? ";
     if (role === "CONGRESISTA") arguments.push("%" + role + "%");
+    else if (role === "PARLAMENTO ANDINO") arguments.push("%" + role);
     else arguments.push(role + "%");
   }
 
@@ -53,10 +30,12 @@ const getCandidates = async (params) => {
   if (vacancia && vacancia === "false") {
     query += "AND b.vacancia = ? ";
     arguments.push(0);
-    queryUpdateVacancyCount = "UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?"
+    queryUpdateVacancyCount =
+      "UPDATE locations SET no_vacancia = no_vacancia + 1 WHERE location = ?";
   } else {
     arguments.push(1);
-    queryUpdateVacancyCount = "UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?"
+    queryUpdateVacancyCount =
+      "UPDATE locations SET si_vacancia = si_vacancia + 1 WHERE location = ?";
   }
 
   let candidates = [];
@@ -67,23 +46,25 @@ const getCandidates = async (params) => {
     query += "AND b.sentencias_ec_penal_cnt > 0";
   }
 
-  query += ` ORDER BY FIELD(e.alias,${"'" +
-    partiesAliasOrder.reverse().join("','") +
-    "'"}) DESC, a.posicion ASC;`;
+  query += ` ORDER BY e.orden_cedula ASC, a.posicion ASC;`;
 
   try {
     candidates = await db.query(query, arguments);
 
-    await db.query(
-      "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
-      region
-    );
-    if (queryUpdateVacancyCount) await db.query(queryUpdateVacancyCount, region);
+    if (region) {
+      await db.query(
+        "UPDATE locations SET apicounts = apicounts + 1 WHERE location = ?",
+        region
+      );
+      if (queryUpdateVacancyCount)
+        await db.query(queryUpdateVacancyCount, region);
+    }
 
     return {
-      candidates
+      candidates,
     };
   } catch (error) {
+    console.log(error);
     throw new Error("Error al consultar los candidatos");
   }
 };
@@ -106,7 +87,8 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
   let query_afiliations =
     "SELECT a.org_politica, a.afiliacion_inicio, a.afiliacion_cancelacion FROM afiliacion a INNER JOIN candidato c ON a.dni = c.id_dni  WHERE a.vigente = 0 and c.org_politica_nombre != a.org_politica AND c.hoja_vida_id = ?";
 
-  let query_redes_sociales = "SELECT * FROM redes_sociales WHERE hoja_vida_id = ?";
+  let query_redes_sociales =
+    "SELECT * FROM redes_sociales WHERE hoja_vida_id = ?";
 
   candidate = await db.query(query_candidate, hoja_vida_id);
   education = await db.query(query_education, hoja_vida_id);
@@ -125,7 +107,7 @@ const getCandidateByHojaDeVida = async (hoja_vida_id) => {
     bienes_inmuebles,
     judgements,
     afiliations,
-    ...redes_sociales[0]
+    ...redes_sociales[0],
   };
 };
 
@@ -171,7 +153,7 @@ const getCandidateByDNI = async (id_dni) => {
     bienes_inmuebles,
     judgements,
     afiliations,
-    ...redes_sociales[0]
+    ...redes_sociales[0],
   };
 };
 
@@ -185,6 +167,7 @@ const getCandidatesCount = async (params) => {
   if (role) {
     query += "WHERE cargo_nombre LIKE ? ";
     if (role === "CONGRESISTA") arguments.push("%" + role + "%");
+    else if (role === "PARLAMENTO ANDINO") arguments.push("%" + role);
     else arguments.push(role + "%");
   }
 
@@ -202,5 +185,5 @@ module.exports = {
   getCandidates,
   getCandidateByHojaDeVida,
   getCandidateByDNI,
-  getCandidatesCount
+  getCandidatesCount,
 };
