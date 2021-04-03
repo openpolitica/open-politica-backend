@@ -16,6 +16,7 @@ echo "----------------------------------------------"
 echo "#### Downloading data in sqlite"
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-presidenciales.db
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-congresales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-parlamento-andino.db
 
 
 # Login to mysql
@@ -101,6 +102,11 @@ WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+
+# Import Parlamento Andino
+echo "----------------------------------------------"
+echo "#### Importing candidates Parlamento andino"
+sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # Modify datatypes in candidates
 echo "----------------------------------------------"
