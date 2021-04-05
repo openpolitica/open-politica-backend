@@ -113,7 +113,8 @@
                 "PRESIDENTE",
                 "PRIMER VICEPRESIDENTE",
                 "SEGUNDO VICEPRESIDENTE",
-                "CONGRESISTA"
+                "CONGRESISTA",
+                "PARLAMENTO ANDINO"
               ]
             },
             "required": false
@@ -538,15 +539,23 @@
                 "answers": [
                   {
                     "questionId": "edu1",
-                    "answerId": "a"
+                    "answerId": "a",
+                    "answers": null
                   },
                   {
                     "questionId": "edu2",
-                    "answerId": "b"
+                    "answerId": null,
+                    "answers": ["a", "b"]
                   },
                   {
                     "questionId": "sal1",
-                    "answerId": "c"
+                    "answerId": null,
+                    "answers": ["a", "c"]
+                  },
+                  {
+                    "questionId": "sal3",
+                    "answerId": "a",
+                    "answers": null
                   }
                 ]
               }

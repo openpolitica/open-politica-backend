@@ -16,6 +16,7 @@ echo "----------------------------------------------"
 echo "#### Downloading data in sqlite"
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-presidenciales.db
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-congresales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/plataformaelectoral/2021-candidatos-parlamento-andino.db
 
 
 # Login to mysql
@@ -101,6 +102,11 @@ WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+
+# Import Parlamento Andino
+echo "----------------------------------------------"
+echo "#### Importing candidates Parlamento andino"
+sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # Modify datatypes in candidates
 echo "----------------------------------------------"
@@ -583,6 +589,7 @@ echo "----------------------------------------------"
 echo "#### Militancy: Downloading data in sqlite"
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-congresales.db
 wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-presidenciales.db
+wget https://github.com/openpolitica/jne-elecciones/raw/main/data/infogob/2021-militancia-candidatos-parlamento-andino.db
 
 
 # Militancy: Import Presidentes first
@@ -590,6 +597,7 @@ echo "----------------------------------------------"
 echo "#### Militancy: Importing candidates: Presidentes"
 sqlite3mysql -f 2021-militancia-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 sqlite3mysql -f 2021-militancia-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+sqlite3mysql -f 2021-militancia-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 
 # Militancy: Remove duplicates and useless
@@ -727,6 +735,7 @@ DROP TABLE IF EXISTS pregunta;
  codPregunta VARCHAR(45),
   codTopico VARCHAR(45),
   pregunta VARCHAR(500),
+  isMultiple tinyint(1),
   PRIMARY KEY (codPregunta),
   CONSTRAINT FK_preg_codTopico FOREIGN KEY (codTopico)
         REFERENCES topico(codTopico)
@@ -751,6 +760,7 @@ DROP TABLE IF EXISTS respuesta;
   codPregunta VARCHAR(45),
   codRespuesta VARCHAR(45),
   respuesta VARCHAR(500),
+  forceSingle tinyint(1),
   CONSTRAINT FK_res_codPregunta FOREIGN KEY (codPregunta)
         REFERENCES pregunta(codPregunta)
  )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

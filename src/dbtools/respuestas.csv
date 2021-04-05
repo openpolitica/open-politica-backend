@@ -1,148 +1,147 @@
-codPregunta,codRespuesta,respuesta
-edu1,a,"Medidas para atender la deserción universitaria (becas, acompañamiento, etc.)."
-edu1,b,Incluir estrategias complementarias de reforzamiento y recuperación de clases.
-edu1,c,Implementar un modelo de educación semipresencial.
-edu1,d,"Dar recursos tecnológicos para educación a distancia (tablets, internet, etc.)."
-edu1,e,Hacer un 'Aprendo en Casa' por grado para escolares.
-edu2,a,Adoptar estándares internacionales de calidad educativa.
-edu2,b,Sistema para garantizar condiciones básicas de calidad de colegios (similar a SUNEDU).
-edu2,c,Regular el aumento de pensiones y cuotas de ingreso en colegios privados.
-edu2,d,Prohibir colegios con fines de lucro.
-edu3,a,Eliminar las exoneraciones tributarias de las universidades con fines de lucro.
-edu3,b,Continuar con el proceso de licenciamiento a universidades de la SUNEDU.
-edu3,c,Continuar con el proceso de licenciamiento a institutos de educación superior universitarios y no universitarios.
-edu3,d,Adecuar la oferta formativa técnica superior a las necesidades de cada región.
-edu3,e,"Crear nuevas formas de oferta de educación superior (universidades o institutos de Alto Rendimiento, Emblemáticos, Digitales, u otros)."
-edu4,a,Aumentar la cantidad de becas disponibles.
-edu4,b,"Agregar nuevos grupos beneficiarios de becas (por ejemplo afectados por Covid-19, madres jóvenes o deportistas)."
-edu4,c,Aumentar la cantidad de créditos educativos de bajo interés.
-edu4,d,Crear un nuevo programa de becas para estudios de maestrías y doctorado (distinto a los existentes).
-edu5,a,"Intervenciones enfocadas en los estudios de docencia (malla curricular, fortalecer las escuelas de formación pedagógica)."
-edu5,b,"Intervenciones enfocadas en los docentes en actividad (centros de formación continua, capacitaciones, acompañamiento pedagógico)."
-edu5,c,Implementar un SERUMS para docentes (como el de los doctores).
-edu5,d,"Brindar incentivos adicionales (becas para los docentes que enseñan en zonas rurales, o reintegro del costo de estudios de maestría y doctorado)."
-edu5,e,Aumentar el salario de los docentes.
-edu6,a,Adaptar mejor el Currículo Escolar a la diversidad cultural del país.
-edu6,b,Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB).
-edu6,c,Enseñar quechua en los colegios.
-edu7,a,Adaptar el Currículo Escolar a sus necesidades.
-edu7,b,"Ampliar y mejorar los servicios para atender sus necesidades educativas especiales (capacitación docente, psicólogos escolares, etc.)."
-edu7,c,Darles reforzamiento escolar gestionado por las municipalidades.
-sal1,a,Rastrear contactos y aislar casos positivos.
-sal1,b,Usar pruebas moleculares para detectar tempranamente los casos.
-sal1,c,Sensibilizar e informar más a las personas cumplan con las medidas de seguridad.
-sal1,d,Aumentar la cantidad disponible de oxígeno para pacientes de Covid-19.
-sal1,e,Dar apoyo alimentario o de vivienda para pacientes con Covid-19 que deban mantenerse aislados.
-sal2,a,"Unificar el sistema de salud público (Minsa, EsSalud, FFAA y PNP)."
-sal2,b,"Integrar sistemas de información de salud del Minsa, EsSalud, FFAA y PNP."
-sal2,c,"Estandarizar los servicios, costos operativos y condiciones laborales entre Minsa, EsSalud, FFAA y PNP."
-sal2,d,"Separar funciones de rectoría (monitoreo y estrategia), financiamiento y prestación (quienes brindan los servicios en el día a día)."
-sal2,e,Fortalecer el primer nivel de atención de salud.
-sal3,a,Garantizar la venta de medicamentos a bajo precio en farmacias públicas o centros de salud del Estado.
-sal3,b,"Obligar que las farmacias tengan medicamentos básicos (aquellos incluidos en los Petitorios del Minsa, EsSalud, FFAA y PNP)."
-sal3,c,Eliminar monopolios y oligopolios en el mercado peruano de salud y medicamentos.
-sal3,d,"Ampliar la cobertura de los seguros públicos y combinar su uso con seguros privados, tomar medidas para evitar la duplicidad de exámenes de diagnóstico."
-sal3,e,"Continuar con medidas actuales (venta de medicamentos genéricos, compras públicas masivas del Estado, exoneración de impuestos a algunos medicamentos)."
-sal4,a,Servicios de salud sexual y reproductiva (planificación familiar y educación sexual).
-sal4,b,"Servicios de salud interculturales (adecuar los servicios a la cultura, casas de maternidad, servicios itinerantes, incorporar medicina tradicional)."
-sal4,c,"Enfoque de salud familiar (médicos y enfermeras de familia, dar soporte a las familias de pacientes con enfermedades crónicas)."
-sal4,d,Ninguno.
-gob1,a,Se debe hacer una nueva Constitución.
-gob1,b,Se deben hacer algunos cambios a la Constitución.
-gob1,c,No se debe cambiar nada de la Constitución.
-gob2,a,Sanciones para delincuentes y actos de corrupción.
-gob2,b,"Relación entre los poderes del Estado (Congreso, Ejecutivo, Judicial)."
-gob2,c,"Reglas del sistema electoral y de representación (voto preferencial, reelección, bicameralidad, etc)"
-gob2,d,Rol del Estado en la economía y la regulación del sector privado.
-gob2,e,"Derechos sociales y derechos para poblaciones vulnerables (pueblos indígenas, LGTBI+, etc.)."
-gob2,f,En ninguno.
-gob3,a,Fue ilegítima o inconstitucional.
-gob3,b,Fue un error.
-gob3,c,"El partido votó a favor de la vacancia, pero el candidato presidencial declaró que fue un error y/o exigió la renuncia de Merino."
-gob3,d,Estuvo bien.
-amb1,a,"Prohibir la deforestación para monocultivos, y fortalecer sistemas de monitoreo estatales y ciudadanos."
-amb1,b,Generar alternativas a la agricultura itinerante (que requiere quema y tala de bosques) y monitorear a gran escala con imágenes satelitales.
-amb1,c,"Tener una política de reforestación y explotación sostenible, que respete a las comunidades nativas."
-amb2,a,A través de subvenciones.
-amb2,b,"Eliminar las barreras regulatorias y de entrada al mercado, y aumentar la inversión."
-amb2,c,A través de alianzas público-privadas.
-amb2,d,Priorizar e impulsar la investigación científica y el desarrollo tecnológico.
-amb3,a,Establecer protocolos de respuesta y mitigación de efectos negativos articulados con distintos actores.
-amb3,b,Integrar a las instituciones involucradas para prevenir desastres y capacitar a la población.
-amb3,c,Usar tecnología para la prevención y mitigación de impactos; y articular con Fuerzas Armadas y Gobiernos Regionales.
-amb3,d,Mejorar la infraestructura y equipamiento en las zonas más expuestas.
-amb4,a,Integrarse o alinearse al acuerdo de Escazú.
-amb4,b,Establecer una economía circular en la que se reduzcan desechos y se use material reciclado y reaprovechable.
-amb4,c,Promover la educación o participación ambiental ciudadana.
-seg1,a,Fortalecer las comisarías y dar incentivos para mejorar el capital humano en ellas.
-seg1,b,"Utilizar tecnología para hacer más efectivo el patrullaje, la persecución criminal y la labor policial."
-seg1,c,Capacitar a los policías y fortalecer unidades de inteligencia e investigación.
-seg1,d,Fortalecer e incluir a los serenazgos dentro de las estrategias de lucha contra el crimen.
-seg1,e,"Fortalecer y trabajar con los comités ciudadanos de seguridad, juntas vecinales, rondas y comunidades campesinas y nativas."
-seg2,a,"Asegurar que se cumplan los tres años de formación para policías, sin excepciones."
-seg2,b,Reducir el número de escuelas policiales para mejorar la calidad educativa.
-seg2,c,Crear nuevas alternativas de formación policial especializadas.
-seg2,d,Reformar el currículo educativo policial con un enfoque en derechos humanos.
-seg2,e,"Reformar la educación policial hacia labores como inteligencia, investigación, orden y seguridad, e incluir una segunda especialización."
-seg3,a,"Establecer procedimientos claros que faciliten la denuncia, seguimiento y sanción de casos de violencia de género."
-seg3,b,Formar a la policía en el manejo adecuado de casos de violencia de género.
-seg3,c,Fortalecer y crear más Centros de Emergencia Mujer en comisarías y puntos de atención para casos de violencia de género.
-seg4,a,Fortalecer a las oficinas de control interno de la Policía para prevenir y sancionar actos de corrupción.
-seg4,b,Asignar auditores externos que fiscalicen en materia de corrupción.
-seg4,c,Evaluar a los encargados de realizar contratos y compras para detectar actos de corrupción.
-seg4,d,Asignar labores administrativas a personal civil para liberar horas a efectivos policiales.
-seg4,e,Aprobar normas para proteger los derechos de los policías durante su labor.
-der1,a,Ampliar el programa existente de pensiones a personas con discapacidad en situación vulnerable.
-der1,b,"Dar apoyo a las familias en el acceso a terapias, medicamentos y transporte; y potenciar emprendimientos dirigidos a este segmento."
-der1,c,Adaptar mejor el Currículo Escolar a sus necesidades.
-der1,d,"Ampliar y mejorar los servicios para atender sus necesidades educativas especificas (capacitación docente, psicólogos escolares, etc.)."
-der1,e,Visibilizar su situación y darles herramientas educativas y laborales.
-der2,a,Establecer cuotas de representación en el congreso y otros niveles de gobierno.
-der2,b,Utilizar un enfoque intercultural en los diferentes niveles de gobierno.
-der2,c,Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB).
-der2,d,Fomentar el emprendimiento dentro de las comunidades en temas culturales y productivos.
-der2,e,"Promover sus valores culturales y revalorizar, recuperar y proteger su identidad, patrimonio y tradiciones."
-der3,a,"Sí, con igualdad de derechos respecto a familias conformadas por parejas heterosexuales."
-der3,b,"No, pero sí de la unión civil (es decir, sin reconocimiento de derechos sobre hijos e hijas)."
-der3,c,No.
-der4,a,Facilitar financiamiento y acompañamiento a mujeres emprendedoras.
-der4,b,Dar capacitación para facilitar la inserción laboral de las mujeres.
-der4,c,Reconocer o reducir la carga de trabajo no remunerado que enfrentan las mujeres.
-der4,d,Reducir la brecha de participación de mujeres en carreras de ciencia y tecnología.
-der4,e,Fortalecer las leyes para reducir la brecha salarial y generar igualdad de oportunidades.
-der5,a,Durante las primeras 12 semanas de embarazo.
-der5,b,Solo en casos de violación.
-der5,c,Ninguna.
-cre1,a,Revisar la regulación y crear planes de promoción empresarial y de mejora de capacidades de la mano de obra.
-cre1,b,Reducir y reformular las barreras legales y tributarias que enfrentan las empresas.
-cre1,c,Exigir que todos los proveedores del Estado tengan trabajadores en planilla.
-cre1,d,Dar un subsidio a la formalización.
-cre1,e,Prohibir la intermediación y la tercerización laboral (services).
-cre2,a,Desregular para eliminar barreras y que el libre mercado guíe el crecimiento.
-cre2,b,Fortalecer a INDECOPI y la regulación que promueva la competencia.
-cre2,c,Revisar toda la regulación relacionada a servicios públicos.
-cre3,a,Promover la innovación y startups.
-cre3,b,Atraer a investigadores exitosos peruanos y extranjeros.
-cre3,c,Incrementar el financiamiento e incentivos para startups y proyectos de negocio innovadores.
-cre3,d,Disponer de incentivos financieros para la investigación y atraer a investigadores exitosos peruanos y extranjeros.
-cre3,e,Promover la investigación científica en programas de postgrado y brindar líneas de financiamiento e incentivos.
-cre4,a,Dar créditos agrarios para pequeños agricultores.
-cre4,b,"Hacer una segunda Reforma Agraria, con financiamiento público para un Plan de agricultura Familiar y Rural."
-cre4,c,Dar mejor tecnología para la agricultura familiar.
-cre4,d,Fortalecer el Sistema de Compras Públicas de alimentos.
-cre4,e,"Desarrollar la red de mercado mayoristas y minoristas, así como los servicios agrarios regionales."
-imp1,a,Simplificar el régimen tributario y reducir el número de impuestos.
-imp1,b,Combatir el uso de paraísos fiscales y tributación en el extranjero para evadir impuestos.
-imp1,c,Revisar beneficios tributarios a empresas y sectores productivos.
-imp1,d,Añadir un impuesto a la riqueza.
-imp1,e,Hacer más énfasis en impuestos directos y menos en impuestos indirectos.
-imp2,a,Unificar ambos sistemas actuales (AFP y ONP) bajo el Estado.
-imp2,b,Establecer un sistema mixto (una parte del Estado y otra de las AFP).
-imp2,c,Cambiar a un sistema de cuentas individuales administrado por las AFP.
-imp2,d,Unificar todos los sistemas de protección social (pensiones y EsSalud).
-imp2,e,Garantizar una pensión básica para adultos mayores.
-imp3,a,Debe contar con un pilar redistributivo.
-imp3,b,Debe tener más alternativas de administración de fondos.
-imp3,c,Debe establecer un límite al tamaño del fondo acumulable obligatorio.
-imp3,d,Debe tener una mayor tasa de aporte.
-imp3,e,Debe reasignar un porcentaje de tus pagos de IGV a tu cuenta individual de pensiones.
+codPregunta,codRespuesta,respuesta,forceSingle
+edu1,a,"Medidas para atender la deserción universitaria (becas, acompañamiento, etc.).",0
+edu1,b,Incluir estrategias complementarias de reforzamiento y recuperación de clases.,0
+edu1,c,Implementar un modelo de educación semipresencial.,0
+edu1,d,"Dar recursos tecnológicos para educación a distancia (tablets, internet, etc.).",0
+edu1,e,Hacer un 'Aprendo en Casa' por grado para escolares.,0
+edu2,a,Adoptar estándares internacionales de calidad educativa.,0
+edu2,b,Sistema para garantizar condiciones básicas de calidad de colegios (similar a SUNEDU).,0
+edu2,c,Regular el aumento de pensiones y cuotas de ingreso en colegios privados.,0
+edu2,d,Prohibir colegios con fines de lucro.,0
+edu3,a,Eliminar las exoneraciones tributarias de las universidades con fines de lucro.,0
+edu3,b,Continuar con el proceso de licenciamiento a universidades de la SUNEDU.,0
+edu3,c,Continuar con el proceso de licenciamiento a institutos de educación superior universitarios y no universitarios.,0
+edu3,d,Adecuar la oferta formativa técnica superior a las necesidades de cada región.,0
+edu3,e,"Crear nuevas formas de oferta de educación superior (universidades o institutos de Alto Rendimiento, Emblemáticos, Digitales, u otros).",0
+edu4,a,Aumentar la cantidad de becas disponibles.,0
+edu4,b,"Agregar nuevos grupos beneficiarios de becas (por ejemplo afectados por Covid-19, madres jóvenes o deportistas).",0
+edu4,c,Aumentar la cantidad de créditos educativos de bajo interés.,0
+edu4,d,Crear un nuevo programa de becas para estudios de maestrías y doctorado (distinto a los existentes).,0
+edu5,a,"Intervenciones enfocadas en los estudios de docencia (malla curricular, fortalecer las escuelas de formación pedagógica).",0
+edu5,b,"Intervenciones enfocadas en los docentes en actividad (centros de formación continua, capacitaciones, acompañamiento pedagógico).",0
+edu5,c,Implementar un SERUMS para docentes (como el de los doctores).,0
+edu5,d,"Brindar incentivos adicionales (becas para los docentes que enseñan en zonas rurales, o reintegro del costo de estudios de maestría y doctorado).",0
+edu5,e,Aumentar el salario de los docentes.,0
+edu6,a,Adaptar mejor el Currículo Escolar a la diversidad cultural del país.,0
+edu6,b,Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB).,0
+edu6,c,Enseñar quechua en los colegios.,0
+edu7,a,Adaptar el Currículo Escolar a sus necesidades.,0
+edu7,b,"Ampliar y mejorar los servicios para atender sus necesidades educativas especiales (capacitación docente, psicólogos escolares, etc.).",0
+edu7,c,Darles reforzamiento escolar gestionado por las municipalidades.,0
+sal1,a,Rastrear contactos y aislar casos positivos.,0
+sal1,b,Usar pruebas moleculares para detectar tempranamente los casos.,0
+sal1,c,Sensibilizar e informar más a las personas cumplan con las medidas de seguridad.,0
+sal1,d,Aumentar la cantidad disponible de oxígeno para pacientes de Covid-19.,0
+sal1,e,Dar apoyo alimentario o de vivienda para pacientes con Covid-19 que deban mantenerse aislados.,0
+sal2,a,"Unificar el sistema de salud público (Minsa, EsSalud, FFAA y PNP).",0
+sal2,b,"Integrar sistemas de información de salud del Minsa, EsSalud, FFAA y PNP.",0
+sal2,c,"Estandarizar los servicios, costos operativos y condiciones laborales entre Minsa, EsSalud, FFAA y PNP.",0
+sal2,d,"Separar funciones de rectoría (monitoreo y estrategia), financiamiento y prestación (quienes brindan los servicios en el día a día).",0
+sal2,e,Fortalecer el primer nivel de atención de salud.,0
+sal3,a,Garantizar la venta de medicamentos a bajo precio en farmacias públicas o centros de salud del Estado.,0
+sal3,b,"Obligar que las farmacias tengan medicamentos básicos (aquellos incluidos en los Petitorios del Minsa, EsSalud, FFAA y PNP).",0
+sal3,c,Eliminar monopolios y oligopolios en el mercado peruano de salud y medicamentos.,0
+sal3,d,"Ampliar la cobertura de los seguros públicos y combinar su uso con seguros privados, tomar medidas para evitar la duplicidad de exámenes de diagnóstico.",0
+sal3,e,"Continuar con medidas actuales (venta de medicamentos genéricos, compras públicas masivas del Estado, exoneración de impuestos a algunos medicamentos).",0
+sal4,a,Servicios de salud sexual y reproductiva (planificación familiar y educación sexual).,0
+sal4,b,"Servicios de salud interculturales (adecuar los servicios a la cultura, casas de maternidad, servicios itinerantes, incorporar medicina tradicional).",0
+sal4,c,"Enfoque de salud familiar (médicos y enfermeras de familia, dar soporte a las familias de pacientes con enfermedades crónicas).",0
+sal4,d,Ninguno.,1
+gob1,a,Se debe hacer una nueva Constitución.,0
+gob1,b,Se deben hacer algunos cambios a la Constitución.,0
+gob1,c,No se debe cambiar nada de la Constitución.,0
+gob2,a,Sanciones para delincuentes y actos de corrupción.,0
+gob2,b,"Relación entre los poderes del Estado (Congreso, Ejecutivo, Judicial).",0
+gob2,c,"Reglas del sistema electoral y de representación (voto preferencial, reelección, bicameralidad, etc)",0
+gob2,d,Rol del Estado en la economía y la regulación del sector privado.,0
+gob2,e,"Derechos sociales y derechos para poblaciones vulnerables (pueblos indígenas, LGTBI+, etc.).",0
+gob2,f,En ninguno.,1
+gob3,a,Fue ilegítima o inconstitucional.,0
+gob3,b,Fue un error.,0
+gob3,c,"El partido votó a favor de la vacancia, pero el candidato presidencial declaró que fue un error y/o exigió la renuncia de Merino.",0
+gob3,d,Estuvo bien.,0
+amb1,a,"Prohibir la deforestación para monocultivos, y fortalecer sistemas de monitoreo estatales y ciudadanos.",0
+amb1,b,Generar alternativas a la agricultura itinerante (que requiere quema y tala de bosques) y monitorear a gran escala con imágenes satelitales.,0
+amb1,c,"Tener una política de reforestación y explotación sostenible, que respete a las comunidades nativas.",0
+amb2,a,A través de subvenciones.,0
+amb2,b,"Eliminar las barreras regulatorias y de entrada al mercado, y aumentar la inversión.",0
+amb2,c,A través de alianzas público-privadas.,0
+amb2,d,Priorizar e impulsar la investigación científica y el desarrollo tecnológico.,0
+amb3,a,Establecer protocolos de respuesta y mitigación de efectos negativos articulados con distintos actores.,0
+amb3,b,Integrar a las instituciones involucradas para prevenir desastres y capacitar a la población.,0
+amb3,c,Usar tecnología para la prevención y mitigación de impactos; y articular con Fuerzas Armadas y Gobiernos Regionales.,0
+amb3,d,Mejorar la infraestructura y equipamiento en las zonas más expuestas.,0
+amb4,a,Integrarse o alinearse al acuerdo de Escazú.,0
+amb4,b,Establecer una economía circular en la que se reduzcan desechos y se use material reciclado y reaprovechable.,0
+amb4,c,Promover la educación o participación ambiental ciudadana.,0
+seg1,a,Fortalecer las comisarías y dar incentivos para mejorar el capital humano en ellas.,0
+seg1,b,"Utilizar tecnología para hacer más efectivo el patrullaje, la persecución criminal y la labor policial.",0
+seg1,c,Capacitar a los policías y fortalecer unidades de inteligencia e investigación.,0
+seg1,d,Fortalecer e incluir a los serenazgos dentro de las estrategias de lucha contra el crimen.,0
+seg1,e,"Fortalecer y trabajar con los comités ciudadanos de seguridad, juntas vecinales, rondas y comunidades campesinas y nativas.",0
+seg2,a,"Asegurar que se cumplan los tres años de formación para policías, sin excepciones.",0
+seg2,b,Reducir el número de escuelas policiales para mejorar la calidad educativa.,0
+seg2,c,Crear nuevas alternativas de formación policial especializadas.,0
+seg2,d,Reformar el currículo educativo policial con un enfoque en derechos humanos.,0
+seg2,e,"Reformar la educación policial hacia labores como inteligencia, investigación, orden y seguridad, e incluir una segunda especialización.",0
+seg3,a,"Establecer procedimientos claros que faciliten la denuncia, seguimiento y sanción de casos de violencia de género.",0
+seg3,b,Formar a la policía en el manejo adecuado de casos de violencia de género.,0
+seg3,c,Fortalecer y crear más Centros de Emergencia Mujer en comisarías y puntos de atención para casos de violencia de género.,0
+seg4,a,Fortalecer a las oficinas de control interno de la Policía para prevenir y sancionar actos de corrupción.,0
+seg4,b,Asignar auditores externos que fiscalicen en materia de corrupción.,0
+seg4,c,Evaluar a los encargados de realizar contratos y compras para detectar actos de corrupción.,0
+seg4,d,Asignar labores administrativas a personal civil para liberar horas a efectivos policiales.,0
+seg4,e,Aprobar normas para proteger los derechos de los policías durante su labor.,0
+der1,a,Ampliar el programa existente de pensiones a personas con discapacidad en situación vulnerable.,0
+der1,b,"Dar apoyo a las familias en el acceso a terapias, medicamentos y transporte.",0
+der1,c,"Ampliar, adaptar y mejorar los servicios para atender sus necesidades educativas.",0
+der1,d,Brindar herramientas de desarrollo laboral para lograr su proyecto de vida.,0
+der2,a,Establecer cuotas de representación en el congreso y otros niveles de gobierno.,0
+der2,b,Utilizar un enfoque intercultural en los diferentes niveles de gobierno.,0
+der2,c,Aumentar y mejorar los colegios de Educación Intercultural Bilingüe (EIB).,0
+der2,d,Fomentar el emprendimiento dentro de las comunidades en temas culturales y productivos.,0
+der2,e,"Promover sus valores culturales y revalorizar, recuperar y proteger su identidad, patrimonio y tradiciones.",0
+der3,a,"Sí, con igualdad de derechos respecto a familias conformadas por parejas heterosexuales.",0
+der3,b,"No, pero sí de la unión civil (es decir, sin reconocimiento de derechos sobre hijos e hijas).",0
+der3,c,No.,0
+der4,a,Facilitar financiamiento y acompañamiento a mujeres emprendedoras.,0
+der4,b,Dar capacitación para facilitar la inserción laboral de las mujeres.,0
+der4,c,Reconocer o reducir la carga de trabajo no remunerado que enfrentan las mujeres.,0
+der4,d,Reducir la brecha de participación de mujeres en carreras de ciencia y tecnología.,0
+der4,e,Fortalecer las leyes para reducir la brecha salarial y generar igualdad de oportunidades.,0
+der5,a,Durante las primeras 12 semanas de embarazo.,0
+der5,b,Solo en casos de violación.,0
+der5,c,Ninguna.,0
+cre1,a,Revisar la regulación y crear planes de promoción empresarial y de mejora de capacidades de la mano de obra.,0
+cre1,b,Reducir y reformular las barreras legales y tributarias que enfrentan las empresas.,0
+cre1,c,Exigir que todos los proveedores del Estado tengan trabajadores en planilla.,0
+cre1,d,Dar un subsidio a la formalización.,0
+cre1,e,Prohibir la intermediación y la tercerización laboral (services).,0
+cre2,a,Desregular para eliminar barreras y que el libre mercado guíe el crecimiento.,0
+cre2,b,Fortalecer a INDECOPI y la regulación que promueva la competencia.,0
+cre2,c,Revisar toda la regulación relacionada a servicios públicos.,0
+cre3,a,Promover la innovación y startups.,0
+cre3,b,Atraer a investigadores exitosos peruanos y extranjeros.,0
+cre3,c,Incrementar el financiamiento e incentivos para startups y proyectos de negocio innovadores.,0
+cre3,d,Disponer de incentivos financieros para la investigación científica.,0
+cre3,e,Promover la investigación científica en programas de postgrado.,0
+cre4,a,Dar créditos agrarios para pequeños agricultores.,0
+cre4,b,"Hacer una segunda Reforma Agraria, con financiamiento público para un Plan de agricultura Familiar y Rural.",0
+cre4,c,Dar mejor tecnología para la agricultura familiar.,0
+cre4,d,Fortalecer el Sistema de Compras Públicas de alimentos.,0
+cre4,e,"Desarrollar la red de mercado mayoristas y minoristas, así como los servicios agrarios regionales.",0
+imp1,a,Simplificar el régimen tributario y reducir el número de impuestos.,0
+imp1,b,Combatir el uso de paraísos fiscales y tributación en el extranjero para evadir impuestos.,0
+imp1,c,Revisar beneficios tributarios a empresas y sectores productivos.,0
+imp1,d,Añadir un impuesto a la riqueza.,0
+imp1,e,Hacer más énfasis en impuestos directos y menos en impuestos indirectos.,0
+imp2,a,Unificar ambos sistemas actuales (AFP y ONP) bajo el Estado.,0
+imp2,b,Establecer un sistema mixto (una parte del Estado y otra de las AFP).,0
+imp2,c,Cambiar a un sistema de cuentas individuales administrado por las AFP.,0
+imp2,d,Unificar todos los sistemas de protección social (pensiones y EsSalud).,0
+imp2,e,Garantizar una pensión básica para adultos mayores.,0
+imp3,a,Debe contar con un pilar redistributivo.,0
+imp3,b,Debe tener más alternativas de administración de fondos.,0
+imp3,c,Debe establecer un límite al tamaño del fondo acumulable obligatorio.,0
+imp3,d,Debe tener una mayor tasa de aporte.,0
+imp3,e,Debe reasignar un porcentaje de tus pagos de IGV a tu cuenta individual de pensiones.,0
