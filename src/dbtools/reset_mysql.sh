@@ -86,10 +86,10 @@ DROP TABLE IF EXISTS `bien_otro`;
 DROP TABLE IF EXISTS `candidato`;
 '''
 
-# Import Parlamento Andino again
+# Import Presidenciales
 echo "----------------------------------------------"
-echo "#### Importing candidates Parlamento andino"
-sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+echo "#### Definitely importing first group of candidates: Presidentes & Vicepresidentes"
+sqlite3mysql -f 2021-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # For VP+PA entries, delete duplicate info that comes from Presidenciales
 echo "----------------------------------------------"
@@ -113,11 +113,6 @@ DELETE FROM sentencia_penal
 WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
 '''
 
-# Import Presidenciales
-echo "----------------------------------------------"
-echo "#### Definitely importing first group of candidates: Presidentes & Vicepresidentes"
-sqlite3mysql -f 2021-candidatos-presidenciales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
-
 # For VP+congres entries, delete duplicate info that comes from Presidenciales
 echo "----------------------------------------------"
 echo "#### Deleting 'Vicepresidentes' candidates that will also come from the 'Congresistas' base"
@@ -139,6 +134,11 @@ WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 DELETE FROM sentencia_penal
 WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 '''
+
+# Import Parlamento Andino again
+echo "----------------------------------------------"
+echo "#### Importing candidates Parlamento andino"
+sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # Import Congreso again
 echo "----------------------------------------------"
