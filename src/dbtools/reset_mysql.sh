@@ -50,6 +50,26 @@ FROM candidato
 WHERE cargo_nombre LIKE "%VICEPRESIDENTE%"
 '''
 
+# Drop tables
+echo "----------------------------------------------"
+echo "#### Deleting all tables except the temporary one"
+mysql --login-path=local --database=$DATABASE_NAME -e '''
+DROP TABLE IF EXISTS `data_ec`;
+DROP TABLE IF EXISTS `educacion`;
+DROP TABLE IF EXISTS `experiencia`;
+DROP TABLE IF EXISTS `extra_data`;
+DROP TABLE IF EXISTS `locations`;
+DROP TABLE IF EXISTS `ingreso`;
+DROP TABLE IF EXISTS `sentencia_civil`;
+DROP TABLE IF EXISTS `sentencia_penal`;
+DROP TABLE IF EXISTS `sentencias_ec`;
+DROP TABLE IF EXISTS `temp_sentencias`;
+DROP TABLE IF EXISTS `bien_inmueble`;
+DROP TABLE IF EXISTS `bien_mueble`;
+DROP TABLE IF EXISTS `bien_otro`;
+DROP TABLE IF EXISTS `candidato`;
+'''
+
 # Import Parlamento Andino temporarily
 echo "----------------------------------------------"
 echo "#### Temporarily importing candidates: Parlamento Andino"
