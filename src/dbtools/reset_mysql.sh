@@ -50,6 +50,22 @@ FROM candidato
 WHERE cargo_nombre LIKE "%VICEPRESIDENTE%"
 '''
 
+# Import Parlamento Andino temporarily
+echo "----------------------------------------------"
+echo "#### Temporarily importing candidates: Parlamento Andino"
+sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+
+# Store in temporary table VicePresidentes that we know are Parlamento Andino
+echo "----------------------------------------------"
+echo "#### Getting the 'Vicepresidentes' that are 'Parlamento Andino' and storing their ID in temporary table"
+mysql --login-path=local --database=$DATABASE_NAME -e '''
+DROP TABLE IF EXISTS `temp_vp_pa`;
+CREATE TABLE temp_vp_pa
+SELECT hoja_vida_id
+FROM candidato
+WHERE cargo_nombre LIKE "%VICEPRESIDENTE%"
+'''
+
 # Drop tables
 echo "----------------------------------------------"
 echo "#### Deleting all tables except the temporary one"
@@ -70,6 +86,32 @@ DROP TABLE IF EXISTS `bien_otro`;
 DROP TABLE IF EXISTS `candidato`;
 '''
 
+# Import Parlamento Andino again
+echo "----------------------------------------------"
+echo "#### Importing candidates Parlamento andino"
+sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
+
+# For VP+PA entries, delete duplicate info that comes from Presidenciales
+echo "----------------------------------------------"
+echo "#### Deleting 'Vicepresidentes' candidates that will also come from the 'Congresistas' base"
+mysql --login-path=local --database=$DATABASE_NAME -e '''
+DELETE FROM candidato
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM educacion
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM experiencia
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM bien_mueble
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM bien_inmueble
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM ingreso
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM sentencia_civil
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+DELETE FROM sentencia_penal
+WHERE hoja_vida_id in (SELECT * FROM temp_vp_pa);
+'''
 
 # Import Presidenciales
 echo "----------------------------------------------"
@@ -102,11 +144,6 @@ WHERE hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 echo "----------------------------------------------"
 echo "#### Definitely importing second group of candidates: Congresistas"
 sqlite3mysql -f 2021-candidatos-congresales.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
-
-# Import Parlamento Andino
-echo "----------------------------------------------"
-echo "#### Importing candidates Parlamento andino"
-sqlite3mysql -f 2021-candidatos-parlamento-andino.db -d $DATABASE_NAME -u root -p $MYSQL_PWD -h $MYSQL_HOST -P $MYSQL_TCP_PORT
 
 # Modify datatypes in candidates
 echo "----------------------------------------------"
@@ -212,8 +249,22 @@ WHERE cargo_nombre LIKE "PRIMER VICEPRESIDENTE%"
 AND hoja_vida_id in (SELECT * FROM temp_vp_congreso);
 UPDATE candidato
 SET cargo_nombre="SEGUNDO VICEPRESIDENTE Y CONGRESISTA DE LA REPÚBLICA"
-WHERE cargo_nombre LIKE "SEGUNDO VICEPRESIDENTE%" 
+WHERE cargo_nombre LIKE "SEGUNDO VICEPRESIDENTE%"
 AND hoja_vida_id in (SELECT * FROM temp_vp_congreso);
+'''
+
+# Change applicable Vicepresidentes to VP+PA
+echo "----------------------------------------------"
+echo "#### Creating new 'cargo_nombre' type that mixes 'Vicepresidente + Parlamento Andino' where applicable"
+mysql --login-path=local --database=$DATABASE_NAME -e '''
+UPDATE candidato
+SET cargo_nombre="PRIMER VICEPRESIDENTE Y REPRESENTANTE ANTE EL PARLAMENTO ANDINO"
+WHERE cargo_nombre LIKE "PRIMER VICEPRESIDENTE%"
+AND hoja_vida_id in (SELECT * FROM temp_vp_pa);
+UPDATE candidato
+SET cargo_nombre="SEGUNDO VICEPRESIDENTE Y REPRESENTANTE ANTE EL PARLAMENTO ANDINO"
+WHERE cargo_nombre LIKE "SEGUNDO VICEPRESIDENTE%"
+AND hoja_vida_id in (SELECT * FROM temp_vp_pa);
 '''
 
 # Create extra_data table
